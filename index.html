@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunil Sivadas, Ph.D. — AI Practitioner, Educator & Strategic Thinker</title>
+  <meta name="description" content="AI practitioner, educator, and strategic thinker. Practice Lead at NCS. Author of The Agentic AI Builder's Handbook. Leading enterprise generative & agentic AI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #08080e;
+      --surface:  #0f0f18;
+      --border:   #1c1c2e;
+      --border2:  #2a2a40;
+      --text:     #e4e1d8;
+      --muted:    #7a7891;
+      --faint:    #3a3850;
+      --gold:     #c9a96e;
+      --gold-lt:  #e8c98a;
+      --blue:     #5bb8f5;
+      --blue-dk:  #2a8fd8;
+      --serif:    'Cormorant Garant', Georgia, serif;
+      --sans:     'Syne', system-ui, sans-serif;
+      --body:     'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(8,8,14,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 8rem 2.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-noise {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(ellipse 70% 55% at 65% 40%, rgba(90,65,150,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 70%, rgba(91,184,245,0.06) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-line-accent {
+      position: absolute;
+      top: 38%; left: -2%;
+      width: 104%; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--faint) 30%, var(--border2) 60%, transparent 100%);
+    }
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 900px; width: 100%;
+    }
+    .hero-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.6rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--gold);
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold-lt);
+    }
+    .hero-role {
+      font-family: var(--sans);
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-top: 1.8rem;
+      margin-bottom: 1.4rem;
+    }
+    .hero-statement {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(228,225,216,0.7);
+      max-width: 620px;
+      line-height: 1.6;
+      border-left: 2px solid var(--gold);
+      padding-left: 1.2rem;
+      margin-bottom: 2.8rem;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.6rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all .2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #0a0808;
+      border: 1px solid var(--gold);
+    }
+    .btn-primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border2);
+    }
+    .btn-secondary:hover { border-color: var(--muted); color: var(--text); }
+
+    .hero-scroll-hint {
+      position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      color: var(--faint);
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: nudge 2.5s ease-in-out infinite;
+    }
+    .hero-scroll-hint::after {
+      content: '';
+      width: 1px; height: 32px;
+      background: linear-gradient(to bottom, var(--faint), transparent);
+    }
+    @keyframes nudge {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    /* ── SECTION LAYOUT ── */
+    section { padding: 6rem 2.5rem; }
+    .container { max-width: 1060px; margin: 0 auto; }
+
+    .section-eyebrow {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .divider {
+      width: 100%; height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: rgba(228,225,216,0.8);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--gold-lt); font-weight: 500; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+    .stat-cell {
+      background: var(--surface);
+      padding: 1.6rem 1.4rem;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.6rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--gold-lt);
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── FOCUS ── */
+    #focus { background: var(--bg); }
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+    .focus-card {
+      background: var(--bg);
+      padding: 2rem 1.8rem;
+      transition: background .2s;
+    }
+    .focus-card:hover { background: var(--surface); }
+    .focus-icon {
+      width: 36px; height: 36px;
+      margin-bottom: 1.2rem;
+      color: var(--gold);
+    }
+    .focus-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+    }
+    .focus-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .focus-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    /* ── HANDBOOK ── */
+    #handbook {
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+    .handbook-accent {
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%; height: 100%;
+      background: linear-gradient(135deg, transparent 30%, rgba(201,169,110,0.04) 100%);
+      pointer-events: none;
+    }
+    .handbook-accent-line {
+      position: absolute;
+      top: 0; right: 38%;
+      width: 1px; height: 100%;
+      background: linear-gradient(to bottom, transparent, var(--border), transparent);
+    }
+    .handbook-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .handbook-label {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .handbook-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+    .handbook-title em { font-style: italic; color: var(--gold-lt); }
+    .handbook-desc {
+      color: rgba(228,225,216,0.72);
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    .handbook-chapters {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      margin-bottom: 2.2rem;
+    }
+    .chapter-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+    }
+    .chapter-item::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .handbook-visual {
+      width: 220px;
+      flex-shrink: 0;
+    }
+    .handbook-book-mock {
+      width: 180px;
+      height: 240px;
+      background: linear-gradient(135deg, #1a1228 0%, #0f0a1a 100%);
+      border: 1px solid var(--border2);
+      border-radius: 3px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      box-shadow: 10px 10px 30px rgba(0,0,0,0.5), -2px 0 0 rgba(255,255,255,0.03);
+    }
+    .handbook-book-mock::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 8px;
+      background: linear-gradient(to right, #0a0614, #1a1228);
+      border-radius: 3px 0 0 3px;
+    }
+    .book-spine-title {
+      font-family: var(--serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--gold-lt);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 0.8rem;
+    }
+    .book-author {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .book-deco {
+      position: absolute; bottom: 1.2rem;
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    /* ── TALKS ── */
+    #talks { background: var(--bg); }
+    .talks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .talk-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: border-color .2s, background .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .talk-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .3s ease;
+    }
+    .talk-card:hover::before { transform: scaleY(1); }
+    .talk-card:hover { border-color: var(--border2); background: var(--surface); }
+    .talk-type {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.8rem;
+    }
+    .talk-card h3 { font-size: 1.2rem; margin-bottom: 0.7rem; line-height: 1.3; }
+    .talk-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.2rem; }
+    .talk-meta {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      color: var(--faint);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── PRINCIPLES ── */
+    #principles { background: var(--surface); }
+    .principles-intro {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(228,225,216,0.65);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 3.5rem;
+    }
+    .principles-list {
+      display: flex; flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+    .principle-row {
+      display: grid;
+      grid-template-columns: 3fr 5fr;
+      gap: 3rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background .15s;
+    }
+    .principle-row:hover { background: rgba(255,255,255,0.015); margin: 0 -1rem; padding: 1.8rem 1rem; }
+    .principle-name {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gold-lt);
+    }
+    .principle-desc {
+      font-size: 0.9rem;
+      color: rgba(228,225,216,0.7);
+      line-height: 1.7;
+    }
+    .principle-desc strong { color: var(--text); font-weight: 500; }
+
+    /* ── JOURNEY ── */
+    #journey { background: var(--bg); }
+    .timeline {
+      margin-top: 3rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0.4rem; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold) 0%, var(--border) 60%, transparent 100%);
+    }
+    .tl-entry {
+      position: relative;
+      padding-bottom: 2.4rem;
+    }
+    .tl-entry:last-child { padding-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -2.35rem;
+      top: 0.45rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      background: var(--bg);
+    }
+    .tl-dot.active {
+      background: var(--gold);
+      box-shadow: 0 0 8px rgba(201,169,110,0.5);
+    }
+    .tl-period {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+    .tl-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .tl-org {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+    .tl-desc {
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 580px;
+    }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+    .tl-tag {
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border2);
+      padding: 0.15rem 0.55rem;
+      border-radius: 1px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2.5rem;
+    }
+    .footer-inner {
+      max-width: 1060px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 2rem;
+    }
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .footer-name span { font-style: italic; color: var(--gold); }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+    .footer-links {
+      display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap;
+      align-items: center;
+    }
+    .footer-links a {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      max-width: 1060px; margin: 2rem auto 0;
+      font-size: 0.75rem;
+      color: var(--faint);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4.5rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .talks-grid { grid-template-columns: 1fr; }
+      .principle-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      .handbook-inner { grid-template-columns: 1fr; }
+      .handbook-visual { display: none; }
+      footer { padding: 3rem 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── FADE-IN ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Sunil Sivadas, Ph.D.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#handbook">Handbook</a></li>
+    <li><a href="#talks">Talks</a></li>
+    <li><a href="#principles">Ideas</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-line-accent"></div>
+  <div class="hero-inner">
+    <div class="hero-label">AI Practitioner · Educator · Strategic Thinker</div>
+    <h1>Sunil<br><em>Sivadas</em><br><span style="font-size:0.42em;font-style:normal;color:var(--muted);font-weight:300;letter-spacing:0.12em;">Ph.D.</span></h1>
+    <div class="hero-role">Practice Lead, NCS &nbsp;·&nbsp; Distinguished Engineer &nbsp;·&nbsp; Ph.D., Electrical Engineering</div>
+    <p class="hero-statement">Bridging the gap between leadership ambition and frontline readiness — from AI deployment to genuine AI adoption.</p>
+    <div class="hero-ctas">
+      <a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener" class="btn btn-primary">Read the Handbook ↗</a>
+      <a href="#about" class="btn btn-secondary">About Me</a>
+      <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn ↗</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">Scroll</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-eyebrow">About</div>
+        <h2>Practitioner.<br>Educator.<br>Builder.</h2>
+        <p>With over <strong>25 years at the frontier of AI and machine learning</strong>, I turn research into scalable systems and strategies that organisations can actually use — not just deploy.</p>
+        <p>My work spans enterprise AI adoption strategy at NCS, academic research at NTU's SCALE Lab, and applied research at A*STAR and Nokia Bell Labs. At NCS I contribute to a large-scale AI workforce transformation initiative — spanning 13,000 staff, production-grade agent deployments, and the hardest problem in enterprise AI: <strong>sustained active usage, not just tool rollout.</strong></p>
+        <p>I also write, teach, and speak on the economics of AI at work, drawing on primary research to help employers and employees navigate what's actually changing — and what isn't — yet.</p>
+        <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top:1rem">Full Profile ↗</a>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-num">25+</div>
+            <div class="stat-label">Years in AI/ML</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">196</div>
+            <div class="stat-label">AI Use Cases Surfaced</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Granted Patents</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">70+</div>
+            <div class="stat-label">C-Suite Demos Led</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">1×</div>
+            <div class="stat-label">Distinguished Engineer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOCUS -->
+<section id="focus">
+  <div class="container">
+    <div class="section-eyebrow reveal">What I Do</div>
+    <h2 class="reveal">Three interlocking lenses.</h2>
+    <div class="focus-grid">
+      <div class="focus-card reveal">
+        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="10" width="28" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M12 10V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M18 15v8M14 19h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Enterprise AI Strategy</h3>
+        <p>Designing and leading large-scale AI deployment at NCS — from NCSgpt for 13,000 staff to agentic AI initiatives with a CEO mandate. The focus is always active usage, not deployment counts.</p>
+        <span class="focus-tag">NCS · Adoption · Agents</span>
+      </div>
+      <div class="focus-card reveal reveal-delay-1">
+        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="13" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 30c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M25 8l2 2-2 2M29 10H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Workforce Education</h3>
+        <p>Delivering masterclasses and keynotes for employers, university students, and continuing education platforms — translating research on AI's economic impact into what organisations can act on.</p>
+        <span class="focus-tag">NTUC · NUS · SP PACE</span>
+      </div>
+      <div class="focus-card reveal reveal-delay-2">
+        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 28L14 20l6 6 10-12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="14" cy="20" r="1.5" fill="currentColor"/>
+          <circle cx="20" cy="26" r="1.5" fill="currentColor"/>
+          <path d="M28 8h-6M28 8v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3>Research & IP Creation</h3>
+        <p>20+ years building systems at A*STAR, Nokia Bell Labs, and NTU SCALE: conversational AI, physiological computing, noise-robust speech, video intelligence, and robotics — with 6 granted patents.</p>
+        <span class="focus-tag">A*STAR · Nokia · NTU</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HANDBOOK -->
+<section id="handbook">
+  <div class="handbook-accent"></div>
+  <div class="handbook-accent-line"></div>
+  <div class="container">
+    <div class="handbook-inner">
+      <div class="reveal">
+        <div class="handbook-label">Published Work</div>
+        <h2 class="handbook-title">The Agentic AI<br><em>Builder's Handbook</em></h2>
+        <p class="handbook-desc">A practitioner's guide to building systems that go beyond demos and prototypes — addressing why enterprise AI has a high degree of complexity, what it actually takes to deploy agents in production, and how AI capability is reshaping real economic value.</p>
+        <div class="handbook-chapters">
+          <div class="chapter-item">Why Agentic? — Capability, economic signals & the production gap</div>
+          <div class="chapter-item">METR Time Horizons — What autonomy benchmarks actually measure</div>
+          <div class="chapter-item">GDPval — AI on economically meaningful tasks across 44 occupations</div>
+          <div class="chapter-item">The Jagged Frontier — Where AI surprises and where it fails</div>
+          <div class="chapter-item">Building for Adoption — From PoC to production-grade deployment</div>
+        </div>
+        <a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener" class="btn btn-primary">Read Online — Free ↗</a>
+      </div>
+      <div class="handbook-visual reveal reveal-delay-1">
+        <div class="handbook-book-mock">
+          <div class="book-spine-title">The Agentic AI Builder's Handbook</div>
+          <div class="book-author">Sunil Sivadas, Ph.D.</div>
+          <div class="book-deco"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TALKS -->
+<section id="talks">
+  <div class="container">
+    <div class="section-eyebrow reveal">Talks & Masterclasses</div>
+    <h2 class="reveal">Where research<br>meets the room.</h2>
+    <div class="talks-grid">
+      <div class="talk-card reveal">
+        <div class="talk-type">Employer Masterclass</div>
+        <h3>AI at Work: Trends, Adoption Lessons & Workforce Shifts</h3>
+        <p>A 45-minute evidence-based session designed for Singapore employers — covering the productivity J-curve, the jagged frontier, where real gains are showing up, and what the $9-to-$1 investment ratio means for workforce strategy. Delivered on NTUC's platform.</p>
+        <div class="talk-meta">NTUC · Singapore · 2026</div>
+      </div>
+      <div class="talk-card reveal reveal-delay-1">
+        <div class="talk-type">University Keynote</div>
+        <h3>AI at Work: Capability, Economy & What It Means for You</h3>
+        <p>A research-grounded keynote for NUS students — from METR time horizons and GDPval benchmarks to the MIT GenAI Divide and Berkeley MAP findings. Ends with the practical skills and judgment that will matter at the frontier.</p>
+        <div class="talk-meta">NUS · Singapore · 2026</div>
+      </div>
+      <div class="talk-card reveal">
+        <div class="talk-type">Enterprise Workshop</div>
+        <h3>The Three-Wave Agent Deployment Framework</h3>
+        <p>A structured framework for large organisations introducing agentic AI: universal productivity agents → department-specific agents co-designed with teams → employee-built custom agents. Grounded in NCS's own 13,000-person implementation experience.</p>
+        <div class="talk-meta">NCS Clients · Singapore</div>
+      </div>
+      <div class="talk-card reveal reveal-delay-1">
+        <div class="talk-type">Innovation Showcase</div>
+        <h3>NEXTgpt — Rapid Prototyping of GenAI Use Cases</h3>
+        <p>Demonstrated generative AI possibilities to 70+ enterprise clients and C-suite visitors at NCS Tesseract and NCS Impact 2023. Won the NCS Heroes 2023 Gold Award for Innovation. The starting point for NCS's commercial GenAI practice.</p>
+        <div class="talk-meta">NCS Tesseract, HQ · 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div class="container">
+    <div class="section-eyebrow reveal">Key Ideas</div>
+    <h2 class="reveal">Frameworks I work from.</h2>
+    <p class="principles-intro reveal">These aren't abstract concepts — they're the mental models I use daily, grounded in research and field-tested at scale.</p>
+    <div class="principles-list reveal">
+      <div class="principle-row">
+        <div class="principle-name">Adoption ≠ Deployment</div>
+        <div class="principle-desc">The critical failure mode in enterprise AI is measuring tool rollout rather than sustained active usage. <strong>Success requires embedding AI into existing workflows</strong> — not bolting it on as a feature. The north star metric is active weekly usage, not licence count.</div>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name">The Jagged Frontier</div>
+        <div class="principle-desc">AI capabilities are uneven and unpredictable. Models excel at surprising tasks and fail at seemingly simple ones — often convincingly. <strong>Employees need experiential literacy</strong> before they can make good judgments about what to automate. You can't read the frontier from a job description.</div>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name">Tasks Before Jobs</div>
+        <div class="principle-desc">AI reshapes tasks within roles before it displaces roles entirely. <strong>Workforce strategy must start at the task level</strong> — mapping where AI is already changing the work, then redesigning how teams operate around that reality.</div>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name">The 53-Point Gap</div>
+        <div class="principle-desc">Research shows a 53-point disconnect between C-suite confidence in AI policy clarity and frontline employee awareness. <strong>This is a management problem, not a technology problem.</strong> Solving it requires active communication infrastructure, not better tools.</div>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name">The $9-to-$1 Ratio</div>
+        <div class="principle-desc">Technology investment alone is insufficient. For every $1 spent on AI platforms and tools, <strong>organisations need roughly $9 invested in people, process redesign, and change management</strong> to capture the value. Most enterprise AI budgets are inverted.</div>
+      </div>
+      <div class="principle-row">
+        <div class="principle-name">Delegate → Review → Iterate → Own</div>
+        <div class="principle-desc">The practical daily pattern for building genuine AI fluency. Start by delegating a task, critically review the output, iterate with the model, and eventually own a new, higher-leverage workflow. <strong>Repeated across hundreds of tasks, this is how AI capability compounds.</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="container">
+    <div class="section-eyebrow reveal">Journey</div>
+    <h2 class="reveal">25 years at the frontier.</h2>
+    <div class="timeline reveal">
+      <div class="tl-entry">
+        <div class="tl-dot active"></div>
+        <div class="tl-period">2022 — Present</div>
+        <div class="tl-title">Director, NEXT Gen Tech</div>
+        <div class="tl-org">NCS Group · Singapore</div>
+        <div class="tl-desc">Part of NCS's AI strategy and GenAI practice — building from zero to one. Built NEXTgpt, a rapid prototyping sandbox presented to 70+ C-suite clients. Contributing to NCS's large-scale AI adoption initiative, with 196 use cases surfaced through the Sunshine.AI hackathon.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Agentic AI</span>
+          <span class="tl-tag">GenAI</span>
+          <span class="tl-tag">Workforce Strategy</span>
+          <span class="tl-tag">Gold Award — NCS Heroes 2023</span>
+        </div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot active"></div>
+        <div class="tl-period">2021 — 2023</div>
+        <div class="tl-title">Deputy Director, Singtel AI Lab (SCALE@NTU)</div>
+        <div class="tl-org">Nanyang Technological University · Singapore</div>
+        <div class="tl-desc">Developed AI applications for public safety, smart urban infrastructure, transport, and healthcare. Led conversational interface for Florence (robotic nurse assistant trialed at Alexandra Hospital) and traffic management engine for nationwide security robot deployment.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Computer Vision</span>
+          <span class="tl-tag">Robotics</span>
+          <span class="tl-tag">Healthcare AI</span>
+        </div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot active"></div>
+        <div class="tl-period">2023 — 2025</div>
+        <div class="tl-title">Adjunct Associate Professor, CCDS</div>
+        <div class="tl-org">Nanyang Technological University · Singapore</div>
+        <div class="tl-desc">Teaching ML operationalization in the wild. Supervising PhD scholars (EDB-IPP) and mentoring undergraduate researchers (URECA).</div>
+        <div class="tl-tags">
+          <span class="tl-tag">MLOps</span>
+          <span class="tl-tag">PhD Supervision</span>
+        </div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot"></div>
+        <div class="tl-period">2018 — 2021</div>
+        <div class="tl-title">Associate Director / Lead Research Scientist</div>
+        <div class="tl-org">NCS · Singtel Cognitive AI Lab @ NTU</div>
+        <div class="tl-desc">Built a lean high-performance research team from scratch. Multi-modal context-aware intelligent systems. Incubated multiple AI-centric products including Ins8.ai, a real-time conversation intelligence platform.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Multimodal AI</span>
+          <span class="tl-tag">Conversational AI</span>
+        </div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot"></div>
+        <div class="tl-period">2012 — 2018</div>
+        <div class="tl-title">Unit Head / Senior Scientist, Human Language Technology</div>
+        <div class="tl-org">Institute for Infocomm Research (A*STAR) · Singapore</div>
+        <div class="tl-desc">Led conversational AI research. Principal Investigator on public sector and industry projects across Finance, Telco, Healthcare, Security, Transport, and Media. Hired and nurtured a generation of AI researchers.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">NLP</span>
+          <span class="tl-tag">Spoken Language</span>
+          <span class="tl-tag">A*STAR</span>
+        </div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot"></div>
+        <div class="tl-period">2004 — 2012</div>
+        <div class="tl-title">Senior Researcher</div>
+        <div class="tl-org">Nokia Bell Labs · Finland</div>
+        <div class="tl-desc">Generated 6 granted patents. Developed noise-robust small-footprint speech recognition for mobile devices. Physiological computing and context-aware systems. Represented Nokia at TC-STAR, the EU Framework Programme for speech-to-speech translation.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">6 Patents</span>
+          <span class="tl-tag">ASR</span>
+          <span class="tl-tag">Physiological Computing</span>
+        </div>
+      </div>
+      <div class="tl-entry">
+        <div class="tl-dot"></div>
+        <div class="tl-period">1999 — 2004</div>
+        <div class="tl-title">Ph.D., Electrical Engineering</div>
+        <div class="tl-org">Oregon Health & Science University · Portland, USA</div>
+        <div class="tl-desc">Led technical work for the OGI-ICSI-Qualcomm consortium in ETSI's Aurora Distributed Speech Recognition standardization — one of the best-performing systems. Research on noise-robust front-ends with Prof. Hermansky at ICSI Berkeley and Idiap Switzerland.</div>
+        <div class="tl-tags">
+          <span class="tl-tag">Noise-Robust ASR</span>
+          <span class="tl-tag">ETSI Aurora</span>
+          <span class="tl-tag">1 Patent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-name">Sunil <span>Sivadas</span>, Ph.D.</div>
+      <div class="footer-tagline">AI Practitioner · Educator · Distinguished Engineer</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener">Handbook ↗</a></li>
+      <li><a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+      <li><a href="https://www.ncs.co/en-sg/about-us/distinguished-engineers/dr-sunilsivadas/" target="_blank" rel="noopener">NCS Profile ↗</a></li>
+      <li><a href="mailto:sunil.sivadas@gmail.com">Email</a></li>
+    </ul>
+  </div>
+  <div class="footer-copy">
+    © 2026 Sunil Sivadas, Ph.D. · Singapore
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Hero elements animate in on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('#hero .hero-inner > *').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.style.transition = `opacity 0.7s ease ${i * 0.12}s, transform 0.7s ease ${i * 0.12}s`;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
