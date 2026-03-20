@@ -226,12 +226,30 @@
       margin: 0;
     }
 
+    /* ── PROFILE PHOTO ── */
+    .profile-photo-wrap {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--border2);
+      box-shadow: 0 0 0 6px rgba(201,169,110,0.08), 0 12px 40px rgba(0,0,0,0.5);
+      flex-shrink: 0;
+      margin-bottom: 2rem;
+    }
+    .profile-photo-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(8%);
+    }
+
     /* ── ABOUT ── */
     #about { background: var(--surface); }
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 3.5rem;
       align-items: start;
     }
     .about-text p {
@@ -628,12 +646,328 @@
       color: var(--faint);
     }
 
+    /* ── WRITING / POST CARDS ── */
+    #writing { background: var(--bg); }
+    .post-card {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .post-card:hover { border-color: var(--border2); }
+    .post-card-reverse { grid-template-columns: 1fr 420px; }
+    .post-card-reverse .post-img-wrap { order: 2; }
+    .post-card-reverse .post-body { order: 1; }
+    .post-img-wrap {
+      overflow: hidden;
+      background: #0a0a14;
+      max-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .post-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.92;
+      transition: opacity .3s, transform .4s;
+    }
+    .post-card:hover .post-img-wrap img { opacity: 1; transform: scale(1.02); }
+    .post-img-light { background: #f5f0ea; }
+    .post-img-light img { object-fit: contain; padding: 1rem; }
+    .post-body {
+      padding: 2.4rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--surface);
+    }
+    .post-tag {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.7rem;
+    }
+    .post-body h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 0.9rem;
+    }
+    .post-body p {
+      font-size: 0.88rem;
+      color: rgba(228,225,216,0.65);
+      line-height: 1.72;
+      margin-bottom: 0.8rem;
+    }
+    .post-pull {
+      font-family: var(--serif) !important;
+      font-style: italic;
+      font-size: 1rem !important;
+      color: rgba(228,225,216,0.75) !important;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.9rem;
+      margin: 0.8rem 0 1.2rem !important;
+    }
+    .post-link {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: color .2s;
+      margin-top: auto;
+    }
+    .post-link:hover { color: var(--gold-lt); }
+
+    /* ── AWARDS ── */
+    #awards { background: var(--surface); }
+    .awards-intro {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: rgba(228,225,216,0.65);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 2.8rem;
+    }
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .award-card {
+      background: var(--bg);
+      overflow: hidden;
+      transition: background .2s;
+    }
+    .award-card:hover { background: #0d0d1a; }
+    .award-img-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .award-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform .4s ease, opacity .3s;
+      opacity: 0.88;
+    }
+    .award-card:hover .award-img-wrap img {
+      transform: scale(1.03);
+      opacity: 1;
+    }
+    .award-caption {
+      padding: 1.2rem 1.4rem 1.4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .award-year-badge {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0a0808;
+      background: var(--gold);
+      padding: 0.15rem 0.5rem;
+      border-radius: 1px;
+      align-self: flex-start;
+      margin-bottom: 0.2rem;
+    }
+    .award-year-badge--blue {
+      background: var(--blue);
+    }
+    .award-card-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .award-card-sub {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--bg); }
+
+    .scholar-metrics {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      border: 1px solid var(--border);
+      margin: 2.5rem 0 3rem;
+      background: var(--surface);
+    }
+    .scholar-stat {
+      padding: 1.8rem 2.4rem;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    .scholar-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--gold-lt);
+      margin-bottom: 0.3rem;
+    }
+    .scholar-label {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scholar-divider {
+      width: 1px;
+      height: 60px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+    .scholar-areas {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1.8rem 2rem;
+      border-left: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .scholar-area-tag {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      border: 1px solid rgba(91,184,245,0.25);
+      padding: 0.25rem 0.65rem;
+      border-radius: 1px;
+      white-space: nowrap;
+    }
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+    .pub-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background .15s;
+    }
+    .pub-row:hover { background: rgba(255,255,255,0.015); margin: 0 -1rem; padding: 1.8rem 1rem; }
+    .pub-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding-top: 0.15rem;
+    }
+    .pub-year {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold-lt);
+    }
+    .pub-cited {
+      font-family: var(--sans);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.4;
+      display: block;
+      margin-bottom: 0.4rem;
+      transition: color .2s;
+    }
+    .pub-title:hover { color: var(--gold-lt); }
+    .pub-authors {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .pub-authors strong { color: var(--text); font-weight: 500; }
+    .pub-venue {
+      font-size: 0.82rem;
+      color: var(--faint);
+      font-style: italic;
+    }
+    .pub-section-header {
+      margin-top: 3rem;
+      margin-bottom: 0;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+    }
+    .pub-section-label {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .scholar-footer {
+      margin-top: 2.5rem;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 800px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       section { padding: 4.5rem 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .profile-photo-wrap { width: 140px; height: 140px; margin: 0 auto 1.5rem; }
+      .post-card,
+      .post-card-reverse { grid-template-columns: 1fr; }
+      .post-card-reverse .post-img-wrap { order: 0; }
+      .post-card-reverse .post-body { order: 1; }
+      .post-img-wrap { max-height: 220px; }
+      .post-body { padding: 1.6rem 1.4rem; }
+      .awards-grid { grid-template-columns: 1fr; }
+      .scholar-metrics { flex-direction: column; }
+      .scholar-divider { width: 100%; height: 1px; }
+      .scholar-areas { border-left: none; border-top: 1px solid var(--border); width: 100%; flex-wrap: wrap; }
+      .pub-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      .pub-meta { flex-direction: row; align-items: center; gap: 1rem; }
       .focus-grid { grid-template-columns: 1fr; }
       .talks-grid { grid-template-columns: 1fr; }
       .principle-row { grid-template-columns: 1fr; gap: 0.5rem; }
@@ -663,8 +997,9 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#handbook">Handbook</a></li>
-    <li><a href="#talks">Talks</a></li>
-    <li><a href="#principles">Ideas</a></li>
+    <li><a href="#writing">Writing & Talks</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#publications">Research</a></li>
     <li><a href="#journey">Journey</a></li>
     <li><a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener">LinkedIn ↗</a></li>
   </ul>
@@ -675,10 +1010,10 @@
   <div class="hero-noise"></div>
   <div class="hero-line-accent"></div>
   <div class="hero-inner">
-    <div class="hero-label">AI Practitioner · Educator · Strategic Thinker</div>
+    <div class="hero-label">AI Practitioner · Builder · Researcher</div>
     <h1>Sunil<br><em>Sivadas</em><br><span style="font-size:0.42em;font-style:normal;color:var(--muted);font-weight:300;letter-spacing:0.12em;">Ph.D.</span></h1>
     <div class="hero-role">Practice Lead, NCS &nbsp;·&nbsp; Distinguished Engineer &nbsp;·&nbsp; Ph.D., Electrical Engineering</div>
-    <p class="hero-statement">Bridging the gap between leadership ambition and frontline readiness — from AI deployment to genuine AI adoption.</p>
+    <p class="hero-statement">Building agentic AI systems, creating IP, and turning frontier research into working technology — from conversational AI to multi-agent architectures.</p>
     <div class="hero-ctas">
       <a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener" class="btn btn-primary">Read the Handbook ↗</a>
       <a href="#about" class="btn btn-secondary">About Me</a>
@@ -694,35 +1029,44 @@
 <section id="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-text reveal">
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;padding-top:0.5rem">
+        <div class="profile-photo-wrap">
+          <img src="img/sunil-profile.jpg" alt="Sunil Sivadas, Ph.D." />
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-1">
         <div class="section-eyebrow">About</div>
         <h2>Practitioner.<br>Educator.<br>Builder.</h2>
-        <p>With over <strong>25 years at the frontier of AI and machine learning</strong>, I turn research into scalable systems and strategies that organisations can actually use — not just deploy.</p>
-        <p>My work spans enterprise AI adoption strategy at NCS, academic research at NTU's SCALE Lab, and applied research at A*STAR and Nokia Bell Labs. At NCS I contribute to a large-scale AI workforce transformation initiative — spanning 13,000 staff, production-grade agent deployments, and the hardest problem in enterprise AI: <strong>sustained active usage, not just tool rollout.</strong></p>
-        <p>I also write, teach, and speak on the economics of AI at work, drawing on primary research to help employers and employees navigate what's actually changing — and what isn't — yet.</p>
+        <p>With over <strong>25 years at the frontier of AI and machine learning</strong>, I build systems, create IP, and architect platforms — from foundational research to production-grade deployment.</p>
+        <p>I lead a team of research scientists and software engineers at NCS exploring the frontiers of AI — from safe deployment of generative AI and AI-assisted software development to agentic AI architectures and multi-modal knowledge management. I also served as Deputy Director of SCALE@NTU — a S$42.4M corporate lab — directing research across Generative AI, Computer Vision, Mixed Reality, and Robotics, <strong>exceeding all KPIs for publications, patents, and IP translation.</strong></p>
+        <p>I hold a Ph.D. from Oregon Health &amp; Science University and serve as Adjunct Associate Professor in the College of Computing and Data Science at NTU. Conferred the title of NCS Distinguished Engineer in 2022 for contributions to research, product innovation, and thought leadership.</p>
         <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top:1rem">Full Profile ↗</a>
       </div>
-      <div class="reveal reveal-delay-1">
+      <div class="reveal reveal-delay-2">
         <div class="stats-grid">
           <div class="stat-cell">
             <div class="stat-num">25+</div>
             <div class="stat-label">Years in AI/ML</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-num">196</div>
-            <div class="stat-label">AI Use Cases Surfaced</div>
+            <div class="stat-num">7</div>
+            <div class="stat-label">Granted Patents</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-num">6</div>
-            <div class="stat-label">Granted Patents</div>
+            <div class="stat-num">1,804</div>
+            <div class="stat-label">Scholar Citations</div>
           </div>
           <div class="stat-cell">
             <div class="stat-num">70+</div>
             <div class="stat-label">C-Suite Demos Led</div>
           </div>
           <div class="stat-cell">
-            <div class="stat-num">1×</div>
-            <div class="stat-label">Distinguished Engineer</div>
+            <div class="stat-num">S$42.4M</div>
+            <div class="stat-label">SCALE Lab Directed</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">3×</div>
+            <div class="stat-label">NCS Heroes Gold</div>
           </div>
         </div>
       </div>
@@ -736,27 +1080,30 @@
 <section id="focus">
   <div class="container">
     <div class="section-eyebrow reveal">What I Do</div>
-    <h2 class="reveal">Three interlocking lenses.</h2>
+    <h2 class="reveal">Building at the frontier.</h2>
     <div class="focus-grid">
       <div class="focus-card reveal">
         <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="10" width="28" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M12 10V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M18 15v8M14 19h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="18" cy="18" r="4" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="6" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="30" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="6" cy="26" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="30" cy="26" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8.5 11.5L14 15M21.5 21.5L27.5 24.5M27.5 11.5L22 15M8.5 24.5L14 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <h3>Enterprise AI Strategy</h3>
-        <p>Designing and leading large-scale AI deployment at NCS — from NCSgpt for 13,000 staff to agentic AI initiatives with a CEO mandate. The focus is always active usage, not deployment counts.</p>
-        <span class="focus-tag">NCS · Adoption · Agents</span>
+        <h3>Agentic AI Development</h3>
+        <p>Exploring and building agentic AI systems — from multi-agent architectures and tool-use patterns to production-ready assets. Using frameworks like AWS Strands SDK, LangChain, and Playwright MCP to push beyond demos into deployed, working agents.</p>
+        <span class="focus-tag">Agents · MCP · AWS Strands · LangChain</span>
       </div>
       <div class="focus-card reveal reveal-delay-1">
         <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="18" cy="13" r="5" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M8 30c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M25 8l2 2-2 2M29 10H25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 12h4M8 18h8M8 24h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="4" y="6" width="28" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M22 16l4 4-4 4M26 20h-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <h3>Workforce Education</h3>
-        <p>Delivering masterclasses and keynotes for employers, university students, and continuing education platforms — translating research on AI's economic impact into what organisations can act on.</p>
-        <span class="focus-tag">NTUC · NUS · SP PACE</span>
+        <h3>Conversational & Generative AI</h3>
+        <p>Over a decade building conversational AI systems — from next-generation spoken language interfaces at A*STAR to generative AI prototyping at NCS. Created NEXTgpt, a sandbox for rapid GenAI use-case development, presented to 70+ enterprise clients.</p>
+        <span class="focus-tag">GenAI · NLP · Spoken Language · NEXTgpt</span>
       </div>
       <div class="focus-card reveal reveal-delay-2">
         <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -766,8 +1113,8 @@
           <path d="M28 8h-6M28 8v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
         <h3>Research & IP Creation</h3>
-        <p>20+ years building systems at A*STAR, Nokia Bell Labs, and NTU SCALE: conversational AI, physiological computing, noise-robust speech, video intelligence, and robotics — with 6 granted patents.</p>
-        <span class="focus-tag">A*STAR · Nokia · NTU</span>
+        <p>25+ years generating original research and IP — noise-robust ASR, physiological computing, multi-modal context-aware systems, video intelligence, and robotics. Six granted patents. Principal Investigator on public-sector and industry-funded projects across A*STAR and NTU SCALE.</p>
+        <span class="focus-tag">A*STAR · Nokia Bell Labs · NTU · 6 Patents</span>
       </div>
     </div>
   </div>
@@ -807,73 +1154,373 @@
 
 <div class="divider"></div>
 
-<!-- TALKS -->
-<section id="talks">
+<!-- WRITING & TALKS -->
+<section id="writing">
   <div class="container">
-    <div class="section-eyebrow reveal">Talks & Masterclasses</div>
-    <h2 class="reveal">Where research<br>meets the room.</h2>
-    <div class="talks-grid">
-      <div class="talk-card reveal">
-        <div class="talk-type">Employer Masterclass</div>
-        <h3>AI at Work: Trends, Adoption Lessons & Workforce Shifts</h3>
-        <p>A 45-minute evidence-based session designed for Singapore employers — covering the productivity J-curve, the jagged frontier, where real gains are showing up, and what the $9-to-$1 investment ratio means for workforce strategy. Delivered on NTUC's platform.</p>
-        <div class="talk-meta">NTUC · Singapore · 2026</div>
+    <div class="section-eyebrow reveal">Writing &amp; Talks</div>
+    <h2 class="reveal">Ideas I'm working on.</h2>
+
+    <!-- POST 1: Bitter Lesson -->
+    <div class="post-card reveal" style="margin-top:3rem">
+      <div class="post-img-wrap">
+        <img src="img/post-bitter-lesson.png" alt="Stop designing agents. Start defining outcomes." />
       </div>
-      <div class="talk-card reveal reveal-delay-1">
-        <div class="talk-type">University Keynote</div>
-        <h3>AI at Work: Capability, Economy & What It Means for You</h3>
-        <p>A research-grounded keynote for NUS students — from METR time horizons and GDPval benchmarks to the MIT GenAI Divide and Berkeley MAP findings. Ends with the practical skills and judgment that will matter at the frontier.</p>
-        <div class="talk-meta">NUS · Singapore · 2026</div>
+      <div class="post-body">
+        <div class="post-tag">Agentic AI Architecture</div>
+        <h3>The Bitter Lesson is about to hit agentic AI builders</h3>
+        <p>Hand-crafting agent architectures — stitching system prompts, tool definitions, routing logic, guardrails — is the same pattern the bitter lesson has punished every time. A new open-source framework from UC Berkeley (optimize_anything / GEPA) treats any text artifact as an optimizable parameter. A 10-line agent stub automatically evolved into a 300+ line multi-stage system. ARC-AGI accuracy went from 32.5% to 89.5%. No human designed that architecture.</p>
+        <p class="post-pull">The craft of building AI applications is shifting — from designing agents to <em>defining outcomes.</em></p>
+        <a href="https://www.linkedin.com/posts/sunilsivadas_the-bitter-lesson-is-about-to-hit-agentic-activity-7430897100990763008-vRfi" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
-      <div class="talk-card reveal">
-        <div class="talk-type">Enterprise Workshop</div>
-        <h3>The Three-Wave Agent Deployment Framework</h3>
-        <p>A structured framework for large organisations introducing agentic AI: universal productivity agents → department-specific agents co-designed with teams → employee-built custom agents. Grounded in NCS's own 13,000-person implementation experience.</p>
-        <div class="talk-meta">NCS Clients · Singapore</div>
+    </div>
+
+    <!-- POST 2: Agent Adoption Triangle -->
+    <div class="post-card post-card-reverse reveal">
+      <div class="post-img-wrap post-img-light">
+        <img src="img/post-imda-assurance.png" alt="Agent Adoption Triangle" />
       </div>
-      <div class="talk-card reveal reveal-delay-1">
-        <div class="talk-type">Innovation Showcase</div>
-        <h3>NEXTgpt — Rapid Prototyping of GenAI Use Cases</h3>
-        <p>Demonstrated generative AI possibilities to 70+ enterprise clients and C-suite visitors at NCS Tesseract and NCS Impact 2023. Won the NCS Heroes 2023 Gold Award for Innovation. The starting point for NCS's commercial GenAI practice.</p>
-        <div class="talk-meta">NCS Tesseract, HQ · 2023</div>
+      <div class="post-body">
+        <div class="post-tag">Agentic AI Benchmarking &amp; Adoption</div>
+        <h3>Visualising Agentic AI as a Triangle — not a straight line</h3>
+        <p>Two of the most-cited studies pull in opposite directions: METR's "agents are doubling in capability" and MIT's "95% of GenAI projects fail." Looking at only one leaves you either overestimating what you can deploy, or underestimating what's possible. The missing lens is the tasks corner — GDP-Eval-style evidence showing how frontier models already perform on the work we actually pay people to do.</p>
+        <p class="post-pull"><em>Capabilities</em> tell you what's possible. <em>Tasks</em> tell you where value appears first. <em>Adoption</em> tells you how hard it is to ship.</p>
+        <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
+    </div>
+
+    <!-- POST 3: IMDA AI Assurance -->
+    <div class="post-card reveal">
+      <div class="post-img-wrap">
+        <img src="img/post-agent-triangle.png" alt="Making AI Assurance Work in the Real World — IMDA speaker" />
+      </div>
+      <div class="post-body">
+        <div class="post-tag">AI Safety &amp; Assurance · IMDA · Jan 2026</div>
+        <h3>Making AI Assurance Work in the Real World</h3>
+        <p>With Dr Martin Saerbeck, I demonstrated how to test a multi-turn conversational AI career guidance chatbot — the kind of system where small errors compound across turns and influence high-stakes decisions. Our objectives: discover and characterise risks, define testable assurance requirements aligned to IMDA's Starter Kit three pillars (Hallucination, Undesirable Content, Adversarial Vulnerability), and generate reusable artefacts others can apply.</p>
+        <p class="post-pull">GenAI systems are probabilistic. They can be helpful and still be wrong, unsafe, or manipulable. Testing is not a checkbox — it is how we earn trust.</p>
+        <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <!-- POST 4: MERaLiON -->
+    <div class="post-card post-card-reverse reveal">
+      <div class="post-img-wrap">
+        <img src="img/post-meralion.png" alt="MERaLiON panel at SME Tech Day 2025" />
+      </div>
+      <div class="post-body">
+        <div class="post-tag">Multimodal AI · A*STAR · SWITCH 2025</div>
+        <h3>The Power of Possibilities with MERaLiON</h3>
+        <p>Panellist at "Imagine AI – The Power of Possibilities with MERaLiON" at SWITCH 2025. MERaLiON is Southeast Asia's empathetic multimodal LLM, designed for the region's diverse languages, cultures, and communication styles. We explored how multimodal LLMs reduce solution complexity, cut response latency, and how hyper-localising AI is the foundation for meaningful adoption and trust — not a side concern.</p>
+        <p class="post-pull">At NCS, we evaluate MERaLiON not just in isolation but as part of a larger AI stack — integrating with internal workflows, tuning for performance, measuring deployment cost and resilience.</p>
+        <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <!-- POST 5: AI at Work Masterclass -->
+    <div class="post-card post-card-reverse reveal">
+      <div class="post-img-wrap">
+        <img src="img/post-ai-at-work-masterclass.png" alt="Sunil Sivadas speaking at AI at Work masterclass" />
+      </div>
+      <div class="post-body">
+        <div class="post-tag">AI at Work · Masterclass · 2026</div>
+        <h3>AI is changing tasks before it changes jobs</h3>
+        <p>Most companies are investing in the wrong place. The gap between adoption and impact is the biggest risk. In his Budget 2026 speech, PM Wong announced a National AI Council he'll personally chair and named the real challenge: many firms say they are using AI, but end-to-end transformation requires organising data, rebuilding systems, redesigning processes and jobs, and retraining workers.</p>
+        <p class="post-pull">That gap — between adoption and impact — is what I addressed in my AI at Work masterclass. 200+ use cases surfaced through NCS Group's SunshineAI hackathons, and a knowledge-sharing culture that turns individual discoveries into organisational learning.</p>
+        <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <!-- POST 6: ATxSummit -->
+    <div class="post-card reveal">
+      <div class="post-img-wrap">
+        <img src="img/post-atxsummit.png" alt="Pushing the Boundaries of AI Research — ATxSummit AISDC" />
+      </div>
+      <div class="post-body">
+        <div class="post-tag">AI in Learning &amp; Research · ATxSummit · May 2025</div>
+        <h3>Pushing the Boundaries of AI Research: Breakthroughs and Innovations</h3>
+        <p>Panellist at the ATxSummit AI Student Developer Conference. We explored how learning, teaching, and skill application are transforming to meet an AI-native future — from the ethics of AI in classrooms and vibe coding to how hiring evolves in an AI-first world. In tomorrow's classrooms, AI will be both mentor and brainstorming partner — shifting education from delivering information to orchestrating learning experiences.</p>
+        <p class="post-pull">Meta-skills — framing problems, critiquing AI output, iterating toward better solutions — age far better than any single tool.</p>
+        <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="container">
+    <div class="section-eyebrow reveal">Recognition</div>
+    <h2 class="reveal">Awards & Teams</h2>
+    <p class="awards-intro reveal">Three consecutive NCS Heroes Gold Awards for Best Innovation — for NEXTgpt (2023), Virtual Career Coach (2024), and SOLARIS Agentic AI (2025).</p>
+
+    <div class="awards-grid reveal">
+
+      <div class="award-card">
+        <div class="award-img-wrap">
+          <img src="img/award-heroes2025.jpg" alt="NCS Heroes 2025 Gold Award — SOLARIS" />
+        </div>
+        <div class="award-caption">
+          <span class="award-year-badge">2025</span>
+          <div class="award-card-title">NCS Heroes Gold · Best Innovation</div>
+          <div class="award-card-sub">SOLARIS — Agentic AI for Land Transport Operations</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-img-wrap">
+          <img src="img/award-solaris-team.png" alt="SOLARIS Team" />
+        </div>
+        <div class="award-caption">
+          <span class="award-year-badge award-year-badge--blue">Team</span>
+          <div class="award-card-title">SOLARIS Project Team</div>
+          <div class="award-card-sub">NCS × Land Transport Authority · Singapore 2025</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-img-wrap">
+          <img src="img/award-virtual-career-coach.png" alt="Virtual Career Coach Project Team" />
+        </div>
+        <div class="award-caption">
+          <span class="award-year-badge">2024</span>
+          <div class="award-card-title">NCS Heroes Gold · Best Innovation</div>
+          <div class="award-card-sub">Virtual Career Coach Project Team</div>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <div class="award-img-wrap">
+          <img src="img/award-heroes2023-nextgpt.png" alt="NCS Heroes 2023 Gold — Team NEXTgpt" />
+        </div>
+        <div class="award-caption">
+          <span class="award-year-badge">2023</span>
+          <div class="award-card-title">NCS Heroes Gold · Best Innovation</div>
+          <div class="award-card-sub">Team NEXTgpt — Igniting Gen AI Possibilities</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- PRINCIPLES -->
-<section id="principles">
+<!-- PUBLICATIONS -->
+<section id="publications">
   <div class="container">
-    <div class="section-eyebrow reveal">Key Ideas</div>
-    <h2 class="reveal">Frameworks I work from.</h2>
-    <p class="principles-intro reveal">These aren't abstract concepts — they're the mental models I use daily, grounded in research and field-tested at scale.</p>
-    <div class="principles-list reveal">
-      <div class="principle-row">
-        <div class="principle-name">Adoption ≠ Deployment</div>
-        <div class="principle-desc">The critical failure mode in enterprise AI is measuring tool rollout rather than sustained active usage. <strong>Success requires embedding AI into existing workflows</strong> — not bolting it on as a feature. The north star metric is active weekly usage, not licence count.</div>
+    <div class="section-eyebrow reveal">Research</div>
+    <h2 class="reveal">Publications & Patents</h2>
+
+    <!-- Scholar metrics -->
+    <div class="scholar-metrics reveal">
+      <div class="scholar-stat">
+        <div class="scholar-num">1,804</div>
+        <div class="scholar-label">Total Citations</div>
       </div>
-      <div class="principle-row">
-        <div class="principle-name">The Jagged Frontier</div>
-        <div class="principle-desc">AI capabilities are uneven and unpredictable. Models excel at surprising tasks and fail at seemingly simple ones — often convincingly. <strong>Employees need experiential literacy</strong> before they can make good judgments about what to automate. You can't read the frontier from a job description.</div>
+      <div class="scholar-divider"></div>
+      <div class="scholar-stat">
+        <div class="scholar-num">22</div>
+        <div class="scholar-label">h-index</div>
       </div>
-      <div class="principle-row">
-        <div class="principle-name">Tasks Before Jobs</div>
-        <div class="principle-desc">AI reshapes tasks within roles before it displaces roles entirely. <strong>Workforce strategy must start at the task level</strong> — mapping where AI is already changing the work, then redesigning how teams operate around that reality.</div>
+      <div class="scholar-divider"></div>
+      <div class="scholar-stat">
+        <div class="scholar-num">35</div>
+        <div class="scholar-label">i10-index</div>
       </div>
-      <div class="principle-row">
-        <div class="principle-name">The 53-Point Gap</div>
-        <div class="principle-desc">Research shows a 53-point disconnect between C-suite confidence in AI policy clarity and frontline employee awareness. <strong>This is a management problem, not a technology problem.</strong> Solving it requires active communication infrastructure, not better tools.</div>
+      <div class="scholar-divider"></div>
+      <div class="scholar-stat">
+        <div class="scholar-num">329</div>
+        <div class="scholar-label">Citations since 2021</div>
       </div>
-      <div class="principle-row">
-        <div class="principle-name">The $9-to-$1 Ratio</div>
-        <div class="principle-desc">Technology investment alone is insufficient. For every $1 spent on AI platforms and tools, <strong>organisations need roughly $9 invested in people, process redesign, and change management</strong> to capture the value. Most enterprise AI budgets are inverted.</div>
+      <div class="scholar-areas">
+        <span class="scholar-area-tag">Generative AI</span>
+        <span class="scholar-area-tag">Computer Vision</span>
+        <span class="scholar-area-tag">NLP</span>
       </div>
-      <div class="principle-row">
-        <div class="principle-name">Delegate → Review → Iterate → Own</div>
-        <div class="principle-desc">The practical daily pattern for building genuine AI fluency. Start by delegating a task, critically review the output, iterate with the model, and eventually own a new, higher-leverage workflow. <strong>Repeated across hundreds of tasks, this is how AI capability compounds.</strong></div>
+    </div>
+
+    <!-- Journal Publications -->
+    <div class="pub-section-header reveal">
+      <span class="pub-section-label">Journal Publications</span>
+    </div>
+    <div class="pub-list reveal">
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2024</span></div>
+        <div class="pub-content">
+          <span class="pub-title">An Assessment of an Inpatient Robotic Nurse Assistant: A Mixed-Method Study</span>
+          <div class="pub-authors">Lim YW, Tan SW, Tan CYB, Lee DHM, Siow WT, Heng DGN, Mukhopadhyay A, Lim JC, <strong>Sivadas S</strong>, Teo ELK, Ho LKY</div>
+          <div class="pub-venue">Journal of Medical Systems, 48(1):99 · 2024</div>
+        </div>
       </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2023</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Towards Efficient Video-Based Action Recognition: Context-Aware Memory Attention Network</span>
+          <div class="pub-authors">Thean Chun Koh, Chai Kiat Yeo, Xuan Jing, <strong>Sunil Sivadas</strong></div>
+          <div class="pub-venue">SN Applied Sciences, 5(12):330 · 2023</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2018</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Analysis of Cosine Distance Features for Speaker Verification</span>
+          <div class="pub-authors">George KK, Kumar CS, <strong>Sunil Sivadas</strong>, Ramachandran KI, Panda A</div>
+          <div class="pub-venue">Pattern Recognition Letters, 112:285–289 · 2018</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2005</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Pushing the Envelope — Aside [Speech Recognition]</span>
+          <div class="pub-authors">Morgan N, Zhu Q, Stolcke A, Sonmez K, <strong>Sivadas S</strong>, Shinozaki T, Ostendorf M et al.</div>
+          <div class="pub-venue">IEEE Signal Processing Magazine, 22(5):81–88 · 2005</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Selected Conference Papers -->
+    <div class="pub-section-header reveal">
+      <span class="pub-section-label">Selected Conference Papers</span>
+    </div>
+    <div class="pub-list reveal">
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2024</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Multi-Sensor Fusion for Human Action Detection and Human Motion Prediction</span>
+          <div class="pub-authors">Koh TC, Yeo CK, <strong>Sivadas S</strong></div>
+          <div class="pub-venue">35th Conference of Open Innovations Association (FRUCT) · IEEE 2024</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2022</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Recurrent Multi-Head Attention Fusion Network for Combining Audio and Text for Speech Emotion Recognition</span>
+          <div class="pub-authors">Ahn CS, Kasun LLC, <strong>Sivadas S</strong>, Rajapakse JC</div>
+          <div class="pub-venue">INTERSPEECH, pp. 744–748 · 2022</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2016</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Discriminatively Trained Joint Speaker and Environment Representations for Adaptation of Deep Neural Network Acoustic Models</span>
+          <div class="pub-authors">Yin M, <strong>Sivadas S</strong>, Yu K, Ma B</div>
+          <div class="pub-venue">ICASSP 2016, pp. 5065–5069 · IEEE</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2015</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Investigation of Parametric Rectified Linear Units for Noise Robust Speech Recognition</span>
+          <div class="pub-authors"><strong>Sunil Sivadas</strong>, Wu Z, Ma B</div>
+          <div class="pub-venue">INTERSPEECH · 2015</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2002</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Qualcomm-ICSI-OGI Features for ASR</span>
+          <div class="pub-authors">Adami AG, Burget L, Dupont S, Garudadri H, Grezl F, Hermansky H, <strong>Sivadas S</strong> et al.</div>
+          <div class="pub-venue">INTERSPEECH, pp. 21–24 · 2002 &nbsp;·&nbsp; <em>182 citations</em></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2001</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Tandem Acoustic Modeling in Large-Vocabulary Recognition</span>
+          <div class="pub-authors">Ellis DPW, Singh R, <strong>Sivadas S</strong></div>
+          <div class="pub-venue">IEEE ICASSP Proceedings, Vol. 1 · 2001</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Patents -->
+    <div class="pub-section-header reveal">
+      <span class="pub-section-label">Granted Patents</span>
+    </div>
+    <div class="pub-list reveal">
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2022</span><span class="pub-cited">US 11,457,153</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Active Audio-Visual Surveillance System</span>
+          <div class="pub-authors">Chaudhary NK, <strong>Sivadas S</strong></div>
+          <div class="pub-venue">Issued September 27, 2022</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2019</span><span class="pub-cited">US 10,398,366</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Responding to Changes in Emotional Condition of a User</span>
+          <div class="pub-authors"><strong>Sivadas S</strong></div>
+          <div class="pub-venue">Issued September 3, 2019</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2019</span><span class="pub-cited">US 10,244,988</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Method, Apparatus and Computer Program of Using a Bio-Signal Profile</span>
+          <div class="pub-authors">Kangas J, Kärkkäinen L, Nurmi M, Ojanen V, Salminen I, <strong>Sivadas S</strong>, Vetek A</div>
+          <div class="pub-venue">Issued April 2, 2019</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2016</span><span class="pub-cited">US 9,368,018</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Controlling a User Alert Based on Detection of Bio-Signals and a Significance Test</span>
+          <div class="pub-authors">Kangas J, Karkkainen L, Nurmi M, Ojanen V, Salminen I, <strong>Sivadas S</strong>, Vetek A</div>
+          <div class="pub-venue">Issued June 14, 2016</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2014</span><span class="pub-cited">US 8,922,376</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Controlling a User Alert</span>
+          <div class="pub-authors">Kangas J, Kärkkäinen L, Nurmi M, Ojanen V, Salminen I, <strong>Sivadas S</strong>, Vetek A</div>
+          <div class="pub-venue">Issued December 30, 2014</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2013</span><span class="pub-cited">US 8,487,760</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Providing a User Alert</span>
+          <div class="pub-authors">Kangas J, Kärkkäinen L, Nurmi M, Ojanen V, Salminen I, <strong>Sivadas S</strong>, Vetek A</div>
+          <div class="pub-venue">Issued July 16, 2013</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-meta"><span class="pub-year">2006</span><span class="pub-cited">US 7,089,178</span></div>
+        <div class="pub-content">
+          <span class="pub-title">Multistream Network Feature Processing for a Distributed Speech Recognition System</span>
+          <div class="pub-authors">Garudadri H, <strong>Sivadas S</strong>, Hermansky H, Morgan NH, Wooters CC, Adami AG, Benitez Ortuzar MC et al.</div>
+          <div class="pub-venue">Issued August 8, 2006</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scholar-footer reveal">
+      <a href="https://scholar.google.com/citations?user=u5DJot4AAAAJ&hl=en" target="_blank" rel="noopener" class="btn btn-secondary">View all publications on Google Scholar ↗</a>
     </div>
   </div>
 </section>
@@ -891,12 +1538,13 @@
         <div class="tl-period">2022 — Present</div>
         <div class="tl-title">Director, NEXT Gen Tech</div>
         <div class="tl-org">NCS Group · Singapore</div>
-        <div class="tl-desc">Part of NCS's AI strategy and GenAI practice — building from zero to one. Built NEXTgpt, a rapid prototyping sandbox presented to 70+ C-suite clients. Contributing to NCS's large-scale AI adoption initiative, with 196 use cases surfaced through the Sunshine.AI hackathon.</div>
+        <div class="tl-desc">Part of NCS's AI strategy and GenAI practice — building from zero to one. Built NEXTgpt, a rapid prototyping sandbox presented to 70+ C-suite clients. Contributing to NCS's large-scale AI adoption initiative. Key innovations include <strong>SOLARIS</strong>, an agentic AI system for improving the effectiveness of land transport operations.</div>
         <div class="tl-tags">
           <span class="tl-tag">Agentic AI</span>
           <span class="tl-tag">GenAI</span>
-          <span class="tl-tag">Workforce Strategy</span>
-          <span class="tl-tag">Gold Award — NCS Heroes 2023</span>
+          <span class="tl-tag">Gold Award — NCS Heroes 2023, 2024 & 2025</span>
+          <span class="tl-tag">Google Trailblazers Innovation Award</span>
+          <span class="tl-tag">Distinguished Engineer 2022</span>
         </div>
       </div>
       <div class="tl-entry">
@@ -980,7 +1628,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-name">Sunil <span>Sivadas</span>, Ph.D.</div>
-      <div class="footer-tagline">AI Practitioner · Educator · Distinguished Engineer</div>
+      <div class="footer-tagline">AI Practitioner · Builder · Distinguished Engineer</div>
     </div>
     <ul class="footer-links">
       <li><a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener">Handbook ↗</a></li>
