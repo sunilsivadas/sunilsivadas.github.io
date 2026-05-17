@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Inference-Cost Equation for Agentic AI — Sunil Sivadas, Ph.D.</title>
+  <meta name="description" content="Token prices fell 99.7% yet enterprise AI spend tripled. Cost is a system property. Six cost components, eighteen levers, and the order to apply them." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #08080e;
+      --surface:  #0f0f18;
+      --border:   #1c1c2e;
+      --border2:  #2a2a40;
+      --text:     #e4e1d8;
+      --muted:    #7a7891;
+      --faint:    #3a3850;
+      --gold:     #c9a96e;
+      --gold-lt:  #e8c98a;
+      --blue:     #5bb8f5;
+      --serif:    'Cormorant Garant', Georgia, serif;
+      --sans:     'Syne', system-ui, sans-serif;
+      --body:     'DM Sans', system-ui, sans-serif;
+      --prose:    720px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(8,8,14,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-back {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      color: var(--muted); display: flex; align-items: center; gap: 0.5rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back svg { width: 14px; height: 14px; }
+    .nav-title {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; color: var(--faint);
+      max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    /* ── LAYOUT ── */
+    .article-wrap {
+      max-width: var(--prose);
+      margin: 0 auto;
+      padding: 7rem 1.5rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .article-eyebrow {
+      font-family: var(--sans); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue);
+      margin-bottom: 1.2rem;
+    }
+    .article-title {
+      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 300; line-height: 1.15; color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+    .article-title em { color: var(--gold); font-style: italic; }
+    .article-subtitle {
+      font-family: var(--body); font-size: 1.05rem; color: var(--muted);
+      margin-bottom: 2rem; line-height: 1.6;
+    }
+    .article-meta {
+      font-family: var(--sans); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+
+    /* ── TL;DR ── */
+    .tldr {
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 1.6rem 1.8rem; margin-bottom: 3rem;
+    }
+    .tldr-label {
+      font-family: var(--sans); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .tldr p { color: var(--muted); font-size: 0.97rem; }
+    .tldr p + p { margin-top: 0.8rem; }
+
+    /* ── PROSE ── */
+    .prose h2 {
+      font-family: var(--serif); font-size: 1.9rem; font-weight: 400;
+      color: var(--text); margin: 3.5rem 0 1rem; line-height: 1.2;
+    }
+    .prose h3 {
+      font-family: var(--sans); font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold);
+      margin: 2.8rem 0 0.9rem;
+    }
+    .prose h4 {
+      font-family: var(--body); font-size: 1rem; font-weight: 600;
+      color: var(--text); margin: 2rem 0 0.6rem;
+    }
+    .prose p { margin-bottom: 1.1rem; color: var(--text); }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose a { color: var(--blue); text-decoration: underline; text-decoration-color: rgba(91,184,245,0.4); text-underline-offset: 3px; }
+    .prose a:hover { color: var(--gold); text-decoration-color: var(--gold); }
+    .prose strong { color: var(--text); font-weight: 600; }
+    .prose em { color: var(--gold-lt); font-style: italic; }
+    .prose ul, .prose ol { padding-left: 1.4rem; margin-bottom: 1.1rem; }
+    .prose li { margin-bottom: 0.4rem; color: var(--text); }
+    .prose li strong { color: var(--text); }
+    .prose code {
+      font-family: 'Menlo', 'Consolas', monospace; font-size: 0.85em;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 0.15em 0.45em; border-radius: 2px; color: var(--gold-lt);
+    }
+    .prose pre {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.2rem 1.4rem; border-radius: 2px; margin-bottom: 1.5rem;
+      overflow-x: auto;
+    }
+    .prose pre code {
+      background: none; border: none; padding: 0; font-size: 0.9rem;
+      color: var(--gold-lt);
+    }
+
+    /* ── BLOCKQUOTE / CALLOUT ── */
+    .prose blockquote {
+      border-left: 3px solid var(--faint);
+      padding: 0.8rem 1.4rem; margin: 1.5rem 0;
+      background: rgba(15,15,24,0.6);
+    }
+    .prose blockquote p { color: var(--muted); font-size: 0.96rem; }
+    .callout {
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      padding: 1.2rem 1.5rem; margin: 2rem 0;
+    }
+    .callout-label {
+      font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .callout p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout ul { padding-left: 1.2rem; }
+    .callout li { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.35rem; }
+    .callout a { color: var(--blue); }
+
+    /* ── TABLES ── */
+    .table-wrap { overflow-x: auto; margin: 1.8rem 0; }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.88rem; font-family: var(--body);
+    }
+    th {
+      font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+      padding: 0.7rem 1rem; text-align: left;
+      border-bottom: 1px solid var(--border2); background: var(--surface);
+    }
+    td {
+      padding: 0.65rem 1rem; color: var(--text);
+      border-bottom: 1px solid var(--border); vertical-align: top;
+    }
+    tr:hover td { background: rgba(15,15,24,0.5); }
+
+    /* ── MERMAID ── */
+    .mermaid-wrap {
+      margin: 2rem 0; padding: 1.5rem 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+    .mermaid { font-size: 13px; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 3.5rem 0;
+    }
+
+    /* ── REFERENCES ── */
+    .references { margin-top: 3rem; }
+    .references h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1.5rem; }
+    .ref-group { margin-bottom: 2rem; }
+    .ref-group-title {
+      font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+    }
+    .ref-group ul { list-style: none; padding: 0; }
+    .ref-group li { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
+    .ref-group li::before { content: '—'; position: absolute; left: 0; color: var(--faint); }
+    .ref-group a { color: var(--blue); text-decoration: none; }
+    .ref-group a:hover { color: var(--gold); text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .article-footer {
+      margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .article-footer a {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      color: var(--muted); transition: color .2s;
+    }
+    .article-footer a:hover { color: var(--gold); }
+
+    /* ── LEVER NUMBER ── */
+    .lever-num {
+      font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);
+      display: block; margin-bottom: 0.2rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-title { display: none; }
+      .article-wrap { padding: 5.5rem 1.2rem 4rem; }
+      .prose h2 { font-size: 1.6rem; }
+      th, td { padding: 0.5rem 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Sunil Sivadas
+  </a>
+  <div class="nav-title">The Inference-Cost Equation for Agentic AI</div>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="article-eyebrow">Agentic AI · Inference Cost · May 2026</div>
+  <h1 class="article-title">The Inference-Cost Equation<br>for <em>Agentic AI</em></h1>
+  <p class="article-subtitle">A systems view of what actually drives spend, and the 18 levers that bring it down</p>
+  <div class="article-meta">
+    <span>Sunil Sivadas, Ph.D.</span>
+    <span>May 2026</span>
+    <span>18 levers · 6 cost components</span>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="tldr-label">TL;DR</div>
+    <p>Token prices fell ~99.7% between 2023 and 2025, yet enterprise AI spend tripled from $11.5B to $37B in a single year (<a href="https://www.navyaai.com/reports/ai-cost-report-token-prices-vs-ai-bill">NavyaAI, Feb 2026</a>). The reason: agentic workflows consume 5–30× more tokens per task than chatbots (<a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-25-gartner-predicts-that-by-2030-performing-inference-on-an-llm-with-1-trillion-parameters-will-cost-genai-providers-over-90-percent-less-than-in-2025">Gartner, Mar 2026</a>), and an unconstrained reasoning loop running 10 cycles consumes ~50× the tokens of a linear pass (<a href="https://www.datarobot.com/blog/cut-agentic-ai-development-costs/">DataRobot / Stevens Institute, Jan 2026</a>). Gartner now predicts &gt;40% of agentic AI projects will be cancelled before production by 2027, driven by cost-and-complexity (<a href="https://galileo.ai/blog/hidden-cost-of-agentic-ai">Galileo, Aug 2025</a>).</p>
+    <p>Picking a cheaper model is rarely the answer. Cost is a <em>system property</em>. This article maps the full surface: six cost components, eighteen levers, and the order in which to apply them.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">A note on freshness</div>
+    <p>This article is a framework, not a literature review. New findings land monthly. Treat the citations as the strongest published evidence at the time of writing (May 2026) and the references section as a starting point, not a canon. Where 2026 research has materially updated common mental models (trajectory accumulation as the dominant cost driver, grep-beats-vectors for agentic search, adaptive thinking replacing token budgets, workspace-level cache isolation, GPT-5.5 list-price increases), those updates are flagged inline.</p>
+  </div>
+
+  <div class="prose">
+
+    <!-- SECTION 1 -->
+    <h2>1. The right metric: cost per successful task</h2>
+    <p>Token cost per call is a vanity number. Optimise against:</p>
+    <pre><code>cost_per_successful_task  =  cost_per_run  ÷  success_rate</code></pre>
+    <p>A 30% cheaper model that drops success from 90% → 70% raises true cost by ~17%, plus escalation and rework. DataRobot's published framing for agentic AI uses <strong>dollar-per-decision</strong> as the boardroom metric, not cost-per-inference (<a href="https://www.datarobot.com/blog/cut-agentic-ai-development-costs/">DataRobot, Jan 2026</a>). CloudZero's 2025 <em>State of AI Costs</em> report found only 51% of organisations can confidently evaluate the ROI of their AI spend. This is a measurement problem before it is an optimisation problem (<a href="https://www.cloudzero.com/blog/inference-cost/">CloudZero, 2026</a>).</p>
+    <p>If you can't measure cost-per-step <em>and</em> success rate per cohort, stop and instrument first. Every lever below depends on this.</p>
+
+    <hr class="section-divider" />
+
+    <!-- SECTION 2 -->
+    <h2>2. The cost anatomy of an agent run</h2>
+    <p>Every run decomposes into six components. Each has its own driver and its own lever set.</p>
+
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+flowchart LR
+ A[Agent Run Cost] --> B[Input Tokens<br/>system prompt, retrieved docs,<br/>history, tool schemas]
+ A --> C[Output Tokens<br/>response, structured output]
+ A --> D[Reasoning Tokens<br/>CoT, planning, self-critique]
+ A --> E[Tool Calls<br/>API calls, retries, polling]
+ A --> F[Embedding/Retrieval<br/>queries, reranking]
+ A --> G[Compute/Hosting<br/>GPU time, orchestration]
+ B -.lever.-> B1[Context budgets<br/>compaction<br/>smarter retrieval]
+ C -.lever.-> C1[Output caps<br/>schema constraints<br/>step limits]
+ D -.lever.-> D1[Model selection<br/>retrieve vs reason]
+ E -.lever.-> E1[Batching<br/>caching<br/>fail-fast]
+ F -.lever.-> F1[Query consolidation<br/>tiered retrieval]
+ G -.lever.-> G1[Model routing<br/>batching API]
+      </div>
+    </div>
+
+    <p>A worked HR-leave-agent example: one request = ~7,000 input + ~1,300 output tokens, 2–3 tool calls, 1–2 retrieval queries. Multi-agent systems use up to <strong>15× more tokens than simple chat</strong>, and tool results alone can consume <strong>50,000+ tokens</strong> before the agent processes a user request (<a href="https://vorstel.com/feeds/blog/effective-context-engineering-ai-agents">Vorstel / citing Anthropic + Cognition, May 2026</a>).</p>
+
+    <hr class="section-divider" />
+
+    <!-- SECTION 3 -->
+    <h2>3. The eighteen levers</h2>
+
+    <h3><span class="lever-num">Lever 1</span>Model routing (per step, not per agent)</h3>
+    <p>Don't pick <em>a</em> model. Assign a tier <em>per step</em>: classification/extraction → small; eligibility/judgment/drafting → large. Published results:</p>
+    <ul>
+      <li><strong>RouteLLM</strong> (UC Berkeley/Anyscale, ICLR 2025): matrix-factorisation router achieved 95% of GPT-4 quality using only <strong>26% strong-model calls</strong> (~48% cost reduction); with augmented training data, only 14% strong calls, <strong>75% cheaper</strong> than a random baseline; <strong>&gt;85% cost reduction on MT-Bench, 45% on MMLU, 35% on GSM8K</strong> (<a href="https://www.lmsys.org/blog/2024-07-01-routellm/">LMSYS, Jul 2024</a>; <a href="https://www.swfte.com/blog/intelligent-llm-routing-multi-model-ai">Swfte, Jan 2026</a>).</li>
+      <li>LLM gateways report <strong>30–50% token-spend cuts</strong> through automatic routing and policy enforcement (<a href="https://www.burnwise.io/blog/llm-model-routing-guide">Burnwise, Jan 2026</a>).</li>
+    </ul>
+
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+flowchart TD
+ Q[Incoming Step] --> R{Confidence<br/>+ stakes<br/>classifier}
+ R -->|Low complexity| S[Small model<br/>Haiku / Mini / Flash]
+ R -->|Medium complexity| M[Medium model<br/>Sonnet / GPT-4 class]
+ R -->|High stakes / low confidence| L[Large model<br/>Opus / o-series]
+ S --> CC{Output<br/>confidence<br/>check}
+ M --> CC
+ CC -->|Pass| OK[Commit]
+ CC -->|Fail| ESC[Escalate to next tier]
+ ESC --> M
+ ESC --> L
+      </div>
+    </div>
+
+    <p>Healthy escalation rate: <strong>5–15%</strong>. If 50%+ escalates, routing is wrong. The mistake: "use small everywhere." The correct goal: <em>smallest acceptable model per step, with a known escalation path</em>.</p>
+
+    <h3><span class="lever-num">Lever 2</span>Harness / scaffold design</h3>
+    <p>Most hidden cost lives in unbounded ReAct loops that burn tokens proving they're stuck. SWE-Bench and GAIA leaderboards show high-performing agents incur <strong>10–50× more tokens per task</strong> due to iterative reasoning loops (<a href="https://galileo.ai/blog/hidden-cost-of-agentic-ai">Galileo, Aug 2025</a>).</p>
+    <p>Mandatory levers:</p>
+    <ul>
+      <li><code>max_steps</code>, <code>max_tool_calls</code>, <code>max_wall_time</code>, explicit stop conditions</li>
+      <li>State machines or plan-then-execute over open-ended ReAct where structure permits</li>
+      <li>Step-level traces so cost attribution is possible</li>
+    </ul>
+
+    <h4>What the leaderboards actually show</h4>
+    <p>The claim "a well-scaffolded smaller model beats a loosely-scaffolded larger one" used to be intuition. In 2025–2026 it became measurable. Five concrete examples:</p>
+    <p><strong>1. Terminal-Bench 2.0, same model, harness rebuild, +13.7 points.</strong> LangChain's coding agent went from outside the top 30 to <strong>rank 5 on Terminal-Bench 2.0, jumping 52.8% → 66.5%, by rebuilding only the system prompts, tools, and middleware</strong> with no model change (<a href="https://medium.com/@tentenco/the-agent-harness-why-70-of-your-ai-agents-performance-lives-outside-the-model-5093cfe03df1">Mak, Apr 2026</a>). Same-model scaffold gaps in the top tier confirm the pattern: GPT-5.3-Codex scores <strong>77.3% with Factory's Droid agent vs 75.1% with OpenAI's Simple Codex</strong>; Claude Opus 4.6 scores <strong>74.7% with KRAFTON's Terminus-KIRA vs 71.9% with TongAgents</strong> — the model is fixed; only the scaffold changes.</p>
+    <p><strong>2. SWE-bench Pro, cheaper model + better scaffold beats flagship.</strong> Meta and Harvard's Confucius Code Agent ran <strong>Claude Sonnet 4.5</strong> with their custom scaffold and scored <strong>52.7% on SWE-bench Pro, beating Claude Opus 4.5 on Anthropic's own scaffold at 52.0%</strong> (<a href="https://particula.tech/blog/agent-scaffolding-beats-model-upgrades-swe-bench">Particula, Mar 2026</a>). Same source: with six frontier models clustering within <strong>0.8 points on SWE-bench Verified</strong>, scaffolding changes alone produce <strong>22+ point swings</strong> on SWE-bench Pro with the same model.</p>
+
+    <div class="callout">
+      <div class="callout-label">Caveat on SWE-bench Verified</div>
+      <p>OpenAI stopped reporting SWE-bench Verified scores in February 2026, citing contamination concerns and the outsized impact of agent scaffolding. Their audit found 59.4% of the hardest unsolved Verified problems had flawed test cases (<a href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">OpenAI, Feb 2026</a>; <a href="https://www.codesota.com/news/swe-bench-contamination-debate">Codesota, Feb 2026</a>). The same Opus 4.5 model scores 80.9% on Verified but only 45.9% on Scale AI's SEAL-graded SWE-bench Pro under a standardized harness. SWE-bench Pro and SWE-bench Live are the preferred successors. SWE-bench Verified results in this article are reported because they were the standard at the time of the cited research, but should be read alongside contamination uncertainty.</p>
+    </div>
+
+    <p><strong>3. Mini-SWE-Agent, radical minimalism wins.</strong> SWE-agent's <a href="https://github.com/SWE-agent/mini-swe-agent">Mini-SWE-Agent</a> is <strong>~100 lines of Python with no tools beyond bash</strong>, yet scores <strong>&gt;74% on SWE-bench Verified</strong>, beating most heavily-engineered frameworks. The follow-up Live-SWE-Agent adds reflection prompts after each step for a 3–5pp gain, reaching <strong>75.4% on SWE-bench Verified and 45.8% on SWE-Bench Pro</strong> with Claude 4.5 (<a href="https://www.emergentmind.com/topics/mini-swe-agent-27d26942-1f63-4337-bee8-576ebb1468c3">EmergentMind, Dec 2025</a>).</p>
+    <p><strong>4. BrowseComp-Plus, retrieval engineering beats model upgrade.</strong> Pairing GPT-5 with the Qwen3-Embedding-8B retriever raised accuracy from <strong>55.9% → 70.1% with fewer search calls</strong>, a 14-point gain from changing the retriever, not the model (<a href="https://arxiv.org/abs/2508.06600">Chen et al., arXiv 2508.06600, Aug 2025</a>). Same paper: open-source Search-R1 with BM25 retriever scores 3.86%, illustrating how retriever choice dominates outcomes for deep-research agents.</p>
+    <p><strong>5. GAIA, tool-augmented 4B beats unaugmented 32B.</strong> University of Amsterdam research (Żywot et al., 2026) on the GAIA benchmark shows <strong>tool-augmented 4B models outperform 32B models without tool access</strong> (<a href="https://arxiv.org/pdf/2601.11327">arXiv 2601.11327</a>). Separately, Princeton's HAL scaffold adds <strong>~30 absolute points to GAIA scores</strong>, "larger than the gap between most frontier model releases" (<a href="https://rapidclaw.dev/blog/ai-agent-benchmarks-2026">Rapid Claw, Apr 2026</a>).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Benchmark</th><th>Same-model scaffold gap</th><th>Smaller-model-beats-larger evidence</th></tr></thead>
+        <tbody>
+          <tr><td>Terminal-Bench 2.0</td><td>+13.7pp (LangChain rebuild); 2–3pp top-of-table</td><td>Multiple top-5 entries use Sonnet-class, not Opus</td></tr>
+          <tr><td>SWE-bench Verified / Pro</td><td>22+ pp swings; six models within 0.8pp</td><td>Sonnet 4.5 + Confucius beats Opus 4.5 + Anthropic scaffold</td></tr>
+          <tr><td>BrowseComp-Plus</td><td>55.9 → 70.1% via retriever swap</td><td>Retriever choice &gt; model size</td></tr>
+          <tr><td>GAIA</td><td>~30pp from HAL scaffold</td><td>4B-with-tools &gt; 32B-without</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Bar</th><th>Same-model scaffold comparison</th><th>Gain</th></tr></thead>
+        <tbody>
+          <tr><td><strong>A</strong></td><td>LangChain coding agent. Terminal-Bench 2.0 harness rebuild (52.8% → 66.5%)</td><td>+13.7pp</td></tr>
+          <tr><td><strong>B</strong></td><td>GPT-5.3-Codex on TB2: Factory Droid (77.3%) vs OpenAI Simple Codex (75.1%)</td><td>+2.2pp</td></tr>
+          <tr><td><strong>C</strong></td><td>Claude Opus 4.6 on TB2: KRAFTON Terminus-KIRA (74.7%) vs TongAgents (71.9%)</td><td>+2.8pp</td></tr>
+          <tr><td><strong>D</strong></td><td>SWE-bench Pro: Sonnet 4.5 + Confucius (52.7%) beats Opus 4.5 + Anthropic scaffold (52.0%)</td><td>+0.7pp <em>with cheaper model</em></td></tr>
+          <tr><td><strong>E</strong></td><td>Particula client case. Sonnet retained, scaffold rebuilt (34% → 71%)</td><td>+37pp</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The implication for cost: <strong>scaffold engineering is the dominant lever for quality, and quality at smaller-model price is the cost lever</strong>. A production case study from Particula reports rebuilding scaffolding around Claude Sonnet (instead of upgrading to Opus) took a client's task completion rate from <strong>34% → 71%</strong> at no model-cost increase (<a href="https://particula.tech/blog/agent-scaffolding-beats-model-upgrades-swe-bench">Particula, Mar 2026</a>).</p>
+
+    <blockquote>
+      <p><strong>Bottom line.</strong> When you read "Model X scores Y% on benchmark Z," ask which scaffold ran it. A 22-point swing on the same model is now common. The flip side: most teams can capture significant cost reduction by holding the model fixed and investing in the scaffold instead of the next model release.</p>
+      <p><strong>Leaderboard refresh, May 2026.</strong> Terminal-Bench 2.0 has not saturated. Top is now GPT-5.5 at <strong>82.0%</strong>, with the top-10 spread still 22+ points (<a href="https://benchlm.ai/benchmarks/terminalBench2">BenchLM, May 2026</a>). It remains the strongest public board for harness-vs-harness comparison, with multiple scaffold submissions per model.</p>
+    </blockquote>
+
+    <h3><span class="lever-num">Lever 3</span>Context engineering</h3>
+    <p>Anthropic's Sep 2025 engineering guide is now the canonical treatment: <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">"Effective context engineering for AI agents"</a>. The shift from prompt engineering → context engineering reflects the fact that <strong>most production agent failures are context failures, not model failures</strong> (<a href="https://vorstel.com/feeds/blog/effective-context-engineering-ai-agents">Vorstel, May 2026</a>).</p>
+
+    <div class="callout">
+      <div class="callout-label">2026 anchor</div>
+      <p><strong>Trajectory accumulation is the dominant agent cost driver, and most of it is removable.</strong> AgentDiet (PACMSE FSE 2026, <a href="https://arxiv.org/abs/2509.23586">arXiv 2509.23586</a>) reports <strong>39.9–59.7% input-token reduction and 21.1–35.9% total cost reduction with no quality loss</strong> across two LLMs and two coding benchmarks. The paper anchors this with OpenRouter telemetry: of Claude 4 Sonnet's ~100B daily tokens, <strong>99% were trajectory input tokens, 1% were generated output</strong>. The dominant cost line in any non-trivial agent run is the conversation history accumulating across steps, not the answer the model produces.</p>
+    </div>
+
+    <p>Practical tactics:</p>
+    <ul>
+      <li><strong>Per-step context budgets</strong> (e.g., intake ≤2k, retrieval ≤4k, eligibility ≤6k, response ≤3k)</li>
+      <li><strong>Prompt structure ordered for cache hits</strong>: stable system prompt → tool schemas → semi-stable policy → dynamic user/conversation</li>
+      <li><strong>Compaction</strong>: replace verbose history with structured decisions + evidence pointers</li>
+      <li><strong>Step-scoped injection</strong>: each step sees only what it needs</li>
+      <li><strong>Tool-selection budget</strong>: keep 3–5 most-used tools always loaded; dynamic discovery for 10+ (<a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic, Sep 2025</a>)</li>
+      <li><strong>LangChain reports applying RAG to tool descriptions improves selection accuracy 3-fold</strong> (<a href="https://vorstel.com/feeds/blog/effective-context-engineering-ai-agents">Vorstel, May 2026</a>)</li>
+    </ul>
+
+    <h3><span class="lever-num">Lever 4</span>Data quality &amp; retrieval engineering</h3>
+    <p>Bad retrieval forces larger context, more top_k, more reasoning to disambiguate, and more retries. Galileo reports <strong>noisy embeddings reduce retrieval accuracy by 20–30%</strong>, leading to higher inference retries and token consumption (<a href="https://galileo.ai/blog/hidden-cost-of-agentic-ai">Galileo, Aug 2025</a>).</p>
+    <p>The benchmark to beat: <strong>Anthropic's Contextual Retrieval</strong> (Sep 2024) reduces top-20-chunk retrieval failure rate by:</p>
+    <ul>
+      <li><strong>35%</strong> with contextual embeddings alone (5.7% → 3.7%)</li>
+      <li><strong>49%</strong> with contextual embeddings + contextual BM25 (5.7% → 2.9%)</li>
+      <li><strong>67%</strong> when combined with reranking (5.7% → 1.9%)</li>
+    </ul>
+    <p>Source: <a href="https://www.anthropic.com/news/contextual-retrieval">Anthropic. Introducing Contextual Retrieval</a>. The preprocessing cost is roughly <strong>$1.02 per million document tokens</strong> to generate contextualised chunks, made viable by prompt caching.</p>
+
+    <div class="callout">
+      <div class="callout-label">2026 update: for agentic search, grep often beats vector retrieval</div>
+      <p>Two independent May 2026 papers converge on the same conclusion:</p>
+      <ul>
+        <li><strong>"Is Grep All You Need?"</strong> (<a href="https://arxiv.org/abs/2605.15184">Sen et al., PwC, arXiv 2605.15184</a>) tested Chronos plus provider-native CLIs on 116 LongMemEval questions. Grep generally outperformed vector retrieval, and harness/tool-calling style was a stronger determinant of accuracy than retrieval method.</li>
+        <li><strong>"Beyond Semantic Similarity: Rethinking Retrieval for Agentic Search via Direct Corpus Interaction"</strong> (<a href="https://arxiv.org/abs/2605.05242">Li, Lu, Chen, Lin, Choi, Zou et al., arXiv 2605.05242</a>) argues the top-k similarity interface is a structural bottleneck for agentic search. The proposed alternative, <strong>Direct Corpus Interaction</strong>, gives the agent terminal tools (grep, file reads, shell, lightweight scripts) on the raw corpus with no embeddings.</li>
+      </ul>
+      <p>Cost implication: an embedding + reranker stack adds infrastructure, latency, and per-token cost. For agentic workloads, a simpler grep-first retrieval path may yield equal or better accuracy at a fraction of the cost. Anthropic's Contextual Retrieval still anchors document-QA RAG workloads; agentic search is where the 2026 paradigm shift is happening.</p>
+    </div>
+
+    <h3><span class="lever-num">Lever 5</span>Caching (the highest-leverage single lever)</h3>
+
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+flowchart LR
+ REQ[Incoming Request] --> SEM{Semantic<br/>Cache}
+ SEM -->|Hit ~0.95 sim| RESP1[Return cached response<br/>100% savings]
+ SEM -->|Miss| PRE{Prompt/Prefix<br/>Cache}
+ PRE -->|Hit| KV[Reuse KV state<br/>90% savings on input]
+ PRE -->|Miss| FULL[Full inference]
+ KV --> TOOL{Tool result<br/>cache}
+ FULL --> TOOL
+ TOOL -->|Hit| SKIP[Skip API call]
+ TOOL -->|Miss| CALL[Execute tool]
+      </div>
+    </div>
+
+    <p><strong>Prompt/prefix caching</strong> (provider-level):</p>
+    <ul>
+      <li>Anthropic: cache hits cost <strong>10% of base input</strong> (i.e., <strong>90% savings</strong>); writes 1.25× for 5-min TTL or 2.0× for 1-hour TTL (<a href="https://platform.claude.com/docs/en/about-claude/pricing">Anthropic Pricing Docs, May 2026</a>)</li>
+      <li>OpenAI: <strong>automatic prefix caching at 50% discount</strong> on cached input tokens (<a href="https://openai.com/api/pricing/">OpenAI Pricing</a>)</li>
+      <li>Production reports: ProjectDiscovery cut LLM costs <strong>59%</strong> with prompt caching (74% cache hit rate after restructuring) (<a href="https://projectdiscovery.io/blog/how-we-cut-llm-cost-with-prompt-caching">ProjectDiscovery, Apr 2026</a>); Du'An Lightfoot reported $720 → $72 monthly (<strong>90% reduction</strong>) (<a href="https://medium.com/@labeveryday/prompt-caching-is-a-must-how-i-went-from-spending-720-to-72-monthly-on-api-costs-3086f3635d63">Medium, Sep 2025</a>)</li>
+    </ul>
+
+    <p><strong>Five caches with distinct invalidation contracts:</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Cache type</th><th>What it stores</th><th>Invalidation trigger</th><th>TTL guidance</th></tr></thead>
+        <tbody>
+          <tr><td>Prompt/prefix</td><td>System prompts, tool schemas</td><td>Prompt version change</td><td>5 min – 1 hr</td></tr>
+          <tr><td>Semantic</td><td>Query → response</td><td>Policy/corpus update</td><td>Hours to days</td></tr>
+          <tr><td>Embedding</td><td>Chunk → vector</td><td>Source change</td><td>Until source changes</td></tr>
+          <tr><td>Tool result</td><td>Stable lookups (holidays, org chart)</td><td>Source system update</td><td>Hours to days</td></tr>
+          <tr><td>Session</td><td>Parsed context, extracted fields</td><td>Session end</td><td>Session duration</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Caching without invalidation discipline ships stale answers. Track cache hit rate <em>and</em> stale-serve rate.</p>
+    <p><strong>The relocation trick:</strong> ProjectDiscovery's biggest win was moving dynamic content (working memory, runtime context) <em>out</em> of the cacheable prefix; this took hit rate from <strong>7% → 74% in one deployment</strong>.</p>
+
+    <div class="callout">
+      <div class="callout-label">Two 2026 changes that update cache math</div>
+      <p><strong>1. Anthropic workspace-level cache isolation (effective Feb 5, 2026).</strong> Prompt caches are now isolated <em>per workspace</em> on Claude API, Claude Platform on AWS, and Microsoft Foundry (beta). Bedrock and Vertex AI remain organization-isolated (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Claude API Docs, 2026</a>). Teams with multi-workspace architectures need to revisit cache strategy.</p>
+      <p><strong>2. Opus 4.7 tokenizer change: up to +35% tokens per identical request.</strong> The new tokenizer generates up to 35% more tokens for the same input text compared with Opus 4.6. Per-token list price is unchanged, but <strong>effective cost per request can rise up to 35%</strong> even at identical workloads (<a href="https://platform.claude.com/docs/en/build-with-claude/extended-thinking">Anthropic API Docs, 2026</a>). Forecasting tools that assume tokenizer parity across model upgrades will under-report.</p>
+      <p>A separate note: vendor-marketed "90%+ hit rates" for <em>semantic</em> caching conflate match accuracy with hit frequency. Production hit rates land at <strong>20–45%</strong> in honest benchmarks (<a href="https://preto.ai/blog/semantic-caching-llm/">Preto.ai, Apr 2026</a>). A 20% hit rate on a $5K/month bill still saves $1,000/month — but the headline 90% number is a marketing artefact.</p>
+    </div>
+
+    <h3><span class="lever-num">Lever 6</span>Retrieval economics</h3>
+    <p>Most teams set <code>top_k=10</code> and never tune it. Reduce to the smallest k that holds recall on the eval set. Use tiered retrieval: cheap recall pass → small reranker → top 3–5 enter LLM context. Consolidate queries rather than firing one per sub-question.</p>
+
+    <h3><span class="lever-num">Lever 7</span>Tool design and call discipline</h3>
+    <p>Tool calls are network round-trips with their own latency and retry costs. Tool schemas live in input tokens <em>on every call</em>. A bloated tool set causes "context confusion" where the model hallucinates parameters or picks the wrong tool (<a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic Sep 2025</a>).</p>
+    <ul>
+      <li>Batch independent tool calls</li>
+      <li>Fail fast on validation errors before re-invoking the model</li>
+      <li>Idempotency keys to prevent duplicate work on retry</li>
+      <li>Compact tool outputs — 10 fields, not 5 KB of JSON</li>
+      <li>Trim schemas: a human engineer who can't pick the right tool means the agent can't either</li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-label">The MCP metadata tax</div>
+      <p>Model Context Protocol tool registrations are unusually expensive in context. Practitioner reports from 2026 put MCP tool metadata at <strong>40–50% of the context window</strong> for agents with rich tool catalogues (<a href="https://iternal.ai/token-usage-guide">Iternal, 2026</a>). Two practical mitigations: dynamic tool discovery rather than registering everything at session start (cuts the metadata footprint by ~85% in cited cases), and CLI-first or Skills-based architectures where tool capability lives in code the agent calls rather than schemas the model must reason over.</p>
+    </div>
+
+    <h3><span class="lever-num">Lever 8</span>Output shaping</h3>
+    <p>Output tokens are typically <strong>3–5× more expensive than input</strong> (e.g., Anthropic Opus 4.7: $5 in / $25 out per MTok, <a href="https://platform.claude.com/docs/en/about-claude/pricing">Anthropic Pricing</a>). Force structured outputs with JSON schemas, hard length caps, enum constraints. Ban narrative "analysis" before the structured answer.</p>
+
+    <h3><span class="lever-num">Lever 9</span>Reasoning discipline</h3>
+    <p>Reasoning tokens are the silent budget-killer with reasoning-class models. Rule: <strong>don't reason about things you can look up</strong>. Anthropic's Opus 4.7 includes "adaptive thinking" that automatically adjusts reasoning depth based on task complexity (<a href="https://www.anthropic.com/claude/opus">Anthropic, May 2026</a>), but the application layer still owns the decision of <em>when</em> a reasoning model is the right tool at all.</p>
+
+    <div class="callout">
+      <div class="callout-label">2026 update: bigger thinking budget is not always better</div>
+      <p><strong>"Increasing the Thinking Budget is Not All You Need"</strong> (<a href="https://arxiv.org/html/2512.19585v1">arXiv 2512.19585</a>, Dec 2025) tests configurations from 0 to 24,000 reasoning tokens on AIME24 across Qwen3-8B, Qwen3-4B, and DeepSeek-R1-Distill-Llama-8B. For a fixed compute budget, <strong>allocating to multiple shorter reasoning calls often matches or beats a single long one</strong>. The dominant intuition (more thinking → better answer) breaks past a workload-specific inflection point.</p>
+      <p>Concrete API consequence: Anthropic has <strong>deprecated <code>budget_tokens</code> on Opus 4.6 and Sonnet 4.6</strong> in favour of an adaptive <code>effort</code> parameter (<a href="https://platform.claude.com/docs/en/build-with-claude/extended-thinking">Claude API Docs, 2026</a>). The primitive is changing because the old mental model was wrong.</p>
+    </div>
+
+    <h3><span class="lever-num">Lever 10</span>Deflection</h3>
+    <p>The cheapest LLM call is the one you never make. A rule-based or small-classifier front door can deflect FAQs and trivial intents to deterministic responses. Many production agents find 30–50% of traffic is deflectable.</p>
+
+    <h3><span class="lever-num">Lever 11</span>Workflow vs. agent choice</h3>
+    <p>If the task has low cognitive complexity and stable structure, a deterministic workflow with one LLM call beats an agent loop. The "Big Model Fallacy" — assuming frontier models are required for all tasks — is now flagged as <strong>the most expensive architectural mistake in enterprise AI</strong> (<a href="https://oplexa.com/ai-inference-cost-crisis-2026/">Oplexa, Mar 2026</a>).</p>
+
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+flowchart TD
+ START[New AI use case] --> Q1{Cognitive<br/>complexity?}
+ Q1 -->|Low| Q2{Integration<br/>complexity?}
+ Q1 -->|Medium-High| Q3{Stable<br/>workflow?}
+ Q2 -->|Low| WF1[Deterministic UX<br/>form / rule / single LLM call]
+ Q2 -->|High| WF2[Workflow automation<br/>fix integrations first]
+ Q3 -->|Yes| WF3[Plan-Execute scaffold<br/>or state machine]
+ Q3 -->|No - exception heavy| AG[Agentic loop with<br/>budgets + oversight]
+      </div>
+    </div>
+
+    <h3><span class="lever-num">Lever 12</span>Fine-tuning and distillation</h3>
+    <p>A fine-tuned small model on a narrow, repetitive task can match a large model at a fraction of the cost. Published results:</p>
+    <ul>
+      <li><strong>TensorZero</strong>: fine-tuned small models matched or exceeded GPT-4.1 zero-shot performance at <strong>5–30× cheaper inference</strong> for data extraction (<a href="https://www.tensorzero.com/blog/distillation-programmatic-data-curation-smarter-llms-5-30x-cheaper-inference/">TensorZero</a>)</li>
+      <li><strong>In-Context Distillation with Self-Consistency Cascades</strong> (<a href="https://arxiv.org/pdf/2512.02543">arXiv Dec 2025</a>): matches teacher accuracy at <strong>2.5× lower cost</strong> on ALFWorld; <strong>$0.059 → $0.024 per episode</strong></li>
+      <li><strong>distil labs benchmarks</strong>: 0.6B–8B fine-tuned SLMs match or beat 10 frontier LLMs at <strong>10–100× lower inference cost</strong> (<a href="https://www.distillabs.ai/">distil labs, Mar 2026</a>)</li>
+      <li>Galileo's Luna-2 SLM reports <strong>~90% inference cost savings</strong> vs heavy LLMs for evaluation tasks</li>
+    </ul>
+    <p>Worth it when (a) task volume justifies the dataset and eval investment, (b) the task is stable, and (c) you have evaluation infrastructure to detect regression.</p>
+
+    <h3><span class="lever-num">Lever 13</span>Service tiers and time-shifting</h3>
+    <p>The "when" of inference is now a pricing axis, not just the "what." Map every workload to the lowest-cost tier that meets its SLA.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tier</th><th>Latency</th><th>Discount vs Standard</th><th>When to use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Priority</strong></td><td>Lowest, most consistent</td><td>~1.5–2× <em>more</em> expensive</td><td>User-facing real-time, fraud signals, voice agents</td></tr>
+          <tr><td><strong>Standard</strong> (default)</td><td>Normal</td><td>Baseline</td><td>Default for interactive workloads</td></tr>
+          <tr><td><strong>Flex</strong></td><td>Slower, possible 429s</td><td><strong>~50% off</strong></td><td>Async user features, non-critical paths</td></tr>
+          <tr><td><strong>Batch</strong></td><td>Up to 24h</td><td><strong>50% off</strong> input and output</td><td>Bulk jobs, evaluations, nightly enrichment</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Stacking discounts.</strong> Batch combines with prompt caching. On OpenAI: 50% batch × 50% cache hit gives ~25% of base price. On Anthropic and AWS Bedrock Flex: 50% Flex tier × 10% cache hit reads gives ~5% of base price.</p>
+    <p><strong>What qualifies for time-shifting</strong> — a typical product has ~70% of token volume in non-interactive paths: evaluations, document processing pipelines, nightly data enrichment, offline content generation, ETL-style extraction, knowledge base reindexing.</p>
+
+    <div class="callout">
+      <div class="callout-label">Counter-trend: prices do not only fall</div>
+      <p>On <strong>Apr 23, 2026</strong>, OpenAI doubled GPT-5.5 Standard list prices: input $2.50 → $5.00 and output $15 → $30 per MTok (<a href="https://apidog.com/blog/gpt-5-5-pricing/">Apidog, Apr 2026</a>). At Batch pricing, GPT-5.5 sits at $2.50/$15 — identical to the previous GPT-5.4 Standard. Implication: when a vendor re-prices the flagship Standard tier upward, <strong>Batch becomes the new effective Standard</strong> for cost-sensitive workloads.</p>
+    </div>
+
+    <h3><span class="lever-num">Lever 14</span>Self-hosted vs managed APIs</h3>
+    <p><strong>Quick answer.</strong> For most teams in 2026, APIs win. The break-even point is higher than people think.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Break-even threshold</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>TokenMix (50+ deployments)</td><td>~$20K/month API spend</td><td>Below this, ops overhead exceeds savings</td></tr>
+          <tr><td>Renezander</td><td>10M+ tokens/day where open weights match quality</td><td>"Engineering time saves a lot of tokens"</td></tr>
+          <tr><td>DevTk.AI</td><td>50–100M tokens/day</td><td>"Math only flips at very high volumes"</td></tr>
+          <tr><td>Braincuber (500+ deployments)</td><td>500M+ tokens/day</td><td>"API wins for 87% of use cases"</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Total cost of self-hosting is 3–5× the GPU sticker price.</strong> Published breakdown includes: GPU rental, 10–20 hrs/month engineering ($750–$3,000/month), redundancy, monitoring stack, model refresh cycles, and GPU utilisation tax (at 10% utilisation, per-token cost is 10×).</p>
+    <p><strong>When self-hosting actually makes sense:</strong> data residency requirements, sustained high volume above break-even, owned fine-tuned weights, quality bar met by open weights, or latency floor requirements.</p>
+    <p><strong>The hybrid pattern is what most production setups land on.</strong> Self-host the predictable bulk. Use APIs for high-value, bursty, or frontier-only work. One router between them.</p>
+
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+flowchart TD
+ REQ[Incoming request] --> CLASS{Classify}
+ CLASS -->|Predictable bulk<br/>quality-OK with open weights| LOCAL[Self-hosted<br/>Llama / Qwen / DeepSeek<br/>on vLLM or SGLang]
+ CLASS -->|High-value or bursty<br/>or needs frontier quality| API[Managed API<br/>Sonnet / Opus / GPT-5]
+ LOCAL --> CHECK{Confidence<br/>check}
+ CHECK -->|Low confidence| API
+ CHECK -->|OK| OK[Return]
+ API --> OK
+      </div>
+    </div>
+
+    <p><strong>Quantization is the cheapest serving optimization.</strong> A Llama 3.3 70B model needs ~140GB VRAM at fp16. Quantized to 4-bit (AWQ or GPTQ), it fits in 40GB — moving deployment from 2× A100 80GB to a single A100 40GB. Quality drop is typically 1–3 percentage points on standard benchmarks.</p>
+
+    <h3><span class="lever-num">Lever 15</span>Speculative and parallel execution</h3>
+    <p>Parallel retrieval, parallel independent tool calls, streaming output to mask latency. Mostly latency wins — but they also reduce user retries and abandonment. Consistent-hashing-with-bounded-loads (CHWBL) routing benchmarks show <strong>95% reduction in time-to-first-token and 127% increase in throughput</strong> for cache-sensitive workloads (<a href="https://www.swfte.com/blog/intelligent-llm-routing-multi-model-ai">Swfte, Jan 2026</a>).</p>
+
+    <h3><span class="lever-num">Lever 16</span>Confidence-gated work</h3>
+    <p>Running a critic on every output doubles cost. Running it on the 10% with low confidence catches most errors at 10% of the cost. This generalises Lever 1's escalation: don't pay for verification, expansion, or larger-model passes by default — pay for them when a cheap signal warrants it.</p>
+
+    <h3><span class="lever-num">Lever 17</span>FinOps telemetry</h3>
+    <p>Per-step, per-tenant, per-cohort cost attribution. Anomaly detection on cost-per-task. Spend budgets enforced at the orchestration layer, not just provider dashboards.</p>
+
+    <div class="callout">
+      <div class="callout-label">The macro picture</div>
+      <p><strong>FinOps for AI is the #1 forward-looking priority</strong> for FinOps practitioners in the 2026 <em>State of FinOps</em> report. <strong>40% of companies now spend ≥$10M/year on AI.</strong> <strong>AI-centric companies operate at 50–60% gross margins, vs. 80–90% for traditional SaaS</strong> — inference is COGS, not opex. This re-frames every cost lever in this article as a margin lever, not an efficiency one (<a href="https://www.cloudzero.com/blog/inference-economics/">CloudZero, May 2026</a>).</p>
+      <p>A vivid anchor: one team running an automated PR-review agent at ~15 PRs/eng/week with ~400K input tokens per PR generated a <strong>$8,400 month-one bill</strong> from a single workflow — because there was no per-step, per-feature attribution wired into the orchestration layer (<a href="https://www.truefoundry.com/blog/llm-cost-attribution-agentic-cicd">TrueFoundry, 2026</a>).</p>
+    </div>
+
+    <h3><span class="lever-num">Lever 18</span>Prompt compression</h3>
+    <p>This is different from context engineering. Context engineering curates <em>which</em> information enters the prompt. Prompt compression mechanically shrinks the tokens that represent that information. The two stack.</p>
+    <p><strong>LLMLingua family</strong> (Microsoft Research):</p>
+    <ul>
+      <li><strong>LLMLingua</strong>: 20× compression with 1.5pt accuracy drop on GSM8K (<a href="https://arxiv.org/pdf/2310.05736">arXiv 2310.05736</a>)</li>
+      <li><strong>LongLLMLingua</strong>: 94% cost reduction on the LooGLE long-context benchmark. 17.1% performance boost on NaturalQuestions with 4× fewer tokens (<a href="https://arxiv.org/abs/2310.06839">arXiv 2310.06839</a>)</li>
+      <li><strong>LLMLingua-2</strong>: BERT-size classifier, 3–6× faster than original, task-agnostic</li>
+    </ul>
+    <p>Reported production case: a SaaS team cut RAG-heavy support workload from $42K/month to $2.1K/month (<a href="https://tokenmix.ai/blog/llmlingua-prompt-compression-2026">TokenMix, Apr 2026</a>).</p>
+    <p><strong>Stacks with caching.</strong> Cache the compressed prompt, not the raw one. Cache hit rates stay similar. Savings multiply. <strong>Operational note:</strong> run compression on the long context block only; keep schema instructions verbatim; validate on a regression set before rolling out.</p>
+
+    <hr class="section-divider" />
+
+    <!-- SECTION 4 -->
+    <h2>4. Validation: leaderboards mapped to levers</h2>
+    <p>The pattern across all cost-aware leaderboards (HAL, Aider polyglot, BFCL v4, MTEB pricing-overlay views) is the same: <strong>the highest-scoring model is almost never the most cost-efficient one</strong>, and the gap is usually 5–20×, not 5–20%.</p>
+
+    <p><strong>Princeton HAL (Holistic Agent Leaderboard, ICLR 2026)</strong> plots accuracy vs. token cost as Pareto frontiers across 11 benchmarks (<a href="https://arxiv.org/pdf/2510.11977">Kapoor et al., arXiv 2510.11977</a>; <a href="https://hal.cs.princeton.edu/">HAL home</a>). This is the format every internal eval should adopt.</p>
+    <p><strong>Aider Polyglot Leaderboard</strong>, 225 Exercism exercises across six languages, with <strong>dollar-cost-per-run tracked alongside accuracy</strong>. Quality is <em>not monotonic in price</em> — paying $146 for o3-pro buys 3.1pp <em>less</em> accuracy than paying $29 for GPT-5 high.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Model (Aider polyglot)</th><th>% correct</th><th>Cost / run</th><th>Cost per % point</th></tr></thead>
+        <tbody>
+          <tr><td>GPT-5 (high reasoning)</td><td>88.0%</td><td>$29.08</td><td>$0.33</td></tr>
+          <tr><td>o3-pro (high)</td><td>84.9%</td><td>$146.32</td><td>$1.72</td></tr>
+          <tr><td>GPT-5 (medium)</td><td>86.7%</td><td>~$17</td><td>$0.20</td></tr>
+          <tr><td>Claude Opus 4</td><td>72.0%</td><td>$65.75</td><td>$0.91</td></tr>
+          <tr><td>DeepSeek V3.2 Reasoner</td><td>74.2%</td><td>$1.30</td><td>$0.018</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>DeepSeek V3.2 delivers <strong>84% of GPT-5's quality at 4.5% of the cost</strong> — an 18× efficiency advantage when your tolerance for quality drop is reasonable.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Lever</th><th>Public leaderboard / benchmark</th><th>Strongest evidence</th></tr></thead>
+        <tbody>
+          <tr><td>1. Model routing</td><td>RouteLLM (ICLR 2025)</td><td>85% cost cut at 95% GPT-4 quality on MT-Bench</td></tr>
+          <tr><td>2. Harness/scaffold</td><td>Terminal-Bench 2.0; SWE-bench Pro</td><td>+13.7pp from harness rebuild alone</td></tr>
+          <tr><td>3. Context engineering</td><td>NoLiMa; RULER</td><td>10/12 models &lt;50% of baseline at 32K context</td></tr>
+          <tr><td>4. Data quality / retrieval</td><td>Anthropic Contextual Retrieval; BrowseComp-Plus</td><td>67% reduction in retrieval failures</td></tr>
+          <tr><td>5. Caching</td><td>(production telemetry)</td><td>ProjectDiscovery: 59% cost cut</td></tr>
+          <tr><td>6. Retrieval economics</td><td>MTEB / MMTEB; BEIR</td><td>Open-weight competitive with proprietary</td></tr>
+          <tr><td>7. Tool design</td><td>BFCL v4</td><td>4B model + RL beats GPT-4o on BFCL v3</td></tr>
+          <tr><td>9. Reasoning discipline</td><td>Aider Polyglot (cost-tracked)</td><td>DeepSeek 84% of GPT-5 at 4.5% of cost</td></tr>
+          <tr><td>12. Fine-tuning / distillation</td><td>BFCL (open-weight tier); HAL</td><td>5–30× cheaper at iso-quality</td></tr>
+          <tr><td>17. FinOps telemetry</td><td>HAL Pareto frontiers</td><td>Cost-aware leaderboard format itself is the evidence</td></tr>
+          <tr><td>18. Prompt compression</td><td>LooGLE; NaturalQuestions (with LongLLMLingua)</td><td>20× compression at 1.5pt drop; 94% cost reduction on LooGLE</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- SECTION 5 -->
+    <h2>5. Stacked savings: how the levers compound</h2>
+
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+flowchart LR
+ BASE[Baseline cost<br/>100%] --> R[Lever 1<br/>Routing<br/>-50%]
+ R --> C[Lever 5<br/>Prompt cache<br/>-60% of remainder]
+ C --> CTX[Lever 3<br/>Context budgets<br/>-30% of remainder]
+ CTX --> B[Lever 13<br/>Batch API<br/>-50% on eligible 70%]
+ B --> FINAL[Final cost<br/>~7–12%<br/>of baseline]
+      </div>
+    </div>
+
+    <p>The composition is illustrative, not additive. Savings depend on workload mix, cache hit rates, and routing accuracy. Steps 2–5 below typically deliver <strong>50–70% cost reduction at preserved quality</strong>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Lever</th><th>Reported savings</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Routing (RouteLLM)</td><td>85% on MT-Bench at 95% quality</td><td><a href="https://www.lmsys.org/blog/2024-07-01-routellm/">LMSYS</a></td></tr>
+          <tr><td>Anthropic prompt caching</td><td>90% on cached input tokens</td><td><a href="https://platform.claude.com/docs/en/about-claude/pricing">Anthropic Pricing Docs</a></td></tr>
+          <tr><td>OpenAI prompt caching</td><td>50% on cached input tokens</td><td><a href="https://openai.com/api/pricing/">OpenAI Pricing</a></td></tr>
+          <tr><td>Production prompt caching</td><td>59–66% total LLM cost</td><td><a href="https://projectdiscovery.io/blog/how-we-cut-llm-cost-with-prompt-caching">ProjectDiscovery</a></td></tr>
+          <tr><td>Batch API (OpenAI/Anthropic)</td><td>50% on input + output</td><td>OpenAI, Anthropic</td></tr>
+          <tr><td>Contextual retrieval</td><td>67% reduction in retrieval failures</td><td><a href="https://www.anthropic.com/news/contextual-retrieval">Anthropic</a></td></tr>
+          <tr><td>Harness rebuild (same model)</td><td>+13.7pp on Terminal-Bench; +37pp in Particula case</td><td><a href="https://particula.tech/blog/agent-scaffolding-beats-model-upgrades-swe-bench">Particula</a></td></tr>
+          <tr><td>Distillation (TensorZero)</td><td>5–30× cheaper at iso-quality</td><td><a href="https://www.tensorzero.com/blog/distillation-programmatic-data-curation-smarter-llms-5-30x-cheaper-inference/">TensorZero</a></td></tr>
+          <tr><td>LLM gateway routing</td><td>30–50% token spend</td><td><a href="https://www.burnwise.io/blog/llm-model-routing-guide">Burnwise</a></td></tr>
+          <tr><td>LongLLMLingua compression</td><td>94% on LooGLE</td><td><a href="https://arxiv.org/abs/2310.06839">arXiv 2310.06839</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- SECTION 6 -->
+    <h2>6. Trade-offs and traps</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Trap</th><th>What it looks like</th><th>Why it bites</th></tr></thead>
+        <tbody>
+          <tr><td>Small-model-everywhere</td><td>Force Haiku/Mini/Nano on every step</td><td>Escalation rate climbs to 50%+, retry costs swamp savings</td></tr>
+          <tr><td>Aggressive caching, weak invalidation</td><td>High hit rate, stale answers</td><td>Correctness incidents cost more than the savings</td></tr>
+          <tr><td>Over-compaction</td><td>Drop history aggressively</td><td>Loses evidence the model needs; hallucination + rework spike</td></tr>
+          <tr><td>Agent-where-workflow-fits</td><td>Multi-step ReAct for a form</td><td>Most expensive architectural failure; no optimisation rescues it</td></tr>
+          <tr><td>Token cost as KPI</td><td>Dashboard shows tokens, not tasks</td><td>"$X saved" while users churn</td></tr>
+          <tr><td>Caching without prompt restructuring</td><td>Enable feature, forget relocation trick</td><td>ProjectDiscovery: 7% hit rate until they moved dynamic content out of prefix</td></tr>
+          <tr><td>Batch API for interactive turns</td><td>Enable batch globally</td><td>24-hour SLA breaks UX</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- SECTION 7 -->
+    <h2>7. Order of operations</h2>
+
+    <div class="mermaid-wrap">
+      <div class="mermaid">
+flowchart TD
+ S0[0. Instrument cost-per-step and success rate per cohort] --> S1
+ S1[1. Decide workflow vs agent honestly. Re-architect if wrong] --> S2
+ S2[2. Enable prompt caching + restructure prompts for prefix hits] --> S3
+ S3[3. Set per-step context budgets, tune retrieval top_k] --> S4
+ S4[4. Add model routing with measured escalation rate target] --> S5
+ S5[5. Add semantic + tool-result caching with invalidation contracts] --> S6
+ S6[6. Tighten output schemas and length caps] --> S7
+ S7[7. Migrate eligible workloads to Batch API] --> S8
+ S8[8. Apply contextual retrieval + reranking to RAG corpus] --> S9
+ S9[9. Consider fine-tuning / distillation only on stable, high-volume narrow tasks] --> S10
+ S10[10. Self-host or reserve capacity once baseload is predictable]
+      </div>
+    </div>
+
+    <p>Steps 2–5 typically deliver <strong>50–70% cost reduction at preserved quality</strong>. The exotic moves (fine-tuning, self-hosting) matter only at scale or after the obvious wins are exhausted. <strong>Steps 0 and 1 cannot be skipped</strong> — they determine whether everything else is signal or noise.</p>
+
+    <hr class="section-divider" />
+
+    <!-- SECTION 8 -->
+    <h2>8. The bigger picture</h2>
+    <p>The asymmetry is now structural. Gartner projects inference compute on trillion-parameter LLMs will be <strong>90%+ cheaper by 2030</strong> (<a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-25-gartner-predicts-that-by-2030-performing-inference-on-an-llm-with-1-trillion-parameters-will-cost-genai-providers-over-90-percent-less-than-in-2025">Gartner, Mar 2026</a>), but agentic models consume <strong>5–30× more tokens per task</strong> than chatbots, and token demand is rising faster than unit prices fall. The same Gartner note warns:</p>
+    <blockquote>
+      <p>"CPOs who mask architectural inefficiencies with cheap tokens today will find agentic scale elusive tomorrow."</p>
+    </blockquote>
+    <p>The teams that win the next phase aren't the ones with the cheapest models. They're the ones with <strong>per-step cost attribution, disciplined evaluation harnesses, and the eighteen levers wired into their delivery process</strong>.</p>
+    <p>Cost in agentic AI is a system property. Treat it as one.</p>
+
+  </div><!-- /prose -->
+
+  <hr class="section-divider" />
+
+  <!-- REFERENCES -->
+  <div class="references">
+    <h2>References</h2>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Anthropic engineering &amp; research</div>
+      <ul>
+        <li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a> (Sep 2025)</li>
+        <li><a href="https://www.anthropic.com/news/contextual-retrieval">Introducing Contextual Retrieval</a> (Sep 2024)</li>
+        <li><a href="https://www.anthropic.com/research/building-effective-agents">Building Effective Agents</a> (Dec 2024)</li>
+        <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Prompt Caching docs</a> and <a href="https://platform.claude.com/docs/en/about-claude/pricing">Pricing</a></li>
+        <li><a href="https://www.anthropic.com/claude/opus">Claude Opus 4.7 launch announcement</a> (May 2026)</li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Routing &amp; distillation research</div>
+      <ul>
+        <li><a href="https://www.lmsys.org/blog/2024-07-01-routellm/">RouteLLM (LMSYS)</a> and <a href="https://arxiv.org/pdf/2406.18665">arXiv paper</a>. ICLR 2025</li>
+        <li><a href="https://arxiv.org/pdf/2512.02543">In-Context Distillation with Self-Consistency Cascades</a>, arXiv Dec 2025</li>
+        <li><a href="https://www.tensorzero.com/blog/distillation-programmatic-data-curation-smarter-llms-5-30x-cheaper-inference/">TensorZero. Distillation with Programmatic Data Curation</a></li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Industry cost reports</div>
+      <ul>
+        <li><a href="https://www.navyaai.com/reports/ai-cost-report-token-prices-vs-ai-bill">NavyaAI. Tokens got 99.7% cheaper, AI bill tripled</a> (Feb 2026)</li>
+        <li><a href="https://www.gartner.com/en/newsroom/press-releases/2026-03-25-gartner-predicts-that-by-2030-performing-inference-on-an-llm-with-1-trillion-parameters-will-cost-genai-providers-over-90-percent-less-than-in-2025">Gartner. Inference cost predictions through 2030</a> (Mar 2026)</li>
+        <li><a href="https://oplexa.com/ai-inference-cost-crisis-2026/">Oplexa. AI Inference Cost Crisis 2026</a> (Mar 2026)</li>
+        <li><a href="https://www.cloudzero.com/blog/inference-cost/">CloudZero. Inference cost guide</a> (2026)</li>
+        <li><a href="https://www.datarobot.com/blog/cut-agentic-ai-development-costs/">DataRobot. Cut agentic AI development costs</a> (Jan 2026)</li>
+        <li><a href="https://galileo.ai/blog/hidden-cost-of-agentic-ai">Galileo. Hidden costs of agentic AI</a> (Aug 2025)</li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Production case studies</div>
+      <ul>
+        <li><a href="https://projectdiscovery.io/blog/how-we-cut-llm-cost-with-prompt-caching">ProjectDiscovery. How we cut LLM costs 59% with prompt caching</a> (Apr 2026)</li>
+        <li><a href="https://particula.tech/blog/agent-scaffolding-beats-model-upgrades-swe-bench">Particula. Agent scaffolding beats model upgrades on SWE-Bench</a> (Mar 2026)</li>
+        <li><a href="https://www.truefoundry.com/blog/llm-cost-attribution-agentic-cicd">TrueFoundry. Agentic Token Explosion in CI/CD</a> (2026)</li>
+        <li><a href="https://tokenmix.ai/blog/llmlingua-prompt-compression-2026">TokenMix. LLMLingua 2026: 20x Prompt Compression</a> (Apr 2026)</li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Agent benchmarks &amp; scaffold evidence</div>
+      <ul>
+        <li><a href="https://arxiv.org/html/2601.11868v1">Terminal-Bench paper (Merrill et al., arXiv 2601.11868)</a></li>
+        <li><a href="https://arxiv.org/abs/2508.06600">BrowseComp-Plus (Chen et al., arXiv 2508.06600)</a> (Aug 2025)</li>
+        <li><a href="https://github.com/SWE-agent/mini-swe-agent">Mini-SWE-Agent GitHub</a> and <a href="https://www.emergentmind.com/topics/mini-swe-agent-27d26942-1f63-4337-bee8-576ebb1468c3">EmergentMind analysis</a></li>
+        <li><a href="https://arxiv.org/pdf/2601.11327">Żywot et al., GAIA, arXiv 2601.11327</a></li>
+        <li><a href="https://medium.com/@tentenco/the-agent-harness-why-70-of-your-ai-agents-performance-lives-outside-the-model-5093cfe03df1">Mak. The Agent Harness</a> (Apr 2026)</li>
+        <li><a href="https://arxiv.org/abs/2509.23586">AgentDiet. Reducing Cost with Trajectory Reduction (PACMSE FSE 2026, arXiv 2509.23586)</a></li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">2026 retrieval research</div>
+      <ul>
+        <li><a href="https://arxiv.org/abs/2605.15184">Sen et al. Is Grep All You Need? (arXiv 2605.15184, May 2026)</a></li>
+        <li><a href="https://arxiv.org/abs/2605.05242">Li et al. Beyond Semantic Similarity (arXiv 2605.05242, May 2026)</a></li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Reasoning &amp; thinking budget research</div>
+      <ul>
+        <li><a href="https://arxiv.org/html/2512.19585v1">Increasing the Thinking Budget is Not All You Need (arXiv 2512.19585, Dec 2025)</a></li>
+        <li><a href="https://arxiv.org/pdf/2602.03814">Conformal Thinking: Risk Control for Reasoning on a Compute Budget (arXiv 2602.03814, Feb 2026)</a></li>
+        <li><a href="https://platform.claude.com/docs/en/build-with-claude/extended-thinking">Anthropic. Building with extended thinking (Claude API Docs, 2026)</a></li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Cost-aware leaderboards</div>
+      <ul>
+        <li><a href="https://arxiv.org/pdf/2510.11977">Princeton HAL. Holistic Agent Leaderboard (ICLR 2026, arXiv 2510.11977)</a></li>
+        <li><a href="https://hal.cs.princeton.edu/reliability/">HAL Reliability Dashboard</a></li>
+        <li><a href="https://aider.chat/docs/leaderboards/">Aider Polyglot Leaderboard</a></li>
+        <li><a href="https://gorilla.cs.berkeley.edu/leaderboard.html">Berkeley Function Calling Leaderboard (BFCL v4)</a></li>
+        <li><a href="https://huggingface.co/spaces/mteb/leaderboard">MTEB / MMTEB leaderboard</a></li>
+        <li><a href="https://artificialanalysis.ai/">Artificial Analysis, cost-quality model comparisons</a></li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Benchmark contamination &amp; lifecycle</div>
+      <ul>
+        <li><a href="https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/">OpenAI. Why we no longer evaluate SWE-bench Verified (Feb 2026)</a></li>
+        <li><a href="https://arxiv.org/pdf/2602.16763">Akhtar, Reuel et al. When AI Benchmarks Plateau (arXiv 2602.16763, Feb 2026)</a></li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Service tiers, self-hosting, FinOps</div>
+      <ul>
+        <li><a href="https://www.finout.io/blog/navigating-openais-pricing-tiers-a-finops-perspective">Finout. Navigating OpenAI's Pricing Tiers</a> (Nov 2025)</li>
+        <li><a href="https://tokenmix.ai/blog/self-host-llm-vs-api">TokenMix. Self-Host LLM vs API in 2026</a> (Apr 2026)</li>
+        <li><a href="https://www.braincuber.com/blog/self-hosted-llms-vs-api-based-llms-cost-performance-analysis">Braincuber. Self-Hosted vs API Cost &amp; Performance Analysis</a> (Mar 2026)</li>
+        <li><a href="https://data.finops.org/">FinOps Foundation. State of FinOps 2026</a></li>
+        <li><a href="https://www.cloudzero.com/blog/inference-economics/">CloudZero. Inference Economics</a> (Feb–May 2026)</li>
+        <li><a href="https://iternal.ai/token-usage-guide">Iternal Technologies. AI Token Usage Guide 2026</a> (MCP metadata tax)</li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Prompt compression</div>
+      <ul>
+        <li><a href="https://arxiv.org/pdf/2310.05736">LLMLingua (Jiang et al., EMNLP 2023, arXiv 2310.05736)</a></li>
+        <li><a href="https://arxiv.org/abs/2310.06839">LongLLMLingua (arXiv 2310.06839)</a></li>
+        <li><a href="https://www.microsoft.com/en-us/research/project/llmlingua/">Microsoft Research LLMLingua project page</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <a href="index.html">← Back to sunilsivadas.github.io</a>
+    <span style="font-family:var(--sans);font-size:0.68rem;letter-spacing:0.1em;color:var(--faint);">Have a correction or war story? Open an issue or PR.</span>
+  </div>
+
+</div><!-- /article-wrap -->
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      background: '#0f0f18',
+      primaryColor: '#1c1c2e',
+      primaryTextColor: '#e4e1d8',
+      primaryBorderColor: '#2a2a40',
+      lineColor: '#7a7891',
+      secondaryColor: '#0f0f18',
+      tertiaryColor: '#08080e',
+      fontSize: '13px'
+    }
+  });
+</script>
+</body>
+</html>
