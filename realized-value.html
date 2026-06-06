@@ -76,7 +76,7 @@
       border: 1px solid rgba(201,169,110,0.25);
       padding: 0.35rem 0.75rem; margin-bottom: 1.4rem;
     }
-    .series-badge span { color: var(--faint); }
+    .series-badge span { color: var(--blue); }
     .article-eyebrow {
       font-family: var(--sans); font-size: 0.65rem; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue);
@@ -90,12 +90,12 @@
     .article-title em { color: var(--gold); font-style: italic; }
     .article-lede {
       font-family: var(--serif); font-size: 1.25rem; font-style: italic;
-      color: var(--muted); line-height: 1.65; margin-bottom: 2rem;
+      color: var(--text); line-height: 1.65; margin-bottom: 2rem;
       padding-left: 1.2rem; border-left: 2px solid var(--gold);
     }
     .article-meta {
       font-family: var(--sans); font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text);
       display: flex; gap: 1.5rem; flex-wrap: wrap;
       padding-bottom: 2rem; border-bottom: 1px solid var(--border);
       margin-bottom: 3rem;
@@ -134,7 +134,7 @@
     .formula-caption {
       font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
       letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--faint); margin-top: 1rem;
+      color: var(--text); margin-top: 1rem;
     }
 
     /* ── FACTOR TERMS ── */
@@ -156,7 +156,7 @@
     }
     .factor-name.is-capability { color: var(--text); }
     .factor-desc {
-      padding: 1rem 1.2rem; font-size: 0.93rem; color: var(--muted);
+      padding: 1rem 1.2rem; font-size: 0.93rem; color: var(--text);
     }
 
     /* ── SERIES PANEL ── */
@@ -166,7 +166,7 @@
     }
     .series-panel-label {
       font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue);
       margin-bottom: 1.4rem;
     }
     .series-list { list-style: none; padding: 0; }
@@ -178,10 +178,10 @@
     .series-list li:last-child { border-bottom: none; }
     .series-num {
       font-family: var(--sans); font-size: 0.6rem; font-weight: 700;
-      letter-spacing: 0.14em; color: var(--faint); min-width: 1.4rem;
+      letter-spacing: 0.14em; color: var(--text); min-width: 1.4rem;
     }
     .series-title { color: var(--text); }
-    .series-sub { color: var(--muted); font-size: 0.88rem; }
+    .series-sub { color: var(--text); font-size: 0.88rem; }
     .series-badge-pub {
       font-family: var(--sans); font-size: 0.55rem; font-weight: 700;
       letter-spacing: 0.16em; text-transform: uppercase;
@@ -204,24 +204,24 @@
     .img-caption {
       font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
       letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--faint); margin-top: -1.4rem; margin-bottom: 2rem;
+      color: var(--text); margin-top: -1.4rem; margin-bottom: 2rem;
       padding: 0.5rem 0.8rem; background: var(--surface);
       border: 1px solid var(--border); border-top: none;
     }
 
     /* ── BLOCKQUOTE / CALLOUT ── */
     .prose blockquote {
-      border-left: 3px solid var(--faint);
+      border-left: 3px solid var(--border2);
       padding: 0.8rem 1.4rem; margin: 1.5rem 0;
       background: rgba(15,15,24,0.6);
     }
-    .prose blockquote p { color: var(--muted); font-size: 0.96rem; }
+    .prose blockquote p { color: var(--text); font-size: 0.96rem; }
     .callout {
       background: var(--surface); border: 1px solid var(--border);
       border-left: 3px solid var(--blue);
       padding: 1.2rem 1.5rem; margin: 2rem 0;
     }
-    .callout p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .callout p { color: var(--text); font-size: 0.95rem; margin-bottom: 0.6rem; }
     .callout p:last-child { margin-bottom: 0; }
 
     /* ── DIVIDER ── */
@@ -236,9 +236,9 @@
       border-top: 1px solid var(--border);
     }
     .footnotes p {
-      font-size: 0.83rem; color: var(--faint); line-height: 1.6;
+      font-size: 0.83rem; color: var(--text); line-height: 1.6;
     }
-    .footnotes a { color: var(--muted); }
+    .footnotes a { color: var(--blue); }
 
     /* ── REFERENCES ── */
     .references { margin-top: 3rem; }
@@ -246,12 +246,12 @@
     .ref-group { margin-bottom: 2rem; }
     .ref-group-title {
       font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--blue);
       margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
     }
     .ref-group ul { list-style: none; padding: 0; }
-    .ref-group li { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
-    .ref-group li::before { content: '—'; position: absolute; left: 0; color: var(--faint); }
+    .ref-group li { font-size: 0.88rem; color: var(--text); margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
+    .ref-group li::before { content: '—'; position: absolute; left: 0; color: var(--border2); }
     .ref-group a { color: var(--blue); text-decoration: none; }
     .ref-group a:hover { color: var(--gold); text-decoration: underline; }
 
@@ -512,7 +512,7 @@
 
   <div class="article-footer">
     <a href="index.html">← Back to sunilsivadas.github.io</a>
-    <span style="font-family:var(--sans);font-size:0.68rem;letter-spacing:0.1em;color:var(--faint);">Part of the Realized Value series</span>
+    <span style="font-family:var(--sans);font-size:0.68rem;letter-spacing:0.1em;color:var(--text);">Part of the Realized Value series</span>
   </div>
 
 </div><!-- /article-wrap -->
