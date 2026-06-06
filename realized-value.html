@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Realized Value: A Framework for Evaluating Agentic AI in the Enterprise — Sunil Sivadas, Ph.D.</title>
+  <meta name="description" content="Capability is the only term that creates value. Everything else is a discount. The binding constraint is whichever factor sits closest to zero. A framework for evaluating agentic AI in production." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #08080e;
+      --surface:  #0f0f18;
+      --border:   #1c1c2e;
+      --border2:  #2a2a40;
+      --text:     #e4e1d8;
+      --muted:    #7a7891;
+      --faint:    #3a3850;
+      --gold:     #c9a96e;
+      --gold-lt:  #e8c98a;
+      --blue:     #5bb8f5;
+      --serif:    'Cormorant Garant', Georgia, serif;
+      --sans:     'Syne', system-ui, sans-serif;
+      --body:     'DM Sans', system-ui, sans-serif;
+      --prose:    720px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(8,8,14,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-back {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      color: var(--muted); display: flex; align-items: center; gap: 0.5rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back svg { width: 14px; height: 14px; }
+    .nav-title {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; color: var(--faint);
+      max-width: 420px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    /* ── LAYOUT ── */
+    .article-wrap {
+      max-width: var(--prose);
+      margin: 0 auto;
+      padding: 7rem 1.5rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .series-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--sans); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.25);
+      padding: 0.35rem 0.75rem; margin-bottom: 1.4rem;
+    }
+    .series-badge span { color: var(--faint); }
+    .article-eyebrow {
+      font-family: var(--sans); font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue);
+      margin-bottom: 1.2rem;
+    }
+    .article-title {
+      font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 300; line-height: 1.15; color: var(--text);
+      margin-bottom: 1.4rem;
+    }
+    .article-title em { color: var(--gold); font-style: italic; }
+    .article-lede {
+      font-family: var(--serif); font-size: 1.25rem; font-style: italic;
+      color: var(--muted); line-height: 1.65; margin-bottom: 2rem;
+      padding-left: 1.2rem; border-left: 2px solid var(--gold);
+    }
+    .article-meta {
+      font-family: var(--sans); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROSE ── */
+    .prose h2 {
+      font-family: var(--serif); font-size: 1.85rem; font-weight: 400;
+      color: var(--text); margin: 3.5rem 0 1rem; line-height: 1.2;
+    }
+    .prose h3 {
+      font-family: var(--sans); font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
+      margin: 2.4rem 0 0.8rem;
+    }
+    .prose p { margin-bottom: 1.15rem; color: var(--text); }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose a { color: var(--blue); text-decoration: underline; text-decoration-color: rgba(91,184,245,0.35); text-underline-offset: 3px; }
+    .prose a:hover { color: var(--gold); text-decoration-color: var(--gold); }
+    .prose strong { color: var(--text); font-weight: 600; }
+    .prose em { color: var(--gold-lt); font-style: italic; }
+    .prose ul, .prose ol { padding-left: 1.4rem; margin-bottom: 1.15rem; }
+    .prose li { margin-bottom: 0.5rem; color: var(--text); }
+
+    /* ── FORMULA ── */
+    .formula-block {
+      background: var(--surface); border: 1px solid var(--border2);
+      padding: 2rem 1.8rem; margin: 2.5rem 0; text-align: center;
+    }
+    .formula-line {
+      font-family: 'Menlo', 'Consolas', monospace;
+      font-size: clamp(0.78rem, 2vw, 1.05rem);
+      color: var(--gold-lt); letter-spacing: 0.04em;
+      white-space: nowrap; overflow-x: auto;
+    }
+    .formula-caption {
+      font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--faint); margin-top: 1rem;
+    }
+
+    /* ── FACTOR TERMS ── */
+    .factor-list {
+      margin: 1.5rem 0 2rem;
+      border: 1px solid var(--border);
+    }
+    .factor-item {
+      display: grid; grid-template-columns: 160px 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .factor-item:last-child { border-bottom: none; }
+    .factor-name {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 1rem 1.2rem; background: var(--surface);
+      color: var(--gold); display: flex; align-items: flex-start;
+      border-right: 1px solid var(--border);
+    }
+    .factor-name.is-capability { color: var(--text); }
+    .factor-desc {
+      padding: 1rem 1.2rem; font-size: 0.93rem; color: var(--muted);
+    }
+
+    /* ── SERIES PANEL ── */
+    .series-panel {
+      background: var(--surface); border: 1px solid var(--border2);
+      margin: 3rem 0; padding: 2rem 2rem 1.5rem;
+    }
+    .series-panel-label {
+      font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+    .series-list { list-style: none; padding: 0; }
+    .series-list li {
+      display: flex; align-items: baseline; gap: 0.9rem;
+      padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+      font-family: var(--body); font-size: 0.95rem;
+    }
+    .series-list li:last-child { border-bottom: none; }
+    .series-num {
+      font-family: var(--sans); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.14em; color: var(--faint); min-width: 1.4rem;
+    }
+    .series-title { color: var(--text); }
+    .series-sub { color: var(--muted); font-size: 0.88rem; }
+    .series-badge-pub {
+      font-family: var(--sans); font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,169,110,0.35);
+      padding: 0.15rem 0.5rem; margin-left: auto; white-space: nowrap;
+    }
+    .series-badge-intro {
+      font-family: var(--sans); font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--blue); border: 1px solid rgba(91,184,245,0.3);
+      padding: 0.15rem 0.5rem; margin-left: auto; white-space: nowrap;
+    }
+
+    /* ── IMAGES ── */
+    .article-img {
+      width: 100%; margin: 2rem 0;
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .img-caption {
+      font-family: var(--sans); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--faint); margin-top: -1.4rem; margin-bottom: 2rem;
+      padding: 0.5rem 0.8rem; background: var(--surface);
+      border: 1px solid var(--border); border-top: none;
+    }
+
+    /* ── BLOCKQUOTE / CALLOUT ── */
+    .prose blockquote {
+      border-left: 3px solid var(--faint);
+      padding: 0.8rem 1.4rem; margin: 1.5rem 0;
+      background: rgba(15,15,24,0.6);
+    }
+    .prose blockquote p { color: var(--muted); font-size: 0.96rem; }
+    .callout {
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      padding: 1.2rem 1.5rem; margin: 2rem 0;
+    }
+    .callout p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.6rem; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 3.5rem 0;
+    }
+
+    /* ── FOOTNOTE ── */
+    .footnotes {
+      margin-top: 3rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .footnotes p {
+      font-size: 0.83rem; color: var(--faint); line-height: 1.6;
+    }
+    .footnotes a { color: var(--muted); }
+
+    /* ── REFERENCES ── */
+    .references { margin-top: 3rem; }
+    .references h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; margin-bottom: 1.5rem; }
+    .ref-group { margin-bottom: 2rem; }
+    .ref-group-title {
+      font-family: var(--sans); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.8rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+    }
+    .ref-group ul { list-style: none; padding: 0; }
+    .ref-group li { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
+    .ref-group li::before { content: '—'; position: absolute; left: 0; color: var(--faint); }
+    .ref-group a { color: var(--blue); text-decoration: none; }
+    .ref-group a:hover { color: var(--gold); text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .article-footer {
+      margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .article-footer a {
+      font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      color: var(--muted); transition: color .2s;
+    }
+    .article-footer a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-title { display: none; }
+      .article-wrap { padding: 5.5rem 1.2rem 4rem; }
+      .prose h2 { font-size: 1.55rem; }
+      .factor-item { grid-template-columns: 1fr; }
+      .factor-name { border-right: none; border-bottom: 1px solid var(--border); }
+      .formula-line { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Sunil Sivadas
+  </a>
+  <div class="nav-title">Realized Value Series — Introduction</div>
+</nav>
+
+<div class="article-wrap">
+
+  <div class="series-badge">Realized Value Series <span>·</span> Introduction</div>
+  <div class="article-eyebrow">Agentic AI · Enterprise · Jun 2026</div>
+  <h1 class="article-title">Realized Value: A Framework for Evaluating <em>Agentic AI</em> in the Enterprise</h1>
+  <p class="article-lede">Capability is the only term that creates value. Everything else is a discount. The binding constraint is whichever factor sits closest to zero — usually one of the other four.</p>
+  <div class="article-meta">
+    <span>Sunil Sivadas, Ph.D.</span>
+    <span>Jun 2026</span>
+    <span>5-part series</span>
+  </div>
+
+  <div class="prose">
+
+    <p>My team and I work with enterprises across industries. We talk to the users who stand to gain from agentic AI. We build the tooling layer beneath these solutions. And we follow each advance in LLM capability and the shifts in value across the stack.</p>
+    <p>This series is my attempt to write down what we keep seeing. Frontier capability is growing fast. Investment and market value are growing with it. Yet most enterprises still struggle to put agentic AI into production. That gap is the subject of these articles.</p>
+
+    <img src="realization-value-framework/epoch-capability-index.png" alt="Epoch Capabilities Index scatter plot showing AI model scores rising from around 60 in early 2023 to around 160 by mid-2026" class="article-img" />
+    <div class="img-caption">Epoch Capabilities Index — composite score across OpenAI, Google, Anthropic, Meta AI, xAI, and others. Early 2023 to mid-2026.</div>
+
+    <h2>What GDPval says</h2>
+    <p>In late 2025, OpenAI released <a href="https://arxiv.org/abs/2510.04374">GDPval</a>. It is 1,320 tasks across 44 occupations, drawn from the nine sectors that contribute most to U.S. GDP and over $3 trillion in annual wages. Each task is a real deliverable: a financial model, a legal review, a consulting report. A professional with about 14 years of experience built each one. Each took roughly seven hours. Experts then judged the model outputs blind, marking each as better than, equal to, or worse than the human's (<a href="https://arxiv.org/abs/2510.04374">Patwardhan et al., 2025</a>).</p>
+    <p>At the September 2025 release, Claude Opus 4.1 led at 47.6% wins-or-ties against the human expert. By mid-2026, the leaderboard's top score has climbed to around 83% (<a href="https://evals.openai.com/gdpval/leaderboard">OpenAI GDPval Leaderboard, 2026</a>). Seven hours of expert work returns from a model in minutes — a theoretical speed-up near 100×.<sup>1</sup></p>
+    <p>That is what GDPval says: the capability already exists for a large share of valuable knowledge work.</p>
+
+    <h2>What translates</h2>
+    <p>Now set that against a second number. Gartner expects over 40% of agentic AI projects to be cancelled before production by 2027. The drivers are cost and complexity (<a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027">Gartner, 2025</a>).</p>
+    <p>Both numbers are true at once. The gap between them is this series. Production adds what the benchmark ignores. A human reviews the output. Someone reworks it when it is wrong. The agent costs money at volume. Controls keep it safe and contained. Count all of that and the advantage shrinks. METR's survey of 349 technical workers found a median 1.4 to 2× change in the value of their work, down from the theoretical 100× (<a href="https://metr.org/">METR, 2026</a>).</p>
+
+    <img src="realization-value-framework/figure1-productivity-gain.png" alt="Bar chart: theoretical productivity gain about 100 times an unaided expert versus realized gain about 1.2 times after review and rework" class="article-img" />
+    <div class="img-caption">Theoretical speed-up (GDPval, ~100×) versus realised gain with a human in the loop (METR, 1.4–2×).</div>
+
+    <p>A third measure marks the floor. The Remote Labor Index, from Scale AI and the Center for AI Safety, scores end-to-end autonomous completion of real freelance projects. About 240 paid projects, over $140,000 of real work. The best agent finishes 2.5% of them at acceptable quality. Most land between 0.8% and 2.5% (<a href="https://arxiv.org/abs/2510.26787">Scale AI and CAIS, 2025</a>).</p>
+    <p>These numbers measure different things. They sit on an autonomy spectrum. GDPval grades a single deliverable against an expert. The 1.4 to 2× gain assumes a human in the loop. RLI removes the human and asks for a finished project. Read together they tell one story: high deliverable quality, a modest gain with a person reviewing, near-zero completion on the agent's own.</p>
+    <p>GDPval measures a ceiling. The enterprise lives in the gap between that ceiling and the 1.4 to 2×. Capability is what the benchmark shows. Value is what survives production. Four things govern the difference: cost, reliability, safety, and controllability.</p>
+    <p>The benchmark builders now name this gap themselves. Stanford's 2026 Index highlights the distance between what models can do and how ready organisations are to govern them (<a href="https://hai.stanford.edu/ai-index">Stanford HAI, 2026</a>). METR notes that fast benchmark gains have not translated into workflow automation, because long chains of actions are still hard to run reliably (<a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">METR, 2025</a>). Agent Arena, observing 160,480 real-world agent sessions, finds users pull control back about 2.3× as often as they hand over more (<a href="https://arena.ai/blog/agent-arena-methodology/">Arena, 2026</a>).</p>
+
+    <img src="realization-value-framework/measurement-landscape.png" alt="Infographic: six AI studies in two groups — what AI can do versus what is actually used — with what each measures, its finding, and what it conveys" class="article-img" />
+    <div class="img-caption">Six studies across two dimensions: what AI can do, and what actually gets used.</div>
+
+    <p>The series asks one question: how much of the model's capability survives contact with production.</p>
+
+    <h2>The mental model</h2>
+    <p>This is a mental model. It guides judgment about which factor binds. The shape is simple:</p>
+
+    <div class="formula-block">
+      <div class="formula-line">realized value  =  capability  ×  cost  ×  reliability  ×  safety  ×  controllability</div>
+      <div class="formula-caption">The factors multiply. One near-zero factor zeros the product.</div>
+    </div>
+
+    <p>Only cost has a clean unit, the dollar. The other terms resist a single honest number. The model reveals what a scorecard hides: the factors multiply, so one near-zero factor zeros the product.</p>
+    <p>Capability is the only term that creates value. The other four can only subtract it. An agent with high capability and zero controllability ships nothing. An agent you cannot afford, trust, or audit is worth nothing, whatever the first term reads. The binding constraint is whichever factor sits nearest zero — usually one of the other four.</p>
+    <p>How much each factor matters depends on the use case and the sector. The same model on the same task carries different weights. What changes is the cost of error. Three versions of one tool show this:</p>
+    <ul>
+      <li>A meeting-notes summariser for internal standups. A human always reviews the output. Mistakes surface in seconds. The content stays inside the organisation. Safety and controllability barely register. Cost and reliability decide if it is worth running.</li>
+      <li>The same summariser on patient charts or audited financial filings. Now a dropped contraindication or an invented figure is a clinical or regulatory incident. Safety and reliability move to the front. The deployment needs rigorous safety testing before it ships. Same model, same capability. The weights inverted because the stakes did.</li>
+      <li>An agent that places trades or submits orders. Controllability leads: permissions, reversibility, blast radius, a human in the loop on anything irreversible. Even a capable, low-cost, accurate model ships only when you can bound what it does when it is wrong.</li>
+    </ul>
+    <p>Weights follow consequences. A summariser is low stakes only until you point it at something that matters. These weights are judgment calls, set by the deployment. The framework points at one question: which factor is your binding constraint, in your sector.</p>
+
+    <h2>How the factors determine the outcome</h2>
+    <p>Capability enters as potential — the ceiling that GDPval and METR measure. Each discount factor is a gate. What leaves the last gate is realized value: what ships, and what the usage data later records.</p>
+
+    <img src="realization-value-framework/figure2-capability-to-realized-value.png" alt="Flow diagram: capability passes through four discount gates — cost, reliability, safety, and controllability — to produce realized value" class="article-img" />
+    <div class="img-caption">Capability passes through four discount gates. The most-closed gate sets the outcome.</div>
+
+    <p>The gates multiply, so the outcome follows the most-closed gate. One near-zero factor takes an expert-parity model to a rounding error. The opening question is which factor binds. The model sets the ceiling. Your binding constraint sets the rest.</p>
+
+    <h2>Capability: the ceiling</h2>
+    <p>Capability is the potential economic value — the ceiling of what could be automated or augmented. The discipline is in how you measure it.</p>
+    <p>Measure it on economically useful tasks: GDPval-style occupational work (<a href="https://arxiv.org/abs/2510.04374">Patwardhan et al., 2025</a>), METR-style autonomy horizons (<a href="https://metr.org/time-horizons/">METR, 2026</a>). Abstract benchmarks like MMLU measure something different. Measure it under generous conditions: best effort, ideal scaffold, no time pressure. That keeps the number a clean ceiling. Measure it at a success-rate threshold instead and you fold reliability into the top line, then double-count it later.</p>
+    <p>METR shows this. Claude Opus 4.6 has a task horizon near 14 hours at 50% reliability. At 80% it drops to about 1 hour. The same model's capability falls by an order of magnitude. Only the reliability bar changed (<a href="https://metr.org/blog/2026-1-29-time-horizon-1-1/">METR, 2026</a>).</p>
+
+    <img src="realization-value-framework/figure3-metr-horizon.png" alt="Bar chart: Claude Opus 4.6 task horizon is about 14.5 hours at 50 percent reliability and about 1 hour at 80 percent reliability" class="article-img" />
+    <div class="img-caption">Claude Opus 4.6 task horizon: ~14 hours at 50% reliability vs ~1 hour at 80%. Same model, different bar.</div>
+
+    <p>Two consequences. First, capability is a system property, emerging from the model and its scaffold. The harness is usually the first lever to reach for. Second, adoption sits downstream of capability. The Anthropic Economic Index tracks what people use agents for — that is the product of all five terms, an output read after the fact (<a href="https://www.anthropic.com/research/economic-index-march-2026-report">Anthropic, 2026</a>).</p>
+
+    <h2>The four discounts</h2>
+    <p>Each one multiplies. Each erodes potential toward what deploys.</p>
+
+    <div class="factor-list">
+      <div class="factor-item">
+        <div class="factor-name is-capability">Capability</div>
+        <div class="factor-desc">The potential economic value — the ceiling GDPval and METR measure. The only term that creates value. Everything else subtracts from it.</div>
+      </div>
+      <div class="factor-item">
+        <div class="factor-name">Cost</div>
+        <div class="factor-desc">The right unit is cost per successful task, with retries and failures counted in. An agent that costs more than the labour it replaces zeros the product. Cost is the first deep dive — the one factor whose math aggregates cleanly.</div>
+      </div>
+      <div class="factor-item">
+        <div class="factor-name">Reliability</div>
+        <div class="factor-desc">Does the agent finish consistently. Does it recover from mid-task errors. Does it fail safely when it cannot. Benchmarks report pass@1. Production needs pass@always.</div>
+      </div>
+      <div class="factor-item">
+        <div class="factor-name">Safety</div>
+        <div class="factor-desc">The agent's own behaviour. Conservative under ambiguity. No invented actions. Asks before high-stakes steps. Fails closed. Safety is a property of how the system behaves.</div>
+      </div>
+      <div class="factor-item">
+        <div class="factor-name">Controllability</div>
+        <div class="factor-desc">The operator's leverage. Permissions, sandboxing, audit trails, kill switches, blast radius, human-in-the-loop checkpoints. What you can do to constrain the agent. Security sits across safety and controllability — adversarial resistance is a distinct threat model from the agent's behaviour or the operator's controls.</div>
+      </div>
+    </div>
+
+    <img src="realization-value-framework/realized-value-factors.png" alt="Infographic: the five factors. Capability creates value; cost, reliability, safety, and controllability each discount it. The factors multiply." class="article-img" />
+    <div class="img-caption">The five factors. Capability creates value. The other four discount it. They multiply.</div>
+
+    <h2>A note on integration complexity</h2>
+    <p>Real agents work across many systems: CRM, ITSM, SharePoint, email, and more. Integration complexity changes the weights on the factors you already have, unevenly.</p>
+    <ul>
+      <li><strong>Reliability</strong> takes the largest hit. Every system is a new failure surface. APIs rate-limit. Tokens expire. Schemas change. An agent chained across five systems is only as reliable as its flakiest dependency, and failures compound across steps.</li>
+      <li><strong>Cost</strong> rises next. Tool schemas sit in context on every call. More systems mean more calls and more retries per task.</li>
+      <li><strong>Controllability</strong> gets harder. Each connection is a new permission scope, a new blast radius, and a new audit trail.</li>
+      <li><strong>Capability</strong> sets a floor. The agent must operate each tool correctly. This is rarely where the deployment fails.</li>
+    </ul>
+    <p>One part falls outside the model. Cost per successful task is an operating cost. Building and maintaining connectors is a fixed cost. It sits in total cost of ownership, and realized value must amortize it. A small per-task cost can rest on a large integration bill.</p>
+
+    <h2>A successful solution addresses all of them</h2>
+    <p>This is the core of what I have learned. A successful agentic solution addresses every factor. That is product-market fit here.</p>
+    <p>The reason is the multiplication. A solution strong on capability and weak on controllability does not ship. A near-zero factor takes the whole product down. So fit means clearing every factor the use case weights.</p>
+    <p>The adopter cares about all of them at once. Inside the organisation, different teams gate different pillars. Finance looks at cost. The CISO looks at controllability and security. Governance and risk look at safety. Product and engineering look at capability and reliability. <strong>Each weak factor meets a real veto from a real team.</strong> A solution earns fit only when it answers all of them.</p>
+
+    <h2>Honest limits</h2>
+    <p>This framework is a diagnostic tool. It finds your binding constraint.</p>
+    <ul>
+      <li>The factors trade off. Cutting cost can cost capability. Tighter controllability can cost latency. A more conservative safety posture can cost capability at the margin.</li>
+      <li>Only cost aggregates cleanly. You can multiply a routing saving by a caching saving and the math holds. Safety and controllability resist that arithmetic.</li>
+      <li>It points at where to look. Finding the binding constraint starts the work, and directs effort at the factor setting your ceiling.</li>
+    </ul>
+
+    <hr class="section-divider" />
+
+    <h2>The series</h2>
+    <p>Five deep dives. Each pins its claims to named evidence and calls out the traps.</p>
+
+    <div class="series-panel">
+      <div class="series-panel-label">Realized Value — Five deep dives</div>
+      <ul class="series-list">
+        <li>
+          <span class="series-num">0</span>
+          <span>
+            <span class="series-title">Introduction</span>
+            <span class="series-sub"> — The framework. How the factors multiply.</span>
+          </span>
+          <span class="series-badge-intro">This article</span>
+        </li>
+        <li>
+          <span class="series-num">1</span>
+          <span>
+            <span class="series-title">Capability</span>
+            <span class="series-sub"> — Realising the ceiling instead of buying it.</span>
+          </span>
+        </li>
+        <li>
+          <span class="series-num">2</span>
+          <span>
+            <span class="series-title">Cost</span>
+            <span class="series-sub"> — Cost per successful task.</span>
+          </span>
+          <span class="series-badge-pub">Published</span>
+        </li>
+        <li>
+          <span class="series-num">3</span>
+          <span>
+            <span class="series-title">Reliability</span>
+            <span class="series-sub"> — pass@always, and why it lags capability.</span>
+          </span>
+        </li>
+        <li>
+          <span class="series-num">4</span>
+          <span>
+            <span class="series-title">Safety</span>
+            <span class="series-sub"> — The agent's behaviour under uncertainty.</span>
+          </span>
+        </li>
+        <li>
+          <span class="series-num">5</span>
+          <span>
+            <span class="series-title">Controllability</span>
+            <span class="series-sub"> — The operator's leverage, and where security fits.</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <p>Capability sets the ceiling. The other four decide how much of it you keep.</p>
+
+  </div><!-- /prose -->
+
+  <hr class="section-divider" />
+
+  <!-- REFERENCES -->
+  <div class="references">
+    <h2>References</h2>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Capability instruments</div>
+      <ul>
+        <li><a href="https://arxiv.org/abs/2510.04374">Patwardhan et al. GDPval: Evaluating AI Model Performance on Real-World Economically Valuable Tasks</a> (arXiv 2510.04374, Oct 2025). <a href="https://openai.com/index/gdpval/">OpenAI announcement</a> (Sep 2025). <a href="https://evals.openai.com/gdpval/leaderboard">OpenAI GDPval Leaderboard</a> (live). <a href="https://artificialanalysis.ai/evaluations/gdpval-aa">GDPval-AA leaderboard, Artificial Analysis</a>.</li>
+        <li>METR. <a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">Measuring AI Ability to Complete Long Tasks</a> (Mar 2025). <a href="https://metr.org/blog/2026-1-29-time-horizon-1-1/">Time Horizon 1.1</a> (Jan 2026). <a href="https://metr.org/time-horizons/">Task-Completion Time Horizons</a>.</li>
+        <li>Scale AI and Center for AI Safety. <a href="https://arxiv.org/abs/2510.26787">Remote Labor Index</a> (arXiv 2510.26787, Oct 2025). Autonomous completion of real freelance work; 2.5% best-agent automation rate. <a href="https://scale.com/research/rli">Scale</a>.</li>
+        <li>Lee and Emberson. <a href="https://epoch.ai/eci">Epoch Capabilities Index</a> (Epoch AI, live since Oct 2025). Composite capability scale stitching 40+ benchmarks. Methodology paper: <a href="https://arxiv.org/abs/2512.00193">A Rosetta Stone for AI Benchmarks</a> (arXiv 2512.00193).</li>
+      </ul>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Realized-usage and economy-wide observations</div>
+      <ul>
+        <li>Anthropic. <a href="https://www.anthropic.com/news/the-anthropic-economic-index">Introducing the Anthropic Economic Index</a> (Feb 2025). <a href="https://www.anthropic.com/research/economic-index-march-2026-report">Economic Index report, March 2026</a>.</li>
+        <li>Stanford HAI. <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report">The 2026 AI Index Report</a>. <a href="https://hai.stanford.edu/ai-index">AI Index overview</a>.</li>
+        <li>Gartner. <a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027">Over 40% of Agentic AI Projects Will Be Canceled by End of 2027</a> (Jun 2025).</li>
+        <li>Arena Team. <a href="https://arena.ai/blog/agent-arena-methodology/">Agent Arena: Causal Evaluation of Agents in the Real World</a> (Jun 2026). Causal RCT methodology on 160,480 in-the-wild agent sessions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footnotes">
+    <p><sup>1</sup> All figures were retrieved and last verified in June 2026. Several refresh over time, notably the METR task horizon and the GDPval and METR productivity multiples. Verify against the primary sources in the References before republishing.</p>
+  </div>
+
+  <div class="article-footer">
+    <a href="index.html">← Back to sunilsivadas.github.io</a>
+    <span style="font-family:var(--sans);font-size:0.68rem;letter-spacing:0.1em;color:var(--faint);">Part of the Realized Value series</span>
+  </div>
+
+</div><!-- /article-wrap -->
+
+</body>
+</html>
