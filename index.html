@@ -289,54 +289,6 @@
       color: var(--muted);
     }
 
-    /* ── FOCUS ── */
-    #focus { background: var(--bg); }
-    .focus-rows { margin-top: 3rem; }
-    .focus-row {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 0 3rem;
-      padding: 2.2rem 0;
-      border-top: 1px solid var(--border);
-    }
-    .focus-row:last-child { border-bottom: 1px solid var(--border); }
-    .focus-row-label {
-      font-family: var(--sans);
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      padding-top: 0.3rem;
-    }
-    .focus-row h3 {
-      font-size: 1.05rem;
-      margin-bottom: 0.7rem;
-    }
-    .focus-row p {
-      font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.78;
-      margin-bottom: 0;
-    }
-    .focus-row-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 1rem;
-    }
-    .focus-row-tag {
-      font-family: var(--sans);
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--blue);
-      padding: 0.2rem 0.55rem;
-      border: 1px solid var(--border2);
-      border-radius: 2px;
-    }
-
     /* ── HANDBOOK ── */
     #handbook {
       background: var(--surface);
@@ -976,8 +928,7 @@
       .scholar-areas { border-left: none; border-top: 1px solid var(--border); width: 100%; flex-wrap: wrap; }
       .pub-row { grid-template-columns: 1fr; gap: 0.5rem; }
       .pub-meta { flex-direction: row; align-items: center; gap: 1rem; }
-      .focus-row { grid-template-columns: 1fr; gap: 0.6rem 0; }
-      .talks-grid { grid-template-columns: 1fr; }
+.talks-grid { grid-template-columns: 1fr; }
       .principle-row { grid-template-columns: 1fr; gap: 0.5rem; }
       .handbook-inner { grid-template-columns: 1fr; }
       .handbook-visual { display: none; }
@@ -1075,61 +1026,6 @@
           <div class="stat-cell">
             <div class="stat-num">3×</div>
             <div class="stat-label">NCS Heroes Gold</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- FOCUS -->
-<section id="focus">
-  <div class="container">
-    <div class="section-eyebrow reveal">What I Do</div>
-    <h2 class="reveal">Building at the frontier.</h2>
-    <div class="focus-rows">
-      <div class="focus-row reveal">
-        <div class="focus-row-label">Product</div>
-        <div>
-          <h3>Four products. Three NCS Heroes Gold awards.</h3>
-          <p>Co-founded <strong>Ins8.ai</strong> (NCS-incubated), a hyperlocal speech AI platform fluent in Southeast Asian languages, accents and colloquial expressions. The same speech stack powers <strong>Breeze</strong>, a Singapore driver-companion app whose NVIDIA Riva voice handles street and place names where 30%+ of words originate from Mandarin, Hokkien, Malay or Tamil. Built <strong>NEXTgpt</strong>, an open multi-modal orchestration platform for rapid generative-AI development, demonstrated to 70+ enterprise C-suites and chosen by Dell as a Validated Design partner across Asia Pacific &amp; Japan; National Gallery Singapore deployed it as a hyper-personalised AI museum guide. Created <strong>AgentCanvas</strong>, a blueprint-driven platform that turns business-SME requirements into production-ready agentic workflows, built on NVIDIA AI Enterprise (NIM, Blueprints, NeMo Agent Toolkit) and deployable on-prem or across AWS, GCP and Azure. Architected <strong>SOLARIS</strong>, an observe-plan-act multi-agent system transforming Singapore's Land Transport operations, NCS Heroes Gold 2025.</p>
-          <div class="focus-row-tags">
-            <span class="focus-row-tag">Ins8.ai</span>
-            <span class="focus-row-tag">Breeze</span>
-            <span class="focus-row-tag">NEXTgpt</span>
-            <span class="focus-row-tag">AgentCanvas</span>
-            <span class="focus-row-tag">SOLARIS</span>
-            <span class="focus-row-tag">NCS Heroes Gold</span>
-          </div>
-        </div>
-      </div>
-      <div class="focus-row reveal">
-        <div class="focus-row-label">Technology</div>
-        <div>
-          <h3>Translating AI research into deployed systems.</h3>
-          <p>Directed the S$42.4M NTU–NCS SCALE Lab (IAF-ICP, 2021–2023), a research-to-industry translation engine that exceeded all contracted KPIs, moving a computer-vision traffic engine, Robotmanager and city-wide robotics pilots from lab into Singapore public-sector deployment. From this pipeline emerged reusable accelerators, NEXTgpt for generative AI and AgentCanvas for agentic workflows, each engineered as a four-layer stack (Domain · IT · Intelligence · Safety) that compresses enterprise deployment cycles from months to weeks while satisfying data-sovereignty, RBAC and audit requirements.</p>
-          <div class="focus-row-tags">
-            <span class="focus-row-tag">NTU SCALE Lab</span>
-            <span class="focus-row-tag">S$42.4M IAF-ICP</span>
-            <span class="focus-row-tag">Computer Vision</span>
-            <span class="focus-row-tag">Robotics</span>
-            <span class="focus-row-tag">NVIDIA AI Enterprise</span>
-          </div>
-        </div>
-      </div>
-      <div class="focus-row reveal">
-        <div class="focus-row-label">Research</div>
-        <div>
-          <h3>25 years of original AI research across three continents.</h3>
-          <p>PhD from Oregon Health &amp; Science University. Unit Head at A*STAR's Institute for Infocomm Research, directing spoken language and physiological computing programmes. Research scientist at Nokia Bell Labs. Adjunct Associate Professor at NTU's College of Computing and Data Science. Seven granted US patents. 1,804 Google Scholar citations spanning noise-robust ASR, physiological sensing, multi-modal systems, video intelligence, and agentic AI.</p>
-          <div class="focus-row-tags">
-            <span class="focus-row-tag">Nokia Bell Labs</span>
-            <span class="focus-row-tag">A*STAR I2R</span>
-            <span class="focus-row-tag">NTU CCDS</span>
-            <span class="focus-row-tag">7 US Patents</span>
-            <span class="focus-row-tag">1,804 Citations</span>
           </div>
         </div>
       </div>
