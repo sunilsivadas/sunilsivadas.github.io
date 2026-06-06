@@ -291,43 +291,50 @@
 
     /* ── FOCUS ── */
     #focus { background: var(--bg); }
-    .focus-grid {
+    .focus-rows { margin-top: 3rem; }
+    .focus-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
+      grid-template-columns: 130px 1fr;
+      gap: 0 3rem;
+      padding: 2.2rem 0;
+      border-top: 1px solid var(--border);
     }
-    .focus-card {
-      background: var(--bg);
-      padding: 2rem 1.8rem;
-      transition: background .2s;
-    }
-    .focus-card:hover { background: var(--surface); }
-    .focus-icon {
-      width: 36px; height: 36px;
-      margin-bottom: 1.2rem;
-      color: var(--gold);
-    }
-    .focus-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 0.6rem;
-    }
-    .focus-card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .focus-tag {
-      display: inline-block;
-      margin-top: 1rem;
+    .focus-row:last-child { border-bottom: 1px solid var(--border); }
+    .focus-row-label {
       font-family: var(--sans);
-      font-size: 0.65rem;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-top: 0.3rem;
+    }
+    .focus-row h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.7rem;
+    }
+    .focus-row p {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.78;
+      margin-bottom: 0;
+    }
+    .focus-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .focus-row-tag {
+      font-family: var(--sans);
+      font-size: 0.58rem;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--blue);
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--border2);
+      border-radius: 2px;
     }
 
     /* ── HANDBOOK ── */
@@ -969,7 +976,7 @@
       .scholar-areas { border-left: none; border-top: 1px solid var(--border); width: 100%; flex-wrap: wrap; }
       .pub-row { grid-template-columns: 1fr; gap: 0.5rem; }
       .pub-meta { flex-direction: row; align-items: center; gap: 1rem; }
-      .focus-grid { grid-template-columns: 1fr; }
+      .focus-row { grid-template-columns: 1fr; gap: 0.6rem 0; }
       .talks-grid { grid-template-columns: 1fr; }
       .principle-row { grid-template-columns: 1fr; gap: 0.5rem; }
       .handbook-inner { grid-template-columns: 1fr; }
@@ -1082,40 +1089,48 @@
   <div class="container">
     <div class="section-eyebrow reveal">What I Do</div>
     <h2 class="reveal">Building at the frontier.</h2>
-    <div class="focus-grid">
-      <div class="focus-card reveal">
-        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="18" cy="18" r="4" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="6" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="30" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="6" cy="26" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="30" cy="26" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M8.5 11.5L14 15M21.5 21.5L27.5 24.5M27.5 11.5L22 15M8.5 24.5L14 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3>Agentic AI Development</h3>
-        <p>Building agentic AI that ships. Architect of SOLARIS — an award-winning multi-agent system transforming Singapore's Land Transport operations (NCS Heroes Gold 2025) — and author of <em>The Agentic AI Builder's Handbook</em>. Translating frontier research into deployed systems that move beyond prototypes to deliver measurable enterprise outcomes.</p>
-        <span class="focus-tag">Multi-Agent Systems · Enterprise Deployment · Innovation</span>
+    <div class="focus-rows">
+      <div class="focus-row reveal">
+        <div class="focus-row-label">Product</div>
+        <div>
+          <h3>Four products. Three NCS Heroes Gold awards.</h3>
+          <p>Co-founded Ins8.ai (NCS-incubated), a real-time conversation intelligence platform for enterprise contact centres across Southeast Asia. Built NEXTgpt — a rapid GenAI use-case development sandbox demonstrated to 70+ enterprise C-suites, recognised with NCS Heroes Gold 2023 and a Google Trailblazers Innovation Award. Created AgentCanvas, a low-code platform for designing and deploying production-ready agentic AI workflows. Architected SOLARIS, a multi-agent system transforming Singapore's Land Transport operations — NCS Heroes Gold 2025.</p>
+          <div class="focus-row-tags">
+            <span class="focus-row-tag">Ins8.ai</span>
+            <span class="focus-row-tag">NEXTgpt</span>
+            <span class="focus-row-tag">AgentCanvas</span>
+            <span class="focus-row-tag">SOLARIS</span>
+            <span class="focus-row-tag">NCS Heroes Gold</span>
+          </div>
+        </div>
       </div>
-      <div class="focus-card reveal reveal-delay-1">
-        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 12h4M8 18h8M8 24h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <rect x="4" y="6" width="28" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M22 16l4 4-4 4M26 20h-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h3>Conversational & Generative AI</h3>
-        <p>Over a decade building conversational AI systems — from next-generation spoken language interfaces at A*STAR to generative AI prototyping at NCS. Created NEXTgpt, a sandbox for rapid GenAI use-case development, presented to 70+ enterprise clients.</p>
-        <span class="focus-tag">GenAI · NLP · Spoken Language · NEXTgpt</span>
+      <div class="focus-row reveal">
+        <div class="focus-row-label">Technology</div>
+        <div>
+          <h3>Translating AI research into deployed systems.</h3>
+          <p>Directed the S$42.4M NTU–NCS SCALE Lab (IAF-ICP, 2021–2023) — a joint research-to-industry translation engine that exceeded all contracted KPIs. Projects moved from lab to production: a computer-vision traffic monitoring engine, Robotmanager deployed in Singapore public-sector trials, and a city-wide robotics pilot programme. NEXTgpt and AgentCanvas emerged from this pipeline as reusable accelerators, now reducing enterprise GenAI and agentic AI deployment cycles from months to weeks.</p>
+          <div class="focus-row-tags">
+            <span class="focus-row-tag">NTU SCALE Lab</span>
+            <span class="focus-row-tag">S$42.4M IAF-ICP</span>
+            <span class="focus-row-tag">Computer Vision</span>
+            <span class="focus-row-tag">Robotics</span>
+            <span class="focus-row-tag">AI Translation</span>
+          </div>
+        </div>
       </div>
-      <div class="focus-card reveal reveal-delay-2">
-        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 28L14 20l6 6 10-12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="14" cy="20" r="1.5" fill="currentColor"/>
-          <circle cx="20" cy="26" r="1.5" fill="currentColor"/>
-          <path d="M28 8h-6M28 8v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3>Research & IP Creation</h3>
-        <p>25+ years generating original research and IP — noise-robust ASR, physiological computing, multi-modal context-aware systems, video intelligence, and robotics. Six granted patents. Principal Investigator on public-sector and industry-funded projects across A*STAR and NTU SCALE.</p>
-        <span class="focus-tag">A*STAR · Nokia Bell Labs · NTU · 6 Patents</span>
+      <div class="focus-row reveal">
+        <div class="focus-row-label">Research</div>
+        <div>
+          <h3>25 years of original AI research across three continents.</h3>
+          <p>PhD from Oregon Health &amp; Science University. Unit Head at A*STAR's Institute for Infocomm Research, directing spoken language and physiological computing programmes. Research scientist at Nokia Bell Labs. Adjunct Associate Professor at NTU's College of Computing and Data Science. Seven granted US patents. 1,804 Google Scholar citations spanning noise-robust ASR, physiological sensing, multi-modal systems, video intelligence, and agentic AI.</p>
+          <div class="focus-row-tags">
+            <span class="focus-row-tag">Nokia Bell Labs</span>
+            <span class="focus-row-tag">A*STAR I2R</span>
+            <span class="focus-row-tag">NTU CCDS</span>
+            <span class="focus-row-tag">7 US Patents</span>
+            <span class="focus-row-tag">1,804 Citations</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
