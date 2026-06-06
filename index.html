@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunil Sivadas, Ph.D. — AI Practitioner, Educator & Strategic Thinker</title>
+  <title>Sunil Sivadas, Ph.D. | AI Practitioner, Educator & Strategic Thinker</title>
   <meta name="description" content="AI practitioner, educator, and strategic thinker. Practice Lead at NCS. Author of The Agentic AI Builder's Handbook. Leading enterprise generative & agentic AI." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -291,43 +291,50 @@
 
     /* ── FOCUS ── */
     #focus { background: var(--bg); }
-    .focus-grid {
+    .focus-rows { margin-top: 3rem; }
+    .focus-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
+      grid-template-columns: 130px 1fr;
+      gap: 0 3rem;
+      padding: 2.2rem 0;
+      border-top: 1px solid var(--border);
     }
-    .focus-card {
-      background: var(--bg);
-      padding: 2rem 1.8rem;
-      transition: background .2s;
-    }
-    .focus-card:hover { background: var(--surface); }
-    .focus-icon {
-      width: 36px; height: 36px;
-      margin-bottom: 1.2rem;
-      color: var(--gold);
-    }
-    .focus-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 0.6rem;
-    }
-    .focus-card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .focus-tag {
-      display: inline-block;
-      margin-top: 1rem;
+    .focus-row:last-child { border-bottom: 1px solid var(--border); }
+    .focus-row-label {
       font-family: var(--sans);
-      font-size: 0.65rem;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-top: 0.3rem;
+    }
+    .focus-row h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.7rem;
+    }
+    .focus-row p {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.78;
+      margin-bottom: 0;
+    }
+    .focus-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .focus-row-tag {
+      font-family: var(--sans);
+      font-size: 0.58rem;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--blue);
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--border2);
+      border-radius: 2px;
     }
 
     /* ── HANDBOOK ── */
@@ -969,7 +976,7 @@
       .scholar-areas { border-left: none; border-top: 1px solid var(--border); width: 100%; flex-wrap: wrap; }
       .pub-row { grid-template-columns: 1fr; gap: 0.5rem; }
       .pub-meta { flex-direction: row; align-items: center; gap: 1rem; }
-      .focus-grid { grid-template-columns: 1fr; }
+      .focus-row { grid-template-columns: 1fr; gap: 0.6rem 0; }
       .talks-grid { grid-template-columns: 1fr; }
       .principle-row { grid-template-columns: 1fr; gap: 0.5rem; }
       .handbook-inner { grid-template-columns: 1fr; }
@@ -1014,7 +1021,7 @@
     <div class="hero-label">AI Practitioner · Builder · Researcher</div>
     <h1>Sunil<br><em>Sivadas</em><br><span style="font-size:0.42em;font-style:normal;color:var(--muted);font-weight:300;letter-spacing:0.12em;">Ph.D.</span></h1>
     <div class="hero-role">Practice Lead, NCS &nbsp;·&nbsp; Distinguished Engineer &nbsp;·&nbsp; Ph.D., Electrical Engineering</div>
-    <p class="hero-statement">Building agentic AI systems, creating IP, and turning frontier research into working technology — from conversational AI to multi-agent architectures.</p>
+    <p class="hero-statement">Building agentic AI systems, creating IP, and turning frontier research into working technology, from conversational AI to multi-agent architectures.</p>
     <div class="hero-ctas">
       <a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener" class="btn btn-primary">Read the Handbook ↗</a>
       <a href="#about" class="btn btn-secondary">About Me</a>
@@ -1038,8 +1045,8 @@
       <div class="about-text reveal reveal-delay-1">
         <div class="section-eyebrow">About</div>
         <h2>Practitioner.<br>Educator.<br>Builder.</h2>
-        <p>With over <strong>25 years at the frontier of AI and machine learning</strong>, I build systems, create IP, and architect platforms — from foundational research to production-grade deployment.</p>
-        <p>I lead a team of research scientists and software engineers at NCS exploring the frontiers of AI — from safe deployment of generative AI and AI-assisted software development to agentic AI architectures and multi-modal knowledge management. I also served as Deputy Director of SCALE@NTU — a S$42.4M corporate lab — directing research across Generative AI, Computer Vision, Mixed Reality, and Robotics, <strong>exceeding all KPIs for publications, patents, and IP translation.</strong></p>
+        <p>With over <strong>25 years at the frontier of AI and machine learning</strong>, I build systems, create IP, and architect platforms, from foundational research to production-grade deployment.</p>
+        <p>I lead a team of research scientists and software engineers at NCS exploring the frontiers of AI, from safe deployment of generative AI and AI-assisted software development to agentic AI architectures and multi-modal knowledge management. I also served as Deputy Director of SCALE@NTU, a S$42.4M corporate lab, directing research across Generative AI, Computer Vision, Mixed Reality, and Robotics, <strong>exceeding all KPIs for publications, patents, and IP translation.</strong></p>
         <p>I hold a Ph.D. from Oregon Health &amp; Science University and serve as Adjunct Associate Professor in the College of Computing and Data Science at NTU. Conferred the title of NCS Distinguished Engineer in 2022 for contributions to research, product innovation, and thought leadership.</p>
         <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top:1rem">Full Profile ↗</a>
       </div>
@@ -1082,40 +1089,49 @@
   <div class="container">
     <div class="section-eyebrow reveal">What I Do</div>
     <h2 class="reveal">Building at the frontier.</h2>
-    <div class="focus-grid">
-      <div class="focus-card reveal">
-        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="18" cy="18" r="4" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="6" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="30" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="6" cy="26" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="30" cy="26" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M8.5 11.5L14 15M21.5 21.5L27.5 24.5M27.5 11.5L22 15M8.5 24.5L14 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3>Agentic AI Development</h3>
-        <p>Building agentic AI that ships. Architect of SOLARIS — an award-winning multi-agent system transforming Singapore's Land Transport operations (NCS Heroes Gold 2025) — and author of <em>The Agentic AI Builder's Handbook</em>. Translating frontier research into deployed systems that move beyond prototypes to deliver measurable enterprise outcomes.</p>
-        <span class="focus-tag">Multi-Agent Systems · Enterprise Deployment · Innovation</span>
+    <div class="focus-rows">
+      <div class="focus-row reveal">
+        <div class="focus-row-label">Product</div>
+        <div>
+          <h3>Four products. Three NCS Heroes Gold awards.</h3>
+          <p>Co-founded <strong>Ins8.ai</strong> (NCS-incubated), a hyperlocal speech AI platform fluent in Southeast Asian languages, accents and colloquial expressions. The same speech stack powers <strong>Breeze</strong>, a Singapore driver-companion app whose NVIDIA Riva voice handles street and place names where 30%+ of words originate from Mandarin, Hokkien, Malay or Tamil. Built <strong>NEXTgpt</strong>, an open multi-modal orchestration platform for rapid generative-AI development, demonstrated to 70+ enterprise C-suites and chosen by Dell as a Validated Design partner across Asia Pacific &amp; Japan; National Gallery Singapore deployed it as a hyper-personalised AI museum guide. Created <strong>AgentCanvas</strong>, a blueprint-driven platform that turns business-SME requirements into production-ready agentic workflows, built on NVIDIA AI Enterprise (NIM, Blueprints, NeMo Agent Toolkit) and deployable on-prem or across AWS, GCP and Azure. Architected <strong>SOLARIS</strong>, an observe-plan-act multi-agent system transforming Singapore's Land Transport operations, NCS Heroes Gold 2025.</p>
+          <div class="focus-row-tags">
+            <span class="focus-row-tag">Ins8.ai</span>
+            <span class="focus-row-tag">Breeze</span>
+            <span class="focus-row-tag">NEXTgpt</span>
+            <span class="focus-row-tag">AgentCanvas</span>
+            <span class="focus-row-tag">SOLARIS</span>
+            <span class="focus-row-tag">NCS Heroes Gold</span>
+          </div>
+        </div>
       </div>
-      <div class="focus-card reveal reveal-delay-1">
-        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 12h4M8 18h8M8 24h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <rect x="4" y="6" width="28" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M22 16l4 4-4 4M26 20h-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <h3>Conversational & Generative AI</h3>
-        <p>Over a decade building conversational AI systems — from next-generation spoken language interfaces at A*STAR to generative AI prototyping at NCS. Created NEXTgpt, a sandbox for rapid GenAI use-case development, presented to 70+ enterprise clients.</p>
-        <span class="focus-tag">GenAI · NLP · Spoken Language · NEXTgpt</span>
+      <div class="focus-row reveal">
+        <div class="focus-row-label">Technology</div>
+        <div>
+          <h3>Translating AI research into deployed systems.</h3>
+          <p>Directed the S$42.4M NTU–NCS SCALE Lab (IAF-ICP, 2021–2023), a research-to-industry translation engine that exceeded all contracted KPIs, moving a computer-vision traffic engine, Robotmanager and city-wide robotics pilots from lab into Singapore public-sector deployment. From this pipeline emerged reusable accelerators, NEXTgpt for generative AI and AgentCanvas for agentic workflows, each engineered as a four-layer stack (Domain · IT · Intelligence · Safety) that compresses enterprise deployment cycles from months to weeks while satisfying data-sovereignty, RBAC and audit requirements.</p>
+          <div class="focus-row-tags">
+            <span class="focus-row-tag">NTU SCALE Lab</span>
+            <span class="focus-row-tag">S$42.4M IAF-ICP</span>
+            <span class="focus-row-tag">Computer Vision</span>
+            <span class="focus-row-tag">Robotics</span>
+            <span class="focus-row-tag">NVIDIA AI Enterprise</span>
+          </div>
+        </div>
       </div>
-      <div class="focus-card reveal reveal-delay-2">
-        <svg class="focus-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 28L14 20l6 6 10-12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="14" cy="20" r="1.5" fill="currentColor"/>
-          <circle cx="20" cy="26" r="1.5" fill="currentColor"/>
-          <path d="M28 8h-6M28 8v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3>Research & IP Creation</h3>
-        <p>25+ years generating original research and IP — noise-robust ASR, physiological computing, multi-modal context-aware systems, video intelligence, and robotics. Six granted patents. Principal Investigator on public-sector and industry-funded projects across A*STAR and NTU SCALE.</p>
-        <span class="focus-tag">A*STAR · Nokia Bell Labs · NTU · 6 Patents</span>
+      <div class="focus-row reveal">
+        <div class="focus-row-label">Research</div>
+        <div>
+          <h3>25 years of original AI research across three continents.</h3>
+          <p>PhD from Oregon Health &amp; Science University. Unit Head at A*STAR's Institute for Infocomm Research, directing spoken language and physiological computing programmes. Research scientist at Nokia Bell Labs. Adjunct Associate Professor at NTU's College of Computing and Data Science. Seven granted US patents. 1,804 Google Scholar citations spanning noise-robust ASR, physiological sensing, multi-modal systems, video intelligence, and agentic AI.</p>
+          <div class="focus-row-tags">
+            <span class="focus-row-tag">Nokia Bell Labs</span>
+            <span class="focus-row-tag">A*STAR I2R</span>
+            <span class="focus-row-tag">NTU CCDS</span>
+            <span class="focus-row-tag">7 US Patents</span>
+            <span class="focus-row-tag">1,804 Citations</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1132,15 +1148,15 @@
       <div class="reveal">
         <div class="handbook-label">Published Work</div>
         <h2 class="handbook-title">The Agentic AI<br><em>Builder's Handbook</em></h2>
-        <p class="handbook-desc">A practitioner's guide to building systems that go beyond demos and prototypes — addressing why enterprise AI has a high degree of complexity, what it actually takes to deploy agents in production, and how AI capability is reshaping real economic value.</p>
+        <p class="handbook-desc">A practitioner's guide to building systems that go beyond demos and prototypes, addressing why enterprise AI has a high degree of complexity, what it actually takes to deploy agents in production, and how AI capability is reshaping real economic value.</p>
         <div class="handbook-chapters">
-          <div class="chapter-item">Why Agentic? — Capability, economic signals & the production gap</div>
-          <div class="chapter-item">METR Time Horizons — What autonomy benchmarks actually measure</div>
-          <div class="chapter-item">GDPval — AI on economically meaningful tasks across 44 occupations</div>
-          <div class="chapter-item">The Jagged Frontier — Where AI surprises and where it fails</div>
-          <div class="chapter-item">Building for Adoption — From PoC to production-grade deployment</div>
+          <div class="chapter-item">Why Agentic? Capability, economic signals & the production gap</div>
+          <div class="chapter-item">METR Time Horizons: What autonomy benchmarks actually measure</div>
+          <div class="chapter-item">GDPval: AI on economically meaningful tasks across 44 occupations</div>
+          <div class="chapter-item">The Jagged Frontier: Where AI surprises and where it fails</div>
+          <div class="chapter-item">Building for Adoption: From PoC to production-grade deployment</div>
         </div>
-        <a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener" class="btn btn-primary">Read Online — Free ↗</a>
+        <a href="https://sunilsivadas.github.io/The-Agentic-AI-Builder-s-Handbook/" target="_blank" rel="noopener" class="btn btn-primary">Read Online · Free ↗</a>
       </div>
       <div class="handbook-visual reveal reveal-delay-1">
         <div class="handbook-book-mock">
@@ -1179,7 +1195,7 @@
         <div class="post-tag">Agentic AI · Realized Value Series · Jun 2026</div>
         <h3>Realized Value: A Framework for Evaluating Agentic AI in the Enterprise</h3>
         <p>Frontier capability is growing fast. Yet most enterprises still struggle to put agentic AI into production. GDPval shows models matching experts at 83% of tasks. METR puts the realised gain with a human in the loop at 1.4–2×. The Remote Labor Index finds end-to-end autonomous completion at 2.5%. Three true numbers. One gap. This series is about what sits between them.</p>
-        <p class="post-pull"><em>realized value = capability × cost × reliability × safety × controllability.</em> The factors multiply — so one near-zero factor zeros the product.</p>
+        <p class="post-pull"><em>realized value = capability × cost × reliability × safety × controllability.</em> The factors multiply, so one near-zero factor zeros the product.</p>
         <a href="realized-value.html" class="post-link">Read the introduction ↗</a>
       </div>
     </div>
@@ -1192,8 +1208,8 @@
       <div class="post-body">
         <div class="post-tag">AI Safety &amp; Assurance · ATxSummit · Jun 2026</div>
         <h3>Testing makes the invisible visible</h3>
-        <p>At the IMDA AIVF AI Assurance Sandbox Showcase at ATxSummit, Dr Martin Saerbeck and I shared our case study on building a reusable assurance framework around a live AI career guidance chatbot — one that serves graduates, career switchers, and retrenched workers across Singapore. Our approach began with the people the system serves and the harms they face: tone with vulnerable users, safeguards for minors, parity across gender and age.</p>
-        <p>Wan Sie Lee, Executive Director of the AI Verify Foundation, framed the whole conversation in one line. Prof. Russell added the horizon: as systems approach superhuman levels, real-world testing reaches its limit. Mathematical, analytical guarantees will be needed. The systems deployed today are a different case — they already shape real decisions. Careers. Money. Health.</p>
+        <p>At the IMDA AIVF AI Assurance Sandbox Showcase at ATxSummit, Dr Martin Saerbeck and I shared our case study on building a reusable assurance framework around a live AI career guidance chatbot, one that serves graduates, career switchers, and retrenched workers across Singapore. Our approach began with the people the system serves and the harms they face: tone with vulnerable users, safeguards for minors, parity across gender and age.</p>
+        <p>Wan Sie Lee, Executive Director of the AI Verify Foundation, framed the whole conversation in one line. Prof. Russell added the horizon: as systems approach superhuman levels, real-world testing reaches its limit. Mathematical, analytical guarantees will be needed. The systems deployed today are a different case, they already shape real decisions. Careers. Money. Health.</p>
         <p class="post-pull"><em>Testing makes the invisible visible.</em> For the systems shaping real decisions today, that is how we earn trust.</p>
         <a href="https://www.linkedin.com/feed/update/urn:li:activity:7466090063270174720/" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
@@ -1207,8 +1223,8 @@
       <div class="post-body">
         <div class="post-tag">Agentic AI Architecture</div>
         <h3>The Bitter Lesson is about to hit agentic AI builders</h3>
-        <p>Hand-crafting agent architectures — stitching system prompts, tool definitions, routing logic, guardrails — is the same pattern the bitter lesson has punished every time. A new open-source framework from UC Berkeley (optimize_anything / GEPA) treats any text artifact as an optimizable parameter. A 10-line agent stub automatically evolved into a 300+ line multi-stage system. ARC-AGI accuracy went from 32.5% to 89.5%. No human designed that architecture.</p>
-        <p class="post-pull">The craft of building AI applications is shifting — from designing agents to <em>defining outcomes.</em></p>
+        <p>Hand-crafting agent architectures, stitching system prompts, tool definitions, routing logic, guardrails, is the same pattern the bitter lesson has punished every time. A new open-source framework from UC Berkeley (optimize_anything / GEPA) treats any text artifact as an optimizable parameter. A 10-line agent stub automatically evolved into a 300+ line multi-stage system. ARC-AGI accuracy went from 32.5% to 89.5%. No human designed that architecture.</p>
+        <p class="post-pull">The craft of building AI applications is shifting, from designing agents to <em>defining outcomes.</em></p>
         <a href="https://www.linkedin.com/posts/sunilsivadas_the-bitter-lesson-is-about-to-hit-agentic-activity-7430897100990763008-vRfi" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
     </div>
@@ -1216,12 +1232,12 @@
     <!-- POST 2: Agent Adoption Triangle -->
     <div class="post-card post-card-reverse reveal">
       <div class="post-img-wrap post-img-light">
-        <img src="img/post-agent-triangle.png" alt="Agent Adoption Triangle — Capabilities, Tasks, Adoption" />
+        <img src="img/post-agent-triangle.png" alt="Agent Adoption Triangle, Capabilities, Tasks, Adoption" />
       </div>
       <div class="post-body">
         <div class="post-tag">Agentic AI Benchmarking &amp; Adoption</div>
-        <h3>Visualising Agentic AI as a Triangle — not a straight line</h3>
-        <p>Two of the most-cited studies pull in opposite directions: METR's "agents are doubling in capability" and MIT's "95% of GenAI projects fail." Looking at only one leaves you either overestimating what you can deploy, or underestimating what's possible. The missing lens is the tasks corner — GDP-Eval-style evidence showing how frontier models already perform on the work we actually pay people to do.</p>
+        <h3>Visualising Agentic AI as a Triangle, not a straight line</h3>
+        <p>Two of the most-cited studies pull in opposite directions: METR's "agents are doubling in capability" and MIT's "95% of GenAI projects fail." Looking at only one leaves you either overestimating what you can deploy, or underestimating what's possible. The missing lens is the tasks corner, GDP-Eval-style evidence showing how frontier models already perform on the work we actually pay people to do.</p>
         <p class="post-pull"><em>Capabilities</em> tell you what's possible. <em>Tasks</em> tell you where value appears first. <em>Adoption</em> tells you how hard it is to ship.</p>
         <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
@@ -1230,13 +1246,13 @@
     <!-- POST 3: IMDA AI Assurance -->
     <div class="post-card reveal">
       <div class="post-img-wrap">
-        <img src="img/post-imda-assurance.png" alt="Making AI Assurance Work in the Real World — IMDA speaker card" />
+        <img src="img/post-imda-assurance.png" alt="Making AI Assurance Work in the Real World, IMDA speaker card" />
       </div>
       <div class="post-body">
         <div class="post-tag">AI Safety &amp; Assurance · IMDA · Jan 2026</div>
         <h3>Making AI Assurance Work in the Real World</h3>
-        <p>With Dr Martin Saerbeck, I demonstrated how to test a multi-turn conversational AI career guidance chatbot — the kind of system where small errors compound across turns and influence high-stakes decisions. Our objectives: discover and characterise risks, define testable assurance requirements aligned to IMDA's Starter Kit three pillars (Hallucination, Undesirable Content, Adversarial Vulnerability), and generate reusable artefacts others can apply.</p>
-        <p class="post-pull">GenAI systems are probabilistic. They can be helpful and still be wrong, unsafe, or manipulable. Testing is not a checkbox — it is how we earn trust.</p>
+        <p>With Dr Martin Saerbeck, I demonstrated how to test a multi-turn conversational AI career guidance chatbot, the kind of system where small errors compound across turns and influence high-stakes decisions. Our objectives: discover and characterise risks, define testable assurance requirements aligned to IMDA's Starter Kit three pillars (Hallucination, Undesirable Content, Adversarial Vulnerability), and generate reusable artefacts others can apply.</p>
+        <p class="post-pull">GenAI systems are probabilistic. They can be helpful and still be wrong, unsafe, or manipulable. Testing is not a checkbox, it is how we earn trust.</p>
         <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
     </div>
@@ -1249,8 +1265,8 @@
       <div class="post-body">
         <div class="post-tag">Multimodal AI · A*STAR · SWITCH 2025</div>
         <h3>The Power of Possibilities with MERaLiON</h3>
-        <p>Panellist at "Imagine AI – The Power of Possibilities with MERaLiON" at SWITCH 2025. MERaLiON is Southeast Asia's empathetic multimodal LLM, designed for the region's diverse languages, cultures, and communication styles. We explored how multimodal LLMs reduce solution complexity, cut response latency, and how hyper-localising AI is the foundation for meaningful adoption and trust — not a side concern.</p>
-        <p class="post-pull">At NCS, we evaluate MERaLiON not just in isolation but as part of a larger AI stack — integrating with internal workflows, tuning for performance, measuring deployment cost and resilience.</p>
+        <p>Panellist at "Imagine AI – The Power of Possibilities with MERaLiON" at SWITCH 2025. MERaLiON is Southeast Asia's empathetic multimodal LLM, designed for the region's diverse languages, cultures, and communication styles. We explored how multimodal LLMs reduce solution complexity, cut response latency, and how hyper-localising AI is the foundation for meaningful adoption and trust, not a side concern.</p>
+        <p class="post-pull">At NCS, we evaluate MERaLiON not just in isolation but as part of a larger AI stack, integrating with internal workflows, tuning for performance, measuring deployment cost and resilience.</p>
         <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
     </div>
@@ -1264,7 +1280,7 @@
         <div class="post-tag">AI at Work · Masterclass · 2026</div>
         <h3>AI is changing tasks before it changes jobs</h3>
         <p>Most companies are investing in the wrong place. The gap between adoption and impact is the biggest risk. In his Budget 2026 speech, PM Wong announced a National AI Council he'll personally chair and named the real challenge: many firms say they are using AI, but end-to-end transformation requires organising data, rebuilding systems, redesigning processes and jobs, and retraining workers.</p>
-        <p class="post-pull">That gap — between adoption and impact — is what I addressed in my AI at Work masterclass. 200+ use cases surfaced through NCS Group's SunshineAI hackathons, and a knowledge-sharing culture that turns individual discoveries into organisational learning.</p>
+        <p class="post-pull">That gap, between adoption and impact, is what I addressed in my AI at Work masterclass. 200+ use cases surfaced through NCS Group's SunshineAI hackathons, and a knowledge-sharing culture that turns individual discoveries into organisational learning.</p>
         <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
     </div>
@@ -1272,13 +1288,13 @@
     <!-- POST 6: ATxSummit -->
     <div class="post-card reveal">
       <div class="post-img-wrap">
-        <img src="img/post-atxsummit.png" alt="Pushing the Boundaries of AI Research — ATxSummit AISDC" />
+        <img src="img/post-atxsummit.png" alt="Pushing the Boundaries of AI Research, ATxSummit AISDC" />
       </div>
       <div class="post-body">
         <div class="post-tag">AI in Learning &amp; Research · ATxSummit · May 2025</div>
         <h3>Pushing the Boundaries of AI Research: Breakthroughs and Innovations</h3>
-        <p>Panellist at the ATxSummit AI Student Developer Conference. We explored how learning, teaching, and skill application are transforming to meet an AI-native future — from the ethics of AI in classrooms and vibe coding to how hiring evolves in an AI-first world. In tomorrow's classrooms, AI will be both mentor and brainstorming partner — shifting education from delivering information to orchestrating learning experiences.</p>
-        <p class="post-pull">Meta-skills — framing problems, critiquing AI output, iterating toward better solutions — age far better than any single tool.</p>
+        <p>Panellist at the ATxSummit AI Student Developer Conference. We explored how learning, teaching, and skill application are transforming to meet an AI-native future, from the ethics of AI in classrooms and vibe coding to how hiring evolves in an AI-first world. In tomorrow's classrooms, AI will be both mentor and brainstorming partner, shifting education from delivering information to orchestrating learning experiences.</p>
+        <p class="post-pull">Meta-skills, framing problems, critiquing AI output, iterating toward better solutions, age far better than any single tool.</p>
         <a href="https://www.linkedin.com/in/sunilsivadas" target="_blank" rel="noopener" class="post-link">Read on LinkedIn ↗</a>
       </div>
     </div>
@@ -1293,18 +1309,18 @@
   <div class="container">
     <div class="section-eyebrow reveal">Recognition</div>
     <h2 class="reveal">Awards & Teams</h2>
-    <p class="awards-intro reveal">Three consecutive NCS Heroes Gold Awards for Best Innovation — for NEXTgpt (2023), Virtual Career Coach (2024), and SOLARIS Agentic AI (2025).</p>
+    <p class="awards-intro reveal">Three consecutive NCS Heroes Gold Awards for Best Innovation, for NEXTgpt (2023), Virtual Career Coach (2024), and SOLARIS Agentic AI (2025).</p>
 
     <div class="awards-grid reveal">
 
       <div class="award-card">
         <div class="award-img-wrap">
-          <img src="img/award-heroes2025.jpg" alt="NCS Heroes 2025 Gold Award — SOLARIS" />
+          <img src="img/award-heroes2025.jpg" alt="NCS Heroes 2025 Gold Award, SOLARIS" />
         </div>
         <div class="award-caption">
           <span class="award-year-badge">2025</span>
           <div class="award-card-title">NCS Heroes Gold · Best Innovation</div>
-          <div class="award-card-sub">SOLARIS — Agentic AI for Land Transport Operations</div>
+          <div class="award-card-sub">SOLARIS: Agentic AI for Land Transport Operations</div>
         </div>
       </div>
 
@@ -1332,12 +1348,12 @@
 
       <div class="award-card">
         <div class="award-img-wrap">
-          <img src="img/award-heroes2023-nextgpt.png" alt="NCS Heroes 2023 Gold — Team NEXTgpt" />
+          <img src="img/award-heroes2023-nextgpt.png" alt="NCS Heroes 2023 Gold, Team NEXTgpt" />
         </div>
         <div class="award-caption">
           <span class="award-year-badge">2023</span>
           <div class="award-card-title">NCS Heroes Gold · Best Innovation</div>
-          <div class="award-card-sub">Team NEXTgpt — Igniting Gen AI Possibilities</div>
+          <div class="award-card-sub">Team NEXTgpt: Igniting Gen AI Possibilities</div>
         </div>
       </div>
 
@@ -1417,7 +1433,7 @@
       <div class="pub-row">
         <div class="pub-meta"><span class="pub-year">2005</span></div>
         <div class="pub-content">
-          <span class="pub-title">Pushing the Envelope — Aside [Speech Recognition]</span>
+          <span class="pub-title">Pushing the Envelope: Aside [Speech Recognition]</span>
           <div class="pub-authors">Morgan N, Zhu Q, Stolcke A, Sonmez K, <strong>Sivadas S</strong>, Shinozaki T, Ostendorf M et al.</div>
           <div class="pub-venue">IEEE Signal Processing Magazine, 22(5):81–88 · 2005</div>
         </div>
@@ -1574,21 +1590,21 @@
     <div class="timeline reveal">
       <div class="tl-entry">
         <div class="tl-dot active"></div>
-        <div class="tl-period">2022 — Present</div>
+        <div class="tl-period">2022–Present</div>
         <div class="tl-title">Director, NEXT Gen Tech</div>
         <div class="tl-org">NCS Group · Singapore</div>
-        <div class="tl-desc">Part of NCS's AI strategy and GenAI practice — building from zero to one. Built NEXTgpt, a rapid prototyping sandbox presented to 70+ C-suite clients. Contributing to NCS's large-scale AI adoption initiative. Key innovations include <strong>SOLARIS</strong>, an agentic AI system for improving the effectiveness of land transport operations.</div>
+        <div class="tl-desc">Part of NCS's AI strategy and GenAI practice, building from zero to one. Built NEXTgpt, a rapid prototyping sandbox presented to 70+ C-suite clients. Contributing to NCS's large-scale AI adoption initiative. Key innovations include <strong>SOLARIS</strong>, an agentic AI system for improving the effectiveness of land transport operations.</div>
         <div class="tl-tags">
           <span class="tl-tag">Agentic AI</span>
           <span class="tl-tag">GenAI</span>
-          <span class="tl-tag">Gold Award — NCS Heroes 2023, 2024 & 2025</span>
+          <span class="tl-tag">Gold Award, NCS Heroes 2023, 2024 & 2025</span>
           <span class="tl-tag">Google Trailblazers Innovation Award</span>
           <span class="tl-tag">Distinguished Engineer 2022</span>
         </div>
       </div>
       <div class="tl-entry">
         <div class="tl-dot active"></div>
-        <div class="tl-period">2021 — 2023</div>
+        <div class="tl-period">2021–2023</div>
         <div class="tl-title">Deputy Director, Singtel AI Lab (SCALE@NTU)</div>
         <div class="tl-org">Nanyang Technological University · Singapore</div>
         <div class="tl-desc">Developed AI applications for public safety, smart urban infrastructure, transport, and healthcare. Led conversational interface for Florence (robotic nurse assistant trialed at Alexandra Hospital) and traffic management engine for nationwide security robot deployment.</div>
@@ -1600,7 +1616,7 @@
       </div>
       <div class="tl-entry">
         <div class="tl-dot active"></div>
-        <div class="tl-period">2023 — 2025</div>
+        <div class="tl-period">2023–2025</div>
         <div class="tl-title">Adjunct Associate Professor, CCDS</div>
         <div class="tl-org">Nanyang Technological University · Singapore</div>
         <div class="tl-desc">Teaching ML operationalization in the wild. Supervising PhD scholars (EDB-IPP) and mentoring undergraduate researchers (URECA).</div>
@@ -1611,7 +1627,7 @@
       </div>
       <div class="tl-entry">
         <div class="tl-dot"></div>
-        <div class="tl-period">2018 — 2021</div>
+        <div class="tl-period">2018–2021</div>
         <div class="tl-title">Associate Director / Lead Research Scientist</div>
         <div class="tl-org">NCS · Singtel Cognitive AI Lab @ NTU</div>
         <div class="tl-desc">Built a lean high-performance research team from scratch. Multi-modal context-aware intelligent systems. Incubated multiple AI-centric products including Ins8.ai, a real-time conversation intelligence platform.</div>
@@ -1622,7 +1638,7 @@
       </div>
       <div class="tl-entry">
         <div class="tl-dot"></div>
-        <div class="tl-period">2012 — 2018</div>
+        <div class="tl-period">2012–2018</div>
         <div class="tl-title">Unit Head / Senior Scientist, Human Language Technology</div>
         <div class="tl-org">Institute for Infocomm Research (A*STAR) · Singapore</div>
         <div class="tl-desc">Led conversational AI research. Principal Investigator on public sector and industry projects across Finance, Telco, Healthcare, Security, Transport, and Media. Hired and nurtured a generation of AI researchers.</div>
@@ -1634,7 +1650,7 @@
       </div>
       <div class="tl-entry">
         <div class="tl-dot"></div>
-        <div class="tl-period">2004 — 2012</div>
+        <div class="tl-period">2004–2012</div>
         <div class="tl-title">Senior Researcher</div>
         <div class="tl-org">Nokia Bell Labs · Finland</div>
         <div class="tl-desc">Generated 6 granted patents. Developed noise-robust small-footprint speech recognition for mobile devices. Physiological computing and context-aware systems. Represented Nokia at TC-STAR, the EU Framework Programme for speech-to-speech translation.</div>
@@ -1646,10 +1662,10 @@
       </div>
       <div class="tl-entry">
         <div class="tl-dot"></div>
-        <div class="tl-period">1999 — 2004</div>
+        <div class="tl-period">1999–2004</div>
         <div class="tl-title">Ph.D., Electrical Engineering</div>
         <div class="tl-org">Oregon Health & Science University · Portland, USA</div>
-        <div class="tl-desc">Led technical work for the OGI-ICSI-Qualcomm consortium in ETSI's Aurora Distributed Speech Recognition standardization — one of the best-performing systems. Research on noise-robust front-ends with Prof. Hermansky at ICSI Berkeley and Idiap Switzerland.</div>
+        <div class="tl-desc">Led technical work for the OGI-ICSI-Qualcomm consortium in ETSI's Aurora Distributed Speech Recognition standardization, one of the best-performing systems. Research on noise-robust front-ends with Prof. Hermansky at ICSI Berkeley and Idiap Switzerland.</div>
         <div class="tl-tags">
           <span class="tl-tag">Noise-Robust ASR</span>
           <span class="tl-tag">ETSI Aurora</span>

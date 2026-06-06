@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Realized Value: A Framework for Evaluating Agentic AI in the Enterprise — Sunil Sivadas, Ph.D.</title>
+  <title>Realized Value: A Framework for Evaluating Agentic AI in the Enterprise | Sunil Sivadas, Ph.D.</title>
   <meta name="description" content="Capability is the only term that creates value. Everything else is a discount. The binding constraint is whichever factor sits closest to zero. A framework for evaluating agentic AI in production." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -182,6 +182,7 @@
     }
     .series-title { color: var(--text); }
     .series-sub { color: var(--text); font-size: 0.88rem; }
+    .series-sub::before { content: ' · '; color: var(--faint); padding: 0 0.15rem; }
     .series-badge-pub {
       font-family: var(--sans); font-size: 0.55rem; font-weight: 700;
       letter-spacing: 0.16em; text-transform: uppercase;
@@ -251,7 +252,7 @@
     }
     .ref-group ul { list-style: none; padding: 0; }
     .ref-group li { font-size: 0.88rem; color: var(--text); margin-bottom: 0.5rem; padding-left: 1rem; position: relative; }
-    .ref-group li::before { content: '—'; position: absolute; left: 0; color: var(--border2); }
+    .ref-group li::before { content: '·'; position: absolute; left: 0; color: var(--border2); }
     .ref-group a { color: var(--blue); text-decoration: none; }
     .ref-group a:hover { color: var(--gold); text-decoration: underline; }
 
@@ -288,7 +289,7 @@
     </svg>
     Sunil Sivadas
   </a>
-  <div class="nav-title">Realized Value Series — Introduction</div>
+  <div class="nav-title">Realized Value Series · Introduction</div>
 </nav>
 
 <div class="article-wrap">
@@ -296,7 +297,7 @@
   <div class="series-badge">Realized Value Series <span>·</span> Introduction</div>
   <div class="article-eyebrow">Agentic AI · Enterprise · Jun 2026</div>
   <h1 class="article-title">Realized Value: A Framework for Evaluating <em>Agentic AI</em> in the Enterprise</h1>
-  <p class="article-lede">Capability is the only term that creates value. Everything else is a discount. The binding constraint is whichever factor sits closest to zero — usually one of the other four.</p>
+  <p class="article-lede">Capability is the only term that creates value. Everything else is a discount. The binding constraint is whichever factor sits closest to zero, usually one of the other four.</p>
   <div class="article-meta">
     <span>Sunil Sivadas, Ph.D.</span>
     <span>Jun 2026</span>
@@ -309,11 +310,11 @@
     <p>This series is my attempt to write down what we keep seeing. Frontier capability is growing fast. Investment and market value are growing with it. Yet most enterprises still struggle to put agentic AI into production. That gap is the subject of these articles.</p>
 
     <img src="realization-value-framework/epoch-capability-index.png" alt="Epoch Capabilities Index scatter plot showing AI model scores rising from around 60 in early 2023 to around 160 by mid-2026" class="article-img" />
-    <div class="img-caption">Epoch Capabilities Index — composite score across OpenAI, Google, Anthropic, Meta AI, xAI, and others. Early 2023 to mid-2026.</div>
+    <div class="img-caption">Epoch Capabilities Index, composite score across OpenAI, Google, Anthropic, Meta AI, xAI, and others. Early 2023 to mid-2026.</div>
 
     <h2>What GDPval says</h2>
     <p>In late 2025, OpenAI released <a href="https://arxiv.org/abs/2510.04374">GDPval</a>. It is 1,320 tasks across 44 occupations, drawn from the nine sectors that contribute most to U.S. GDP and over $3 trillion in annual wages. Each task is a real deliverable: a financial model, a legal review, a consulting report. A professional with about 14 years of experience built each one. Each took roughly seven hours. Experts then judged the model outputs blind, marking each as better than, equal to, or worse than the human's (<a href="https://arxiv.org/abs/2510.04374">Patwardhan et al., 2025</a>).</p>
-    <p>At the September 2025 release, Claude Opus 4.1 led at 47.6% wins-or-ties against the human expert. By mid-2026, the leaderboard's top score has climbed to around 83% (<a href="https://evals.openai.com/gdpval/leaderboard">OpenAI GDPval Leaderboard, 2026</a>). Seven hours of expert work returns from a model in minutes — a theoretical speed-up near 100×.<sup>1</sup></p>
+    <p>At the September 2025 release, Claude Opus 4.1 led at 47.6% wins-or-ties against the human expert. By mid-2026, the leaderboard's top score has climbed to around 83% (<a href="https://evals.openai.com/gdpval/leaderboard">OpenAI GDPval Leaderboard, 2026</a>). Seven hours of expert work returns from a model in minutes, a theoretical speed-up near 100×.<sup>1</sup></p>
     <p>That is what GDPval says: the capability already exists for a large share of valuable knowledge work.</p>
 
     <h2>What translates</h2>
@@ -328,7 +329,7 @@
     <p>GDPval measures a ceiling. The enterprise lives in the gap between that ceiling and the 1.4 to 2×. Capability is what the benchmark shows. Value is what survives production. Four things govern the difference: cost, reliability, safety, and controllability.</p>
     <p>The benchmark builders now name this gap themselves. Stanford's 2026 Index highlights the distance between what models can do and how ready organisations are to govern them (<a href="https://hai.stanford.edu/ai-index">Stanford HAI, 2026</a>). METR notes that fast benchmark gains have not translated into workflow automation, because long chains of actions are still hard to run reliably (<a href="https://metr.org/blog/2025-03-19-measuring-ai-ability-to-complete-long-tasks/">METR, 2025</a>). Agent Arena, observing 160,480 real-world agent sessions, finds users pull control back about 2.3× as often as they hand over more (<a href="https://arena.ai/blog/agent-arena-methodology/">Arena, 2026</a>).</p>
 
-    <img src="realization-value-framework/measurement-landscape.png" alt="Infographic: six AI studies in two groups — what AI can do versus what is actually used — with what each measures, its finding, and what it conveys" class="article-img" />
+    <img src="realization-value-framework/measurement-landscape.png" alt="Infographic: six AI studies in two groups, what AI can do versus what is actually used, with what each measures, its finding, and what it conveys" class="article-img" />
     <div class="img-caption">Six studies across two dimensions: what AI can do, and what actually gets used.</div>
 
     <p>The series asks one question: how much of the model's capability survives contact with production.</p>
@@ -342,7 +343,7 @@
     </div>
 
     <p>Only cost has a clean unit, the dollar. The other terms resist a single honest number. The model reveals what a scorecard hides: the factors multiply, so one near-zero factor zeros the product.</p>
-    <p>Capability is the only term that creates value. The other four can only subtract it. An agent with high capability and zero controllability ships nothing. An agent you cannot afford, trust, or audit is worth nothing, whatever the first term reads. The binding constraint is whichever factor sits nearest zero — usually one of the other four.</p>
+    <p>Capability is the only term that creates value. The other four can only subtract it. An agent with high capability and zero controllability ships nothing. An agent you cannot afford, trust, or audit is worth nothing, whatever the first term reads. The binding constraint is whichever factor sits nearest zero, usually one of the other four.</p>
     <p>How much each factor matters depends on the use case and the sector. The same model on the same task carries different weights. What changes is the cost of error. Three versions of one tool show this:</p>
     <ul>
       <li>A meeting-notes summariser for internal standups. A human always reviews the output. Mistakes surface in seconds. The content stays inside the organisation. Safety and controllability barely register. Cost and reliability decide if it is worth running.</li>
@@ -352,22 +353,22 @@
     <p>Weights follow consequences. A summariser is low stakes only until you point it at something that matters. These weights are judgment calls, set by the deployment. The framework points at one question: which factor is your binding constraint, in your sector.</p>
 
     <h2>How the factors determine the outcome</h2>
-    <p>Capability enters as potential — the ceiling that GDPval and METR measure. Each discount factor is a gate. What leaves the last gate is realized value: what ships, and what the usage data later records.</p>
+    <p>Capability enters as potential, the ceiling that GDPval and METR measure. Each discount factor is a gate. What leaves the last gate is realized value: what ships, and what the usage data later records.</p>
 
-    <img src="realization-value-framework/figure2-capability-to-realized-value.png" alt="Flow diagram: capability passes through four discount gates — cost, reliability, safety, and controllability — to produce realized value" class="article-img" />
+    <img src="realization-value-framework/figure2-capability-to-realized-value.png" alt="Flow diagram: capability passes through four discount gates, cost, reliability, safety, and controllability, to produce realized value" class="article-img" />
     <div class="img-caption">Capability passes through four discount gates. The most-closed gate sets the outcome.</div>
 
     <p>The gates multiply, so the outcome follows the most-closed gate. One near-zero factor takes an expert-parity model to a rounding error. The opening question is which factor binds. The model sets the ceiling. Your binding constraint sets the rest.</p>
 
     <h2>Capability: the ceiling</h2>
-    <p>Capability is the potential economic value — the ceiling of what could be automated or augmented. The discipline is in how you measure it.</p>
+    <p>Capability is the potential economic value, the ceiling of what could be automated or augmented. The discipline is in how you measure it.</p>
     <p>Measure it on economically useful tasks: GDPval-style occupational work (<a href="https://arxiv.org/abs/2510.04374">Patwardhan et al., 2025</a>), METR-style autonomy horizons (<a href="https://metr.org/time-horizons/">METR, 2026</a>). Abstract benchmarks like MMLU measure something different. Measure it under generous conditions: best effort, ideal scaffold, no time pressure. That keeps the number a clean ceiling. Measure it at a success-rate threshold instead and you fold reliability into the top line, then double-count it later.</p>
     <p>METR shows this. Claude Opus 4.6 has a task horizon near 14 hours at 50% reliability. At 80% it drops to about 1 hour. The same model's capability falls by an order of magnitude. Only the reliability bar changed (<a href="https://metr.org/blog/2026-1-29-time-horizon-1-1/">METR, 2026</a>).</p>
 
     <img src="realization-value-framework/figure3-metr-horizon.png" alt="Bar chart: Claude Opus 4.6 task horizon is about 14.5 hours at 50 percent reliability and about 1 hour at 80 percent reliability" class="article-img" />
     <div class="img-caption">Claude Opus 4.6 task horizon: ~14 hours at 50% reliability vs ~1 hour at 80%. Same model, different bar.</div>
 
-    <p>Two consequences. First, capability is a system property, emerging from the model and its scaffold. The harness is usually the first lever to reach for. Second, adoption sits downstream of capability. The Anthropic Economic Index tracks what people use agents for — that is the product of all five terms, an output read after the fact (<a href="https://www.anthropic.com/research/economic-index-march-2026-report">Anthropic, 2026</a>).</p>
+    <p>Two consequences. First, capability is a system property, emerging from the model and its scaffold. The harness is usually the first lever to reach for. Second, adoption sits downstream of capability. The Anthropic Economic Index tracks what people use agents for, that is the product of all five terms, an output read after the fact (<a href="https://www.anthropic.com/research/economic-index-march-2026-report">Anthropic, 2026</a>).</p>
 
     <h2>The four discounts</h2>
     <p>Each one multiplies. Each erodes potential toward what deploys.</p>
@@ -375,11 +376,11 @@
     <div class="factor-list">
       <div class="factor-item">
         <div class="factor-name is-capability">Capability</div>
-        <div class="factor-desc">The potential economic value — the ceiling GDPval and METR measure. The only term that creates value. Everything else subtracts from it.</div>
+        <div class="factor-desc">The potential economic value, the ceiling GDPval and METR measure. The only term that creates value. Everything else subtracts from it.</div>
       </div>
       <div class="factor-item">
         <div class="factor-name">Cost</div>
-        <div class="factor-desc">The right unit is cost per successful task, with retries and failures counted in. An agent that costs more than the labour it replaces zeros the product. Cost is the first deep dive — the one factor whose math aggregates cleanly.</div>
+        <div class="factor-desc">The right unit is cost per successful task, with retries and failures counted in. An agent that costs more than the labour it replaces zeros the product. Cost is the first deep dive, the one factor whose math aggregates cleanly.</div>
       </div>
       <div class="factor-item">
         <div class="factor-name">Reliability</div>
@@ -391,7 +392,7 @@
       </div>
       <div class="factor-item">
         <div class="factor-name">Controllability</div>
-        <div class="factor-desc">The operator's leverage. Permissions, sandboxing, audit trails, kill switches, blast radius, human-in-the-loop checkpoints. What you can do to constrain the agent. Security sits across safety and controllability — adversarial resistance is a distinct threat model from the agent's behaviour or the operator's controls.</div>
+        <div class="factor-desc">The operator's leverage. Permissions, sandboxing, audit trails, kill switches, blast radius, human-in-the-loop checkpoints. What you can do to constrain the agent. Security sits across safety and controllability, adversarial resistance is a distinct threat model from the agent's behaviour or the operator's controls.</div>
       </div>
     </div>
 
@@ -427,13 +428,13 @@
     <p>Five deep dives. Each pins its claims to named evidence and calls out the traps.</p>
 
     <div class="series-panel">
-      <div class="series-panel-label">Realized Value — Five deep dives</div>
+      <div class="series-panel-label">Realized Value · Five deep dives</div>
       <ul class="series-list">
         <li>
           <span class="series-num">0</span>
           <span>
             <span class="series-title">Introduction</span>
-            <span class="series-sub"> — The framework. How the factors multiply.</span>
+            <span class="series-sub">The framework. How the factors multiply.</span>
           </span>
           <span class="series-badge-intro">This article</span>
         </li>
@@ -441,35 +442,35 @@
           <span class="series-num">1</span>
           <span>
             <span class="series-title">Capability</span>
-            <span class="series-sub"> — Realising the ceiling instead of buying it.</span>
+            <span class="series-sub">Realising the ceiling instead of buying it.</span>
           </span>
         </li>
         <li>
           <span class="series-num">2</span>
           <span>
             <span class="series-title">Cost</span>
-            <span class="series-sub"> — Cost per successful task.</span>
+            <span class="series-sub">Cost per successful task.</span>
           </span>
         </li>
         <li>
           <span class="series-num">3</span>
           <span>
             <span class="series-title">Reliability</span>
-            <span class="series-sub"> — pass@always, and why it lags capability.</span>
+            <span class="series-sub">pass@always, and why it lags capability.</span>
           </span>
         </li>
         <li>
           <span class="series-num">4</span>
           <span>
             <span class="series-title">Safety</span>
-            <span class="series-sub"> — The agent's behaviour under uncertainty.</span>
+            <span class="series-sub">The agent's behaviour under uncertainty.</span>
           </span>
         </li>
         <li>
           <span class="series-num">5</span>
           <span>
             <span class="series-title">Controllability</span>
-            <span class="series-sub"> — The operator's leverage, and where security fits.</span>
+            <span class="series-sub">The operator's leverage, and where security fits.</span>
           </span>
         </li>
       </ul>
